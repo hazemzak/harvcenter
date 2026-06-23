@@ -117,7 +117,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url("../design-system/logo/mark.png");
+    background-image: url("design-system/logo/mark.png");
     background-size: 140px auto;
     background-repeat: repeat;
     opacity: 0.02;
@@ -264,7 +264,7 @@
   .teacher-card-placeholder::before {
     content: '';
     position: absolute; inset: 0;
-    background-image: url("../design-system/logo/mark.png");
+    background-image: url("design-system/logo/mark.png");
     background-size: 60px auto;
     background-repeat: repeat;
     opacity: 0.04;
@@ -412,7 +412,7 @@
   .contact-section::before {
     content: '';
     position: absolute; inset: 0;
-    background-image: url("../design-system/logo/mark.png");
+    background-image: url("design-system/logo/mark.png");
     background-size: 120px auto;
     background-repeat: repeat;
     opacity: 0.02;
@@ -549,7 +549,7 @@
 <!-- ═══ NAV ═══ -->
 <nav class="nav">
   <div class="nav-logo">
-    <img src="../design-system/logo/mark.png" alt="Harv">
+    <img src="design-system/logo/mark.png" alt="Harv">
     <span>سنتر هارفورد التعليمي</span>
   </div>
   <ul class="nav-links">
@@ -633,7 +633,7 @@
       <span>افتح كل الكروت بالحجم الكامل + التحميل ⚽</span>
       <span class="arrow">▼</span>
     </summary>
-    <iframe id="panini-iframe" data-src="../panini-cards/download.html" height="800" loading="lazy"></iframe>
+    <iframe id="panini-iframe" data-src="panini-cards/download.html" height="800" loading="lazy"></iframe>
   </details>
 </section>
 
@@ -651,7 +651,7 @@
     <!-- Free German Course -->
     <div class="announcement-card">
       <div class="announcement-img">
-        <img src="../social-posts/free-german-course.png" alt="كورس ألماني مجاني" loading="lazy">
+        <img src="social-posts/free-german-course.png" alt="كورس ألماني مجاني" loading="lazy">
       </div>
       <div class="announcement-body">
         <span class="announcement-badge badge-free">كورس مجاني</span>
@@ -694,7 +694,7 @@
 
 <!-- ═══ FOOTER ═══ -->
 <div class="footer">
-  <img src="../design-system/logo/mark.png" alt="Harv">
+  <img src="design-system/logo/mark.png" alt="Harv">
   <p>سنتر هارفورد التعليمي — مدينة نصر</p>
   <div class="tagline">معاك للنهاية</div>
 </div>
@@ -858,7 +858,7 @@ function renderTeachers() {
   grid.innerHTML = filtered.map(function(t) {
     var photoHTML = t.photo
       ? '<img class="teacher-card-photo" src="' + t.photo + '" alt="' + t.name + '" loading="lazy">'
-      : '<div class="teacher-card-placeholder"><img src="../design-system/logo/mark.png" alt=""></div>';
+      : '<div class="teacher-card-placeholder"><img src="design-system/logo/mark.png" alt=""></div>';
 
     var badges = '';
     if (t.mode) {
@@ -892,8 +892,8 @@ var paniniCards = [
 function renderFlipCards() {
   var grid = document.getElementById('flip-grid');
   grid.innerHTML = paniniCards.map(function(id) {
-    var pngSrc = '../panini-cards/rendered/' + id + '.png';
-    var gifSrc = '../panini-cards/gifs/' + id + '.gif';
+    var pngSrc = 'panini-cards/rendered/' + id + '.png';
+    var gifSrc = 'panini-cards/gifs/' + id + '.gif';
     return '<div class="flip-wrap">'
       + '<img class="static-layer" src="' + pngSrc + '" alt="' + id + '" loading="lazy">'
       + '<img class="gif-layer" data-src="' + gifSrc + '" alt="' + id + ' animation">'
