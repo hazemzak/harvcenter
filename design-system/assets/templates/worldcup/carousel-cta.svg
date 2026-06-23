@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1080 1350" font-family="Cairo, sans-serif">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1350" fill="#1A2744"/>
+
+  <!-- Subtle pitch lines as texture -->
+  <circle cx="540" cy="675" r="200" fill="none" stroke="#2B3A56" stroke-width="1"/>
+  <line x1="0" y1="675" x2="1080" y2="675" stroke="#2B3A56" stroke-width="1"/>
+
+  <!-- ===== Logo watermark (large, subtle) ===== -->
+  <image href="../../../logo/mark.png" x="340" y="180" width="400" height="460" opacity="0.06"/>
+
+  <!-- ===== MAIN CTA TEXT ===== -->
+  <text x="540" y="520" font-size="56" font-weight="700" fill="#FFFFFF" text-anchor="middle" direction="rtl">عايز تنضم للتيم؟</text>
+
+  <!-- Sub-headline -->
+  <text x="540" y="600" font-size="38" font-weight="600" fill="#D42027" text-anchor="middle" direction="rtl">الحجز مفتوح ٢٠٢٧</text>
+
+  <!-- Divider -->
+  <line x1="420" y1="640" x2="660" y2="640" stroke="#D42027" stroke-width="3"/>
+
+  <!-- Contact info -->
+  <text x="540" y="720" font-size="30" font-weight="600" fill="#FFFFFF" text-anchor="middle" direction="rtl">واتساب 01064949395</text>
+
+  <!-- Location -->
+  <text x="540" y="780" font-size="22" font-weight="400" fill="#7D8AA0" text-anchor="middle" direction="rtl">مدينة نصر — المنطقة التاسعة</text>
+
+  <!-- Stats row -->
+  <g transform="translate(0, 880)">
+    <g transform="translate(220, 0)" text-anchor="middle">
+      <text x="0" y="0" font-size="52" font-weight="700" fill="#D42027">10</text>
+      <text x="0" y="36" font-size="18" font-weight="400" fill="#7D8AA0" direction="rtl">مدرس</text>
+    </g>
+    <g transform="translate(540, 0)" text-anchor="middle">
+      <text x="0" y="0" font-size="52" font-weight="700" fill="#D42027">8+</text>
+      <text x="0" y="36" font-size="18" font-weight="400" fill="#7D8AA0" direction="rtl">مواد</text>
+    </g>
+    <g transform="translate(860, 0)" text-anchor="middle">
+      <text x="0" y="0" font-size="52" font-weight="700" fill="#D42027">92%</text>
+      <text x="0" y="36" font-size="18" font-weight="400" fill="#7D8AA0" direction="rtl">نسبة نجاح</text>
+    </g>
+  </g>
+
+  <!-- ===== BOTTOM: Logo + tagline (matching liked photo pattern) ===== -->
+  <line x1="440" y1="1120" x2="640" y2="1120" stroke="#2B3A56" stroke-width="1"/>
+  <image href="../../../logo/mark.png" x="508" y="1140" width="55" height="65"/>
+  <text x="540" y="1240" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle" direction="rtl">هارفورد</text>
+  <image href="../../../logo/mark.png" x="600" y="1214" width="28" height="32"/>
+  <text x="540" y="1290" font-size="20" font-weight="400" fill="#7D8AA0" text-anchor="middle" direction="rtl">معاك للنهاية</text>
+</svg>

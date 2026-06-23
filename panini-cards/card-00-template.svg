@@ -1,0 +1,122 @@
+<!--
+  HARV FC × WORLD CUP 2026 — PANINI CARD TEMPLATE
+  =================================================
+  Replace all [BRACKETED] values with your data.
+  For stat bars: width = (stat_value / 100) × 180
+  For gold cards: change #D42027 to #C9993A throughout.
+  Photo path must be URL-encoded (spaces = %20, parens = %28/%29).
+-->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="1080" height="1350" viewBox="0 0 1080 1350" font-family="Cairo, sans-serif">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&amp;display=swap');</style>
+    <filter id="blue-silhouette" color-interpolation-filters="sRGB">
+      <feFlood flood-color="#1F2F50" result="color"/>
+      <feComposite in="color" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <pattern id="logo-bg" width="300" height="340" patternUnits="userSpaceOnUse" patternTransform="rotate(-15)">
+      <image href="../design-system/logo/mark.png" x="20" y="20" width="260" height="300" filter="url(#blue-silhouette)"/>
+    </pattern>
+    <linearGradient id="fade-top" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1A2744" stop-opacity="1"/>
+      <stop offset="1" stop-color="#1A2744" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fade-bottom" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1A2744" stop-opacity="0"/>
+      <stop offset="0.6" stop-color="#1A2744" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#1A2744" stop-opacity="1"/>
+    </linearGradient>
+    <linearGradient id="fade-left" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1A2744" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#1A2744" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#1A2744" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="photo-clip"><rect x="0" y="95" width="1080" height="685"/></clipPath>
+  </defs>
+
+  <rect width="1080" height="1350" fill="#1A2744"/>
+  <rect width="1080" height="1350" fill="url(#logo-bg)"/>
+  <rect x="20" y="20" width="1040" height="1310" rx="16" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+  <!-- HEADER -->
+  <text x="50" y="60" font-size="12" font-weight="600" fill="#7D8AA0" letter-spacing="3">FIFA WORLD CUP</text>
+  <text x="50" y="84" font-size="24" font-weight="700" fill="#FFFFFF" letter-spacing="2">2026</text>
+  <rect x="894" y="38" width="44" height="10" rx="2" fill="#CE1126"/>
+  <rect x="894" y="48" width="44" height="10" fill="#FFFFFF"/>
+  <rect x="894" y="58" width="44" height="10" rx="2" fill="#000000"/>
+  <image href="../design-system/logo/mark.png" x="952" y="14" width="80" height="76"/>
+  <line x1="40" y1="95" x2="1040" y2="95" stroke="#D42027" stroke-width="3"/>
+
+  <!-- PHOTO — Replace [PHOTO_PATH] -->
+  <image href="[PHOTO_PATH]"
+         x="0" y="95" width="1080" height="685" preserveAspectRatio="xMidYMin slice" clip-path="url(#photo-clip)"/>
+  <rect x="0" y="95" width="1080" height="160" fill="url(#fade-top)"/>
+  <rect x="0" y="530" width="1080" height="250" fill="url(#fade-bottom)"/>
+  <rect x="0" y="95" width="320" height="685" fill="url(#fade-left)"/>
+
+  <!-- RATING SHIELD — Replace [OVR] and [POS] -->
+  <g transform="translate(50, 120)">
+    <polygon points="0,0 100,0 100,88 50,116 0,88" fill="#D42027"/>
+    <polygon points="3,3 97,3 97,86 50,113 3,86" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+    <text x="50" y="55" font-size="48" font-weight="900" fill="#FFFFFF" text-anchor="middle">[OVR]</text>
+    <text x="50" y="78" font-size="16" font-weight="700" fill="rgba(255,255,255,0.85)" text-anchor="middle" letter-spacing="2">[POS]</text>
+  </g>
+
+  <!-- Shirt number — Replace [NUM] -->
+  <text x="900" y="380" font-size="260" font-weight="900" fill="rgba(212,32,39,0.08)" text-anchor="middle">[NUM]</text>
+
+  <!-- SUBJECT BANNER — Replace [SUBJECT] -->
+  <rect x="0" y="790" width="1080" height="80" fill="#D42027"/>
+  <rect x="0" y="790" width="5" height="80" fill="rgba(255,255,255,0.3)"/>
+  <rect x="1075" y="790" width="5" height="80" fill="rgba(255,255,255,0.3)"/>
+  <text x="540" y="842" font-size="30" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">[SUBJECT]</text>
+
+  <!-- NAME — Replace [NAME_EN] and [NAME_AR] -->
+  <text x="540" y="940" font-size="58" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">[NAME_EN]</text>
+  <text x="540" y="985" font-size="28" font-weight="600" fill="rgba(255,255,255,0.5)" text-anchor="middle" direction="rtl">[NAME_AR]</text>
+
+  <!-- Position pill — Replace [NUM] and [POS_LABEL] -->
+  <rect x="420" y="1000" width="240" height="38" rx="19" fill="rgba(212,32,39,0.15)" stroke="#D42027" stroke-width="1"/>
+  <text x="540" y="1025" font-size="14" font-weight="700" fill="#D42027" text-anchor="middle" letter-spacing="3">#[NUM] · [POS_LABEL]</text>
+
+  <line x1="60" y1="1058" x2="1020" y2="1058" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <!-- STATS — Replace [S1]-[S6] values, [L1]-[L6] Arabic labels, and bar widths -->
+  <text x="180" y="1105" font-size="38" font-weight="900" fill="#FFFFFF" text-anchor="middle">[S1]</text>
+  <rect x="90" y="1115" width="180" height="3" rx="1.5" fill="rgba(255,255,255,0.1)"/>
+  <rect x="90" y="1115" width="176" height="3" rx="1.5" fill="#D42027"/>
+  <text x="180" y="1148" font-size="16" font-weight="700" fill="#7D8AA0" text-anchor="middle" direction="rtl">[L1]</text>
+
+  <text x="540" y="1105" font-size="38" font-weight="900" fill="#FFFFFF" text-anchor="middle">[S2]</text>
+  <rect x="450" y="1115" width="180" height="3" rx="1.5" fill="rgba(255,255,255,0.1)"/>
+  <rect x="450" y="1115" width="176" height="3" rx="1.5" fill="#D42027"/>
+  <text x="540" y="1148" font-size="16" font-weight="700" fill="#7D8AA0" text-anchor="middle" direction="rtl">[L2]</text>
+
+  <text x="900" y="1105" font-size="38" font-weight="900" fill="#FFFFFF" text-anchor="middle">[S3]</text>
+  <rect x="810" y="1115" width="180" height="3" rx="1.5" fill="rgba(255,255,255,0.1)"/>
+  <rect x="810" y="1115" width="176" height="3" rx="1.5" fill="#D42027"/>
+  <text x="900" y="1148" font-size="16" font-weight="700" fill="#7D8AA0" text-anchor="middle" direction="rtl">[L3]</text>
+
+  <text x="180" y="1195" font-size="38" font-weight="900" fill="#FFFFFF" text-anchor="middle">[S4]</text>
+  <rect x="90" y="1205" width="180" height="3" rx="1.5" fill="rgba(255,255,255,0.1)"/>
+  <rect x="90" y="1205" width="176" height="3" rx="1.5" fill="#D42027"/>
+  <text x="180" y="1238" font-size="16" font-weight="700" fill="#7D8AA0" text-anchor="middle" direction="rtl">[L4]</text>
+
+  <text x="540" y="1195" font-size="38" font-weight="900" fill="#FFFFFF" text-anchor="middle">[S5]</text>
+  <rect x="450" y="1205" width="180" height="3" rx="1.5" fill="rgba(255,255,255,0.1)"/>
+  <rect x="450" y="1205" width="176" height="3" rx="1.5" fill="#D42027"/>
+  <text x="540" y="1238" font-size="16" font-weight="700" fill="#7D8AA0" text-anchor="middle" direction="rtl">[L5]</text>
+
+  <text x="900" y="1195" font-size="38" font-weight="900" fill="#FFFFFF" text-anchor="middle">[S6]</text>
+  <rect x="810" y="1205" width="180" height="3" rx="1.5" fill="rgba(255,255,255,0.1)"/>
+  <rect x="810" y="1205" width="176" height="3" rx="1.5" fill="#D42027"/>
+  <text x="900" y="1238" font-size="16" font-weight="700" fill="#7D8AA0" text-anchor="middle" direction="rtl">[L6]</text>
+
+  <!-- FOOTER -->
+  <line x1="40" y1="1246" x2="1040" y2="1246" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <image href="../design-system/logo/mark.png" x="40" y="1253" width="44" height="51"/>
+  <text x="96" y="1284" font-size="14" font-weight="600" fill="#5A6784">معاك للنهاية</text>
+  <text x="1040" y="1281" font-size="12" font-weight="600" fill="#3D4C6B" text-anchor="end" letter-spacing="1">HARV FC</text>
+  <rect x="270" y="1289" width="540" height="42" rx="21" fill="rgba(212,32,39,0.12)" stroke="rgba(212,32,39,0.4)" stroke-width="1"/>
+  <text x="540" y="1317" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="3">WHATSAPP · 01064949395</text>
+</svg>

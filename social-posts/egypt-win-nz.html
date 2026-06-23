@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<meta name="format-detection" content="telephone=no">
+<title>Egypt 3-1 New Zealand — Harvard Education Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+a[href^="tel"] { color: inherit; text-decoration: none; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #0a0f1a;
+  gap: 24px;
+}
+
+.download-btn {
+  padding: 14px 40px;
+  border-radius: 12px;
+  border: none;
+  background: #D42027;
+  color: #fff;
+  font-family: 'Cairo', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: background 0.2s;
+}
+.download-btn:hover { background: #b01a20; }
+
+.post {
+  width: 1080px;
+  height: 1080px;
+  background: linear-gradient(170deg, #1A2744 0%, #0F1A2E 50%, #1A2744 100%);
+  font-family: 'Cairo', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Tone-on-tone logo pattern */
+.post::before {
+  content: '';
+  position: absolute;
+  inset: -30%;
+  background-image: url("../design-system/logo/mark.png");
+  background-size: 90px auto;
+  background-repeat: repeat;
+  transform: rotate(-12deg);
+  opacity: 0.025;
+  filter: brightness(10);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 45%, rgba(212,32,39,0.06) 0%, transparent 60%);
+  z-index: 1;
+}
+
+/* ===== HEADER — matches panini card style ===== */
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.wc-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wc-badge .football {
+  font-size: 28px;
+}
+
+.wc-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.wc-text .line1 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #7D8AA0;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  direction: ltr;
+}
+
+.wc-text .line2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.08em;
+  direction: ltr;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.egypt-flag {
+  width: 48px;
+  height: 32px;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.egypt-flag div { flex: 1; }
+.egypt-flag .ef-red { background: #CE1126; }
+.egypt-flag .ef-white { background: #FFFFFF; }
+.egypt-flag .ef-black { background: #000000; }
+
+.harv-logo {
+  width: 56px;
+  height: auto;
+}
+
+.header-line {
+  position: absolute;
+  top: 90px;
+  left: 40px;
+  right: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #D42027, #D42027 60%, transparent);
+  z-index: 10;
+}
+
+/* ===== CONTENT ===== */
+.content {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 120px;
+}
+
+/* Group stage label */
+.group-label {
+  margin-top: 16px;
+  padding: 8px 28px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  font-size: 14px;
+  font-weight: 600;
+  color: #7D8AA0;
+  letter-spacing: 3px;
+  direction: ltr;
+}
+
+/* Historic badge */
+.historic {
+  margin-top: 20px;
+  padding: 10px 32px;
+  border-radius: 24px;
+  background: rgba(212,32,39,0.12);
+  border: 1px solid rgba(212,32,39,0.3);
+  font-size: 20px;
+  font-weight: 700;
+  color: #D42027;
+}
+
+/* Main celebrate text */
+.celebrate {
+  margin-top: 20px;
+  font-size: 56px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+
+/* ===== SCORE SECTION ===== */
+.score-section {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 180px;
+}
+
+.team-flag {
+  font-size: 64px;
+  line-height: 1;
+}
+
+.team-name {
+  font-size: 28px;
+  font-weight: 900;
+  color: #fff;
+}
+
+.team-name-en {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 5px;
+  direction: ltr;
+}
+
+.score-display {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.score-num {
+  font-size: 110px;
+  font-weight: 900;
+  line-height: 1;
+  color: #fff;
+}
+
+.score-num.winner {
+  color: #D42027;
+  text-shadow: 0 0 40px rgba(212,32,39,0.4);
+}
+
+.score-dash {
+  font-size: 50px;
+  color: rgba(255,255,255,0.15);
+  margin-top: -8px;
+}
+
+/* Goal scorers */
+.scorers {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  direction: ltr;
+}
+
+.scorer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.scorer-icon { font-size: 14px; }
+
+.scorer-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+}
+
+.scorer-time {
+  font-size: 13px;
+  font-weight: 700;
+  color: #D42027;
+}
+
+/* ===== FOOTER / CONTACT ===== */
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.footer-logo {
+  width: 40px;
+  height: auto;
+}
+
+.footer-names {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.footer-name-ar {
+  font-size: 18px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.6);
+}
+
+.footer-name-en {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 3px;
+  direction: ltr;
+  text-align: right;
+}
+
+.footer-contact-bar {
+  width: 100%;
+  background: rgba(212,32,39,0.9);
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  direction: rtl;
+}
+
+.contact-phones {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  direction: ltr;
+}
+
+.contact-phones span {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.contact-phones .divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255,255,255,0.3);
+}
+
+.contact-location {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  direction: rtl;
+}
+
+/* Corner accents */
+.corner { position: absolute; width: 60px; height: 60px; border: 2px solid rgba(212,32,39,0.06); z-index: 2; }
+.corner-tl { top: 100px; left: 24px; border-right: none; border-bottom: none; }
+.corner-tr { top: 100px; right: 24px; border-left: none; border-bottom: none; }
+.corner-bl { bottom: 70px; left: 24px; border-right: none; border-top: none; }
+.corner-br { bottom: 70px; right: 24px; border-left: none; border-top: none; }
+
+.side-line {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 180px;
+  background: linear-gradient(180deg, transparent, rgba(212,32,39,0.12), transparent);
+  z-index: 2;
+}
+.side-l { left: 24px; }
+.side-r { right: 24px; }
+</style>
+</head>
+<body>
+
+<div class="post">
+  <div class="glow"></div>
+
+  <!-- ===== HEADER (panini card style) ===== -->
+  <div class="header">
+    <div class="header-left">
+      <div class="wc-badge">
+        <span class="football">⚽</span>
+        <div class="wc-text">
+          <span class="line1">FIFA WORLD CUP</span>
+          <span class="line2">2026</span>
+        </div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="egypt-flag">
+        <div class="ef-red"></div>
+        <div class="ef-white"></div>
+        <div class="ef-black"></div>
+      </div>
+      <img class="harv-logo" src="../design-system/logo/mark.png" alt="Harvard">
+    </div>
+  </div>
+  <div class="header-line"></div>
+
+  <!-- Corner accents -->
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+  <div class="side-line side-l"></div>
+  <div class="side-line side-r"></div>
+
+  <!-- ===== CONTENT ===== -->
+  <div class="content">
+
+    <div class="group-label">GROUP G · MATCHDAY 1</div>
+
+    <div class="historic">أول فوز في تاريخ كأس العالم 🇪🇬</div>
+
+    <div class="celebrate">فخورين بمنتخبنا</div>
+
+    <!-- Score -->
+    <div class="score-section">
+      <div class="team">
+        <div class="team-flag">🇪🇬</div>
+        <div class="team-name">مصر</div>
+        <div class="team-name-en">EGYPT</div>
+      </div>
+
+      <div class="score-display">
+        <div class="score-num winner">3</div>
+        <div class="score-dash">—</div>
+        <div class="score-num">1</div>
+      </div>
+
+      <div class="team">
+        <div class="team-flag">🇳🇿</div>
+        <div class="team-name">نيوزيلندا</div>
+        <div class="team-name-en">NEW ZEALAND</div>
+      </div>
+    </div>
+
+    <!-- Scorers -->
+    <div class="scorers">
+      <div class="scorer">
+        <span class="scorer-icon">⚽</span>
+        <span class="scorer-name">Zizo</span>
+        <span class="scorer-time">58'</span>
+      </div>
+      <div class="scorer">
+        <span class="scorer-icon">⚽</span>
+        <span class="scorer-name">Salah</span>
+        <span class="scorer-time">67'</span>
+      </div>
+      <div class="scorer">
+        <span class="scorer-icon">⚽</span>
+        <span class="scorer-name">Trezeguet</span>
+        <span class="scorer-time">82'</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== FOOTER — branding + contact ===== -->
+  <div class="footer">
+    <div class="footer-brand">
+      <img class="footer-logo" src="../design-system/logo/mark.png" alt="Harvard">
+      <div class="footer-names">
+        <span class="footer-name-ar">سنتر هارفارد التعليمي</span>
+        <span class="footer-name-en">HARVARD EDUCATION CENTER</span>
+      </div>
+    </div>
+
+    <div class="footer-contact-bar">
+      <div class="contact-location">مدينة نصر · بجوار بنزينة كار جاس · أمام عقارات السوسري أ</div>
+      <div class="contact-phones">
+        <span>01064949395</span>
+        <div class="divider"></div>
+        <span>01223463448</span>
+        <div class="divider"></div>
+        <span>02-24734371</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<button class="download-btn" onclick="downloadPost()">تحميل الصورة ↓</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+async function downloadPost() {
+  const btn = document.querySelector('.download-btn');
+  btn.textContent = 'جاري التحميل...';
+  btn.disabled = true;
+
+  try {
+    const el = document.querySelector('.post');
+    const canvas = await html2canvas(el, {
+      width: 1080,
+      height: 1080,
+      scale: 1,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#1A2744',
+      logging: true,
+      onclone: function(clonedDoc) {
+        const clonedPost = clonedDoc.querySelector('.post');
+        clonedPost.style.borderRadius = '0';
+      }
+    });
+    const link = document.createElement('a');
+    link.download = 'egypt-3-1-nz-harvard.png';
+    link.href = canvas.toDataURL('image/png');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  } catch (err) {
+    console.error('Download error:', err);
+    alert('خطأ في التحميل — جرب كليك يمين على الصورة واعمل screenshot');
+  }
+  btn.textContent = 'تحميل الصورة ↓';
+  btn.disabled = false;
+}
+</script>
+</body>
+</html>

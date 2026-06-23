@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <title>HARV FC — Panini Cards — Download</title>
+  <meta name="format-detection" content="telephone=no">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0a0f1a; padding: 40px; display: flex; flex-direction: column; align-items: center; gap: 30px; font-family: 'Cairo', sans-serif; }
+    h1 { color: #fff; font-size: 28px; } h1 span { color: #D42027; }
+    .card-wrap { position: relative; }
+    .dl-btn {
+      display: block; margin: 12px auto 50px; padding: 12px 40px; background: #D42027; color: #fff;
+      border: none; border-radius: 100px; font-family: 'Cairo'; font-size: 16px; font-weight: 700;
+      cursor: pointer; letter-spacing: 1px;
+    }
+    .dl-btn:hover { background: #B91C1C; }
+    .view-btn {
+      display: block; margin: 0 auto 8px; padding: 10px 40px; background: transparent; color: #7D8AA0;
+      border: 1px solid #2A3A5C; border-radius: 100px; font-family: 'Cairo'; font-size: 14px; font-weight: 700;
+      cursor: pointer; letter-spacing: 1px;
+    }
+    .view-btn:hover { border-color: #D42027; color: #fff; }
+    .caption-box { max-width: 800px; margin: 10px auto 60px; background: #111827; border: 1px solid #1F2F50; border-radius: 12px; padding: 20px 24px; color: #C8CED9; font-size: 14px; line-height: 1.8; white-space: pre-wrap; direction: rtl; text-align: right; position: relative; }
+    .caption-box .copy-btn { position: absolute; top: 10px; left: 10px; background: #D42027; color: #fff; border: none; border-radius: 8px; padding: 6px 16px; font-family: 'Cairo'; font-size: 12px; cursor: pointer; direction: ltr; }
+    .caption-box .copy-btn:hover { background: #B91C1C; }
+    .caption-box a { color: #C8CED9; text-decoration: none; }
+
+    /* ===== FILTER TABS ===== */
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+      max-width: 900px; position: sticky; top: 0; z-index: 50;
+      background: #0a0f1a; padding: 16px 0 20px; margin-bottom: -10px;
+    }
+    .filter-btn {
+      padding: 8px 20px; border-radius: 100px; border: 1px solid #2A3A5C;
+      background: transparent; color: #7D8AA0; font-family: 'Cairo'; font-size: 14px;
+      font-weight: 700; cursor: pointer; transition: all 0.15s; letter-spacing: 0.5px;
+    }
+    .filter-btn:hover { border-color: #D42027; color: #fff; }
+    .filter-btn.active { background: #D42027; border-color: #D42027; color: #fff; }
+    .card-wrap.hidden { display: none; }
+
+    /* ===== CARD ===== */
+    .card {
+      width: 1080px; height: 1350px; position: relative; overflow: hidden;
+      background: #1A2744; font-family: 'Cairo', sans-serif;
+    }
+    /* Pattern overlays — top: subject-heavy, bottom: logo-only */
+    .card .pattern-top {
+      position: absolute; top: -300px; left: -300px; right: -300px; bottom: 420px; pointer-events: none; z-index: 0;
+      background-size: 700px 700px; background-repeat: repeat;
+      transform: rotate(-15deg); filter: brightness(1.15);
+    }
+    .card .pattern-bottom {
+      position: absolute; top: 740px; left: -300px; right: -300px; bottom: -300px; pointer-events: none; z-index: 0;
+      background-size: 700px 700px; background-repeat: repeat;
+      transform: rotate(-15deg); filter: brightness(1.15);
+      background-image: url('photos/tiles/tile-logo.png');
+    }
+    .card .inner-frame {
+      position: absolute; inset: 20px; border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06); z-index: 10; pointer-events: none;
+    }
+
+    /* HEADER */
+    .card .header { position: absolute; top: 0; left: 0; right: 0; height: 95px; z-index: 5; display: flex; align-items: center; justify-content: space-between; padding: 0 50px; }
+    .wc-label { font-size: 12px; font-weight: 600; color: #7D8AA0; letter-spacing: 3px; }
+    .wc-year { font-size: 24px; font-weight: 700; color: #fff; letter-spacing: 2px; display: flex; align-items: center; gap: 10px; }
+    .wc-year img { height: 50px; width: auto; }
+    .header-right { display: flex; align-items: center; gap: 14px; }
+    .flag { width: 44px; height: 30px; display: flex; flex-direction: column; border-radius: 3px; overflow: hidden; }
+    .flag div { flex: 1; } .flag .r { background: #CE1126; } .flag .w { background: #fff; } .flag .b { background: #000; }
+    .header .logo { width: 80px; height: 76px; object-fit: contain; }
+    .accent-line { position: absolute; top: 95px; left: 40px; right: 40px; height: 3px; background: #D42027; z-index: 5; }
+
+    /* PHOTO — using background-image so html2canvas renders crop correctly */
+    .photo-area { position: absolute; top: 95px; left: 0; right: 0; height: 685px; z-index: 2; overflow: hidden; background-size: cover; background-position: center 2%; background-repeat: no-repeat; }
+    #card-haitham .photo-area { background-position: center 8%; }
+    #card-milad .photo-area { background-position: center 2%; }
+    #card-atef .photo-area { background-position: center 8%; }
+    #card-elqot .photo-area { background-position: center 12%; }
+    #card-nawar .photo-area { background-position: center 30%; }
+    #card-mogli .photo-area { background-position: center 12%; }
+    .grad-top { position: absolute; top: 0; left: 0; right: 0; height: 160px; background: linear-gradient(180deg, #1A2744, transparent); z-index: 3; }
+    .grad-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 250px; background: linear-gradient(0deg, #1A2744, rgba(26,39,68,0.4) 60%, transparent); z-index: 3; }
+    .grad-left { position: absolute; top: 0; left: 0; bottom: 0; width: 320px; background: linear-gradient(90deg, rgba(26,39,68,0.95), rgba(26,39,68,0.5) 50%, transparent); z-index: 3; }
+
+    /* RATING SHIELD */
+    .shield { position: absolute; top: 120px; left: 50px; z-index: 8; width: 100px; text-align: center; }
+    .shield-bg { width: 100px; height: 116px; background: #D42027; clip-path: polygon(0 0,100% 0,100% 76%,50% 100%,0 76%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 14px; position: relative; }
+    .shield-ovr { font-size: 48px; font-weight: 900; color: #fff; line-height: 1; }
+    .shield-pos { font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.85); letter-spacing: 2px; margin-top: -2px; }
+
+    /* SHIRT NUMBER */
+    .shirt-num { position: absolute; top: 140px; right: 40px; font-size: 260px; font-weight: 900; color: rgba(212,32,39,0.08); z-index: 1; line-height: 1; }
+
+    /* SUBJECT BANNER */
+    .subject { position: absolute; top: 740px; left: 0; right: 0; height: 80px; background: #D42027; z-index: 5; display: flex; align-items: center; justify-content: center; border-left: 5px solid rgba(255,255,255,0.3); border-right: 5px solid rgba(255,255,255,0.3); }
+    .subject span { font-size: 30px; font-weight: 700; color: #fff; letter-spacing: 4px; }
+
+    /* NAME */
+    .name-area { position: absolute; top: 830px; left: 0; right: 0; z-index: 5; text-align: center; padding: 0 40px; }
+    .name-en { font-size: 58px; font-weight: 900; color: #fff; letter-spacing: 2px; line-height: 1.1; }
+    .name-ar { font-size: 28px; font-weight: 600; color: rgba(255,255,255,0.5); direction: rtl; margin-top: 4px; }
+    .pos-pill { display: inline-block; margin-top: 12px; padding: 8px 32px; border-radius: 19px; background: rgba(212,32,39,0.15); border: 1px solid #D42027; font-size: 14px; font-weight: 700; color: #D42027; letter-spacing: 3px; }
+
+    /* DIVIDER */
+    .divider { position: absolute; top: 1000px; left: 60px; right: 60px; height: 1px; background: rgba(255,255,255,0.08); z-index: 5; }
+
+    /* STATS */
+    .stats { position: absolute; top: 1015px; left: 40px; right: 40px; z-index: 5; display: grid; grid-template-columns: repeat(3,1fr); gap: 8px 20px; }
+    .stat { text-align: center; }
+    .stat-val { font-size: 38px; font-weight: 900; color: #fff; line-height: 1.2; }
+    .stat-bar { width: 180px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; margin: 2px auto 0; }
+    .stat-bar-fill { height: 100%; background: #D42027; border-radius: 2px; }
+    .stat-label { font-size: 16px; font-weight: 700; color: #7D8AA0; direction: rtl; margin-top: 4px; }
+
+    /* FOOTER */
+    .footer { position: absolute; bottom: 40px; left: 0; right: 0; z-index: 5; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; }
+    .footer-line { display: none; }
+    .footer-left { display: flex; align-items: center; gap: 10px; }
+    .footer-left img { width: 48px; height: 56px; object-fit: contain; }
+    .footer-left span { font-size: 14px; font-weight: 600; color: #5A6784; }
+    .footer-right { font-size: 12px; font-weight: 600; color: #3D4C6B; letter-spacing: 1px; }
+    .card-num { position: absolute; bottom: 90px; right: 50px; font-size: 13px; font-weight: 700; color: #3D4C6B; letter-spacing: 2px; z-index: 5; }
+    .center-name { position: absolute; top: 95px; left: 0; right: 0; z-index: 6; text-align: center; font-size: 24px; font-weight: 700; color: rgba(255,255,255,0.5); padding: 14px 0; background: rgba(26,39,68,0.8); }
+    .center-name .cn-en { letter-spacing: 3px; }
+    .center-name .cn-ar { letter-spacing: 0; }
+    .wa-pill { display: flex; align-items: center; justify-content: center; padding: 0 24px; height: 42px; border-radius: 21px; background: rgba(212,32,39,0.12); border: 1px solid rgba(212,32,39,0.4); }
+    .wa-pill span { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: 2px; }
+
+    @media (max-width: 1200px) {
+      .card-wrap { transform: scale(0.45); transform-origin: top center; margin-bottom: -740px; }
+    }
+  </style>
+</head>
+<body>
+  <h1>HARV FC <span>&times;</span> WORLD CUP 2026</h1>
+
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active" data-filter="all">الكل</button>
+    <button class="filter-btn" data-filter="english">English</button>
+    <button class="filter-btn" data-filter="physics">فيزياء</button>
+    <button class="filter-btn" data-filter="chemistry">كيمياء</button>
+    <button class="filter-btn" data-filter="arabic">عربي</button>
+    <button class="filter-btn" data-filter="german">ألماني</button>
+    <button class="filter-btn" data-filter="history">تاريخ</button>
+    <button class="filter-btn" data-filter="biology">أحياء</button>
+    <button class="filter-btn" data-filter="math">رياضيات</button>
+    <button class="filter-btn" data-filter="french">فرنسي</button>
+    <button class="filter-btn" data-filter="italian">إيطالي</button>
+    <button class="filter-btn" data-filter="business">إدارة أعمال</button>
+    <button class="filter-btn" data-filter="philosophy">فلسفة</button>
+  </div>
+
+  <!-- ========== CARD 1: HAITHAM ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-haitham" data-subject="business">
+      <div class="pattern-top"></div>
+      <div class="pattern-bottom"></div>
+      <div class="inner-frame"></div>
+      <div class="header">
+        <div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div>
+        <div class="header-right">
+          <div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div>
+          <img class="logo" src="../design-system/logo/mark.png">
+        </div>
+      </div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/haitham.png')">
+        <div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div>
+      </div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">91</span><span class="shield-pos">CAM</span></div></div>
+      <div class="shirt-num">10</div>
+      <div class="subject"><span>BUSINESS ADMIN · </span><span style="letter-spacing:0">إدارة أعمال</span><span dir="ltr" style="letter-spacing:0;position:absolute;left:30px;font-size:18px;opacity:0.8">(عربي و لغات)</span></div>
+      <div class="name-area">
+        <div class="name-en">DR. HAITHAM ATIA</div>
+        <div class="name-ar">د. هيثم عطية</div>
+        <div class="pos-pill">#10 · PLAYMAKER</div>
+      </div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">شرح مبسّط</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">صبر لامحدود</div></div>
+        <div class="stat"><div class="stat-val">99</div><div class="stat-bar"><div class="stat-bar-fill" style="width:99%"></div></div><div class="stat-label">أسلوب ممتع</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">خبرة واسعة</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">تحفيز مستمر</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">طاقة إيجابية</div></div>
+      </div>
+      <div class="footer">
+        <div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div>
+        <div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div>
+        <div class="footer-right">HARV FC</div>
+      </div>
+    </div>
+    <button class="view-btn" onclick="viewCard('card-haitham')">View</button>
+    <button class="dl-btn" onclick="dl('card-haitham','harv-panini-haitham')">Download PNG</button>
+    <div class="caption-box" id="cap-haitham"><button class="copy-btn" onclick="copyCaption('cap-haitham')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 10 — صانع اللعب 🎯
+
+د. هيثم عطية
+مدرس إدارة أعمال (عربي و لغات)
+
+اللي بيفهّمك الـ Business مش بيحفّظهولك.
+شرح مبسّط، أسلوب ممتع، وصبر مالوش آخر.
+
+ده مش مدرس — ده playmaker. ⚽
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #إدارة_أعمال #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 2: MILAD ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-milad" data-subject="english">
+      <div class="pattern-top"></div>
+      <div class="pattern-bottom"></div>
+      <div class="inner-frame"></div>
+      <div class="header">
+        <div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div>
+        <div class="header-right">
+          <div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div>
+          <img class="logo" src="../design-system/logo/mark.png">
+        </div>
+      </div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/milad.png')">
+        <div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div>
+      </div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">89</span><span class="shield-pos">RW</span></div></div>
+      <div class="shirt-num">7</div>
+      <div class="subject"><span>ENGLISH · </span><span style="letter-spacing:0">لغة إنجليزية</span></div>
+      <div class="name-area">
+        <div class="name-en">MR. MILAD MOURAD</div>
+        <div class="name-ar">أ. ميلاد مراد</div>
+        <div class="pos-pill">#7 · RIGHT WING</div>
+      </div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">شرح واضح</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">صبر لامحدود</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">أسلوب مميز</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">إتقان اللغة</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">تشجيع الطلاب</div></div>
+        <div class="stat"><div class="stat-val">95</div><div class="stat-bar"><div class="stat-bar-fill" style="width:95%"></div></div><div class="stat-label">حماس دائم</div></div>
+      </div>
+      <div class="footer">
+        <div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div>
+        <div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div>
+        <div class="footer-right">HARV FC</div>
+      </div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-milad','harv-panini-milad')">Download PNG</button>
+    <div class="caption-box" id="cap-milad"><button class="copy-btn" onclick="copyCaption('cap-milad')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 7 — الجناح الأيمن 🦅
+
+Mr. Milad Mourad
+مدرس لغة إنجليزية
+
+بيعدّي من أي دفاع لغوي بسرعة وثقة.
+شرح واضح، تشجيع مستمر، وأسلوب مميز.
+
+الإنجليزي معاه بيبقى سهل. 💪
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #English #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 3: SALAH ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-salah" data-subject="english">
+      <div class="pattern-top"></div>
+      <div class="pattern-bottom"></div>
+      <div class="inner-frame"></div>
+      <div class="header">
+        <div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div>
+        <div class="header-right">
+          <div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div>
+          <img class="logo" src="../design-system/logo/mark.png">
+        </div>
+      </div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/salah.png')">
+        <div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div>
+      </div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">94</span><span class="shield-pos">LW</span></div></div>
+      <div class="shirt-num">11</div>
+      <div class="subject"><span>ENGLISH · </span><span style="letter-spacing:0">لغة إنجليزية</span></div>
+      <div class="name-area">
+        <div class="name-en">MR. MOHMED SALAH</div>
+        <div class="name-ar">أ. محمد صلاح</div>
+        <div class="pos-pill">#11 · LEFT WING</div>
+      </div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">99</div><div class="stat-bar"><div class="stat-bar-fill" style="width:99%"></div></div><div class="stat-label">شرح احترافي</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">صبر وتفاني</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">أسلوب ممتع</div></div>
+        <div class="stat"><div class="stat-val">99</div><div class="stat-bar"><div class="stat-bar-fill" style="width:99%"></div></div><div class="stat-label">إلمام بالمادة</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">تحفيز عالي</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">طاقة لا تنتهي</div></div>
+      </div>
+      <div class="footer">
+        <div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div>
+        <div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div>
+        <div class="footer-right">HARV FC</div>
+      </div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-salah','harv-panini-salah')">Download PNG</button>
+    <div class="caption-box" id="cap-salah"><button class="copy-btn" onclick="copyCaption('cap-salah')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 11 — الجناح الأيسر ⚽
+
+Mr. Mohmed Salah
+مدرس لغة إنجليزية
+
+أيوه الاسم مش صدفة. 😄
+بس ده صلاح بتاع الـ English — بيسجّل goals في الفهم مش في الشبكة.
+
+شرح احترافي، إلمام بالمادة، وتحفيز عالي.
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #English #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 4: ATEF ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-atef" data-subject="english">
+      <div class="pattern-top"></div>
+      <div class="pattern-bottom"></div>
+      <div class="inner-frame"></div>
+      <div class="header">
+        <div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div>
+        <div class="header-right">
+          <div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div>
+          <img class="logo" src="../design-system/logo/mark.png">
+        </div>
+      </div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/atef.png')">
+        <div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div>
+      </div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">90</span><span class="shield-pos">ST</span></div></div>
+      <div class="shirt-num">9</div>
+      <div class="subject"><span>ENGLISH · </span><span style="letter-spacing:0">لغة إنجليزية</span></div>
+      <div class="name-area">
+        <div class="name-en">MR. AHMED ATEF</div>
+        <div class="name-ar">أ. أحمد عاطف</div>
+        <div class="pos-pill">#9 · STRIKER</div>
+      </div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">شرح سلس</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">هدوء وثبات</div></div>
+        <div class="stat"><div class="stat-val">99</div><div class="stat-bar"><div class="stat-bar-fill" style="width:99%"></div></div><div class="stat-label">أسلوب راقي</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">معلومة دقيقة</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">ثقة بالطلاب</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">حضور قوي</div></div>
+      </div>
+      <div class="footer">
+        <div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div>
+        <div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div>
+        <div class="footer-right">HARV FC</div>
+      </div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-atef','harv-panini-atef')">Download PNG</button>
+    <div class="caption-box" id="cap-atef"><button class="copy-btn" onclick="copyCaption('cap-atef')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 9 — الهداف 🎯
+
+Mr. Ahmed Atef
+مدرس لغة إنجليزية
+
+أسلوب راقي، حضور قوي، وشرح سلس.
+بيضرب المعلومة في المكان الصح — زي أي striker محترم.
+
+هدوء وثبات، ونتيجة مضمونة. ⚽🔥
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #English #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 5: TOLBA ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-tolba" data-subject="history">
+      <div class="pattern-top"></div>
+      <div class="pattern-bottom"></div>
+      <div class="inner-frame"></div>
+      <div class="header">
+        <div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div>
+        <div class="header-right">
+          <div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div>
+          <img class="logo" src="../design-system/logo/mark.png">
+        </div>
+      </div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/tolba.png')">
+        <div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div>
+      </div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">92</span><span class="shield-pos">CB</span></div></div>
+      <div class="shirt-num">4</div>
+      <div class="subject"><span>HISTORY · </span><span style="letter-spacing:0">التاريخ</span></div>
+      <div class="name-area">
+        <div class="name-en">MOHAMED TOLBA</div>
+        <div class="name-ar">محمد طلبة</div>
+        <div class="pos-pill">#4 · CENTER BACK</div>
+      </div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">شرح شيّق</div></div>
+        <div class="stat"><div class="stat-val">99</div><div class="stat-bar"><div class="stat-bar-fill" style="width:99%"></div></div><div class="stat-label">صبر الأبطال</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">أسلوب حكائي</div></div>
+        <div class="stat"><div class="stat-val">99</div><div class="stat-bar"><div class="stat-bar-fill" style="width:99%"></div></div><div class="stat-label">ذاكرة حديدية</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">ربط بالواقع</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">شغف بالتاريخ</div></div>
+      </div>
+      <div class="footer">
+        <div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div>
+        <div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div>
+        <div class="footer-right">HARV FC</div>
+      </div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-tolba','harv-panini-tolba')">Download PNG</button>
+    <div class="caption-box" id="cap-tolba"><button class="copy-btn" onclick="copyCaption('cap-tolba')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 4 — قلب الدفاع 🛡️
+
+Mohamed Tolba
+مدرس تاريخ
+
+بيدافع عن التاريخ بأسلوب حكائي وذاكرة حديدية.
+معاه التاريخ مش حفظ — ده فهم وربط بالواقع.
+
+الـ center back اللي محدش بيعدّي منه. 💪
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #تاريخ #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 6: NASSER EL-BATAL ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-nasser" data-subject="chemistry">
+      <div class="pattern-top"></div>
+      <div class="pattern-bottom"></div>
+      <div class="inner-frame"></div>
+      <div class="header">
+        <div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div>
+        <div class="header-right">
+          <div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div>
+          <img class="logo" src="../design-system/logo/mark.png">
+        </div>
+      </div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/nasser.png')">
+        <div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div>
+      </div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">97</span><span class="shield-pos">CDM</span></div></div>
+      <div class="shirt-num">6</div>
+      <div class="subject"><span>CHEMISTRY · </span><span style="letter-spacing:0">كيمياء</span></div>
+      <div class="name-area">
+        <div class="name-en">NASSER EL-BATAL</div>
+        <div class="name-ar">ناصر البطل</div>
+        <div class="pos-pill">#6 · MIDFIELD ANCHOR</div>
+      </div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">99</div><div class="stat-bar"><div class="stat-bar-fill" style="width:99%"></div></div><div class="stat-label">شرح عملي</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">إتقان المادة</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">تبسيط المعادلات</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">صبر وإصرار</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">تحفيز الطلاب</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">حماس معدي</div></div>
+      </div>
+      <div class="footer">
+        <div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div>
+        <div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div>
+        <div class="footer-right">HARV FC</div>
+      </div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-nasser','harv-panini-nasser')">Download PNG</button>
+    <div class="caption-box" id="cap-nasser"><button class="copy-btn" onclick="copyCaption('cap-nasser')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 6 — مرتكز الوسط 🛡️⚽
+
+ناصر البطل
+مدرس كيمياء
+
+اسمه بطل ولعبه بطولي.
+بيبسّط المعادلات وبيحوّل الكيمياء من كابوس لمتعة.
+
+شرح عملي، إتقان للمادة، وحماس معدي. 🔥
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #كيمياء #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 7: ASHRAF EL-SHENAWY ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-shenawy" data-subject="chemistry">
+      <div class="pattern-top"></div>
+      <div class="pattern-bottom"></div>
+      <div class="inner-frame"></div>
+      <div class="header">
+        <div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div>
+        <div class="header-right">
+          <div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div>
+          <img class="logo" src="../design-system/logo/mark.png">
+        </div>
+      </div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/shenawy.png')">
+        <div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div>
+      </div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">93</span><span class="shield-pos">GK</span></div></div>
+      <div class="shirt-num">1</div>
+      <div class="subject"><span>CHEMISTRY · </span><span style="letter-spacing:0">كيمياء</span></div>
+      <div class="name-area">
+        <div class="name-en">ASHRAF EL-SHENAWY</div>
+        <div class="name-ar">أشرف الشناوي</div>
+        <div class="pos-pill">#1 · GOALKEEPER</div>
+      </div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">شرح منظم</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">خبرة طويلة</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">أسلوب علمي</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">إلمام شامل</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">ثقة واحتراف</div></div>
+        <div class="stat"><div class="stat-val">95</div><div class="stat-bar"><div class="stat-bar-fill" style="width:95%"></div></div><div class="stat-label">هيبة واحترام</div></div>
+      </div>
+      <div class="footer">
+        <div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div>
+        <div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div>
+        <div class="footer-right">HARV FC</div>
+      </div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-shenawy','harv-panini-shenawy')">Download PNG</button>
+    <div class="caption-box" id="cap-shenawy"><button class="copy-btn" onclick="copyCaption('cap-shenawy')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 1 — حارس المرمى 🧤
+
+أشرف الشناوي
+مدرس كيمياء
+
+الشناوي في المرمى بيصد كور.
+الشناوي في الكيمياء بيصد أسئلة. 😄
+
+شرح منظم، خبرة طويلة، وهيبة واحترام.
+مفيش سؤال بيعدّي منه. 💪
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #كيمياء #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 8: DR. DEIF ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-deif" data-subject="biology">
+      <div class="pattern-top"></div>
+      <div class="pattern-bottom"></div>
+      <div class="inner-frame"></div>
+      <div class="header">
+        <div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div>
+        <div class="header-right">
+          <div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div>
+          <img class="logo" src="../design-system/logo/mark.png">
+        </div>
+      </div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/deif.png')">
+        <div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div>
+      </div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">91</span><span class="shield-pos">CM</span></div></div>
+      <div class="shirt-num">8</div>
+      <div class="subject"><span>BIOLOGY · </span><span style="letter-spacing:0">أحياء</span></div>
+      <div class="name-area">
+        <div class="name-en">DR. DEIF</div>
+        <div class="name-ar">د. ضيف</div>
+        <div class="pos-pill">#8 · MIDFIELDER</div>
+      </div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">شرح مفصّل</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">صبر لامحدود</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">أسلوب سهل</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">فهم عميق</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">قرب من الطلاب</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">طاقة إيجابية</div></div>
+      </div>
+      <div class="footer">
+        <div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div>
+        <div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div>
+        <div class="footer-right">HARV FC</div>
+      </div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-deif','harv-panini-deif')">Download PNG</button>
+    <div class="caption-box" id="cap-deif"><button class="copy-btn" onclick="copyCaption('cap-deif')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 8 — صانع اللعب في الوسط 🎯
+
+د. ضيف
+مدرس أحياء
+
+بيشرح الأحياء بأسلوب سهل وفهم عميق.
+قريب من الطلاب ودايماً موجود.
+
+الدكتور اللي بيخلّي الـ Biology منطقية. 🧬
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #أحياء #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 9: REDA EL-FAROUQ — Arabic ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-reda" data-subject="arabic">
+      <div class="pattern-top"></div><div class="pattern-bottom"></div><div class="inner-frame"></div>
+      <div class="header"><div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div><div class="header-right"><div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div><img class="logo" src="../design-system/logo/mark.png"></div></div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/reda.png')"><div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div></div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">93</span><span class="shield-pos">CB</span></div></div>
+      <div class="shirt-num">3</div>
+      <div class="subject"><span>ARABIC · </span><span style="letter-spacing:0">لغة عربية</span></div>
+      <div class="name-area"><div class="name-en">REDA EL-FAROUQ</div><div class="name-ar">رضا الفاروق</div><div class="pos-pill">#3 · CENTER BACK</div></div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">شرح بليغ</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">صبر لامحدود</div></div>
+        <div class="stat"><div class="stat-val">99</div><div class="stat-bar"><div class="stat-bar-fill" style="width:99%"></div></div><div class="stat-label">تمكّن من اللغة</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">أسلوب أدبي</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">تحفيز مستمر</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">حب اللغة</div></div>
+      </div>
+      <div class="footer"><div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div><div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div><div class="footer-right">HARV FC</div></div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-reda','harv-panini-reda')">Download PNG</button>
+    <div class="caption-box" id="cap-reda"><button class="copy-btn" onclick="copyCaption('cap-reda')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 3 — قلب الدفاع 🛡️
+
+رضا الفاروق
+مدرس لغة عربية
+
+شرح بليغ وأسلوب أدبي يخلّيك تحب العربي.
+متمكّن من اللغة وبيوصّلها بأبسط طريقة.
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #لغة_عربية #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 10: SAYED ABDELAZIZ — Arabic ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-sayed" data-subject="arabic">
+      <div class="pattern-top"></div><div class="pattern-bottom"></div><div class="inner-frame"></div>
+      <div class="header"><div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div><div class="header-right"><div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div><img class="logo" src="../design-system/logo/mark.png"></div></div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/sayed.png')"><div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div></div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">91</span><span class="shield-pos">CB</span></div></div>
+      <div class="shirt-num">5</div>
+      <div class="subject"><span>ARABIC · </span><span style="letter-spacing:0">لغة عربية</span></div>
+      <div class="name-area"><div class="name-en">SAYED ABDELAZIZ</div><div class="name-ar">سيد عبدالعزيز</div><div class="pos-pill">#5 · CENTER BACK</div></div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">شرح واضح</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">إتقان النحو</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">أسلوب سلس</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">خبرة طويلة</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">قرب من الطلاب</div></div>
+        <div class="stat"><div class="stat-val">95</div><div class="stat-bar"><div class="stat-bar-fill" style="width:95%"></div></div><div class="stat-label">هدوء وثبات</div></div>
+      </div>
+      <div class="footer"><div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div><div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div><div class="footer-right">HARV FC</div></div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-sayed','harv-panini-sayed')">Download PNG</button>
+    <div class="caption-box" id="cap-sayed"><button class="copy-btn" onclick="copyCaption('cap-sayed')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 5 — قلب الدفاع 🛡️
+
+سيد عبدالعزيز
+مدرس لغة عربية
+
+إتقان النحو وأسلوب سلس.
+خبرة طويلة وهدوء يخلّيك تفهم من أول مرة.
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #لغة_عربية #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 11: ADEL NABIL — English ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-adel" data-subject="english">
+      <div class="pattern-top"></div><div class="pattern-bottom"></div><div class="inner-frame"></div>
+      <div class="header"><div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div><div class="header-right"><div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div><img class="logo" src="../design-system/logo/mark.png"></div></div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/adel.png')"><div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div></div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">90</span><span class="shield-pos">RB</span></div></div>
+      <div class="shirt-num">14</div>
+      <div class="subject"><span>ENGLISH · </span><span style="letter-spacing:0">لغة إنجليزية</span></div>
+      <div class="name-area"><div class="name-en">ADEL NABIL</div><div class="name-ar">عادل نبيل</div><div class="pos-pill">#14 · RIGHT BACK</div></div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">شرح منظم</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">صبر ودقة</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">إتقان اللغة</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">تشجيع الطلاب</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">أسلوب عملي</div></div>
+        <div class="stat"><div class="stat-val">95</div><div class="stat-bar"><div class="stat-bar-fill" style="width:95%"></div></div><div class="stat-label">حماس دائم</div></div>
+      </div>
+      <div class="footer"><div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div><div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div><div class="footer-right">HARV FC</div></div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-adel','harv-panini-adel')">Download PNG</button>
+    <div class="caption-box" id="cap-adel"><button class="copy-btn" onclick="copyCaption('cap-adel')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 14 — الظهير الأيمن 🏃
+
+عادل نبيل
+مدرس لغة إنجليزية
+
+شرح منظم وتشجيع مستمر.
+الإنجليزي معاه مش صعب. 💪
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #English #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 12: ABDELMOEEZ ISMAIL — German ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-abdelmoeez" data-subject="german">
+      <div class="pattern-top"></div><div class="pattern-bottom"></div><div class="inner-frame"></div>
+      <div class="header"><div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div><div class="header-right"><div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div><img class="logo" src="../design-system/logo/mark.png"></div></div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/abdelmoeez.png')"><div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div></div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">92</span><span class="shield-pos">LB</span></div></div>
+      <div class="shirt-num">16</div>
+      <div class="subject"><span>GERMAN · </span><span style="letter-spacing:0">لغة ألمانية</span></div>
+      <div class="name-area"><div class="name-en">ABDELMOEEZ ISMAIL</div><div class="name-ar">عبدالمعز إسماعيل</div><div class="pos-pill">#16 · LEFT BACK</div></div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">شرح دقيق</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">إتقان القواعد</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">أسلوب منهجي</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">صبر وتفاني</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">تحفيز عالي</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">طاقة إيجابية</div></div>
+      </div>
+      <div class="footer"><div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div><div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div><div class="footer-right">HARV FC</div></div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-abdelmoeez','harv-panini-abdelmoeez')">Download PNG</button>
+    <div class="caption-box" id="cap-abdelmoeez"><button class="copy-btn" onclick="copyCaption('cap-abdelmoeez')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 16 — الظهير الأيسر 🏃
+
+عبدالمعز إسماعيل
+مدرس لغة ألمانية
+
+شرح دقيق وإتقان للقواعد.
+الألماني معاه بيبقى منظم ومفهوم. 🇩🇪
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #ألماني #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 13: ESSAM KHATTAB — German ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-essam" data-subject="german">
+      <div class="pattern-top"></div><div class="pattern-bottom"></div><div class="inner-frame"></div>
+      <div class="header"><div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div><div class="header-right"><div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div><img class="logo" src="../design-system/logo/mark.png"></div></div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/essam.png')"><div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div></div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">91</span><span class="shield-pos">CM</span></div></div>
+      <div class="shirt-num">18</div>
+      <div class="subject"><span>GERMAN · </span><span style="letter-spacing:0">لغة ألمانية</span></div>
+      <div class="name-area"><div class="name-en">ESSAM KHATTAB</div><div class="name-ar">عصام خطاب</div><div class="pos-pill">#18 · MIDFIELDER</div></div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">شرح واضح</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">خبرة واسعة</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">أسلوب مبسط</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">إلمام بالمادة</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">تشجيع الطلاب</div></div>
+        <div class="stat"><div class="stat-val">95</div><div class="stat-bar"><div class="stat-bar-fill" style="width:95%"></div></div><div class="stat-label">هدوء واحتراف</div></div>
+      </div>
+      <div class="footer"><div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div><div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div><div class="footer-right">HARV FC</div></div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-essam','harv-panini-essam')">Download PNG</button>
+    <div class="caption-box" id="cap-essam"><button class="copy-btn" onclick="copyCaption('cap-essam')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 18 — لاعب الوسط ⚽
+
+عصام خطاب
+مدرس لغة ألمانية
+
+خبرة واسعة وأسلوب مبسط.
+الألماني معاه بيبقى ممتع. 🇩🇪
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #ألماني #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 14: MOHAMED EL-BARDISI — French ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-bardisi" data-subject="french">
+      <div class="pattern-top"></div><div class="pattern-bottom"></div><div class="inner-frame"></div>
+      <div class="header"><div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div><div class="header-right"><div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div><img class="logo" src="../design-system/logo/mark.png"></div></div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/bardisi.png')"><div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div></div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">90</span><span class="shield-pos">AM</span></div></div>
+      <div class="shirt-num">20</div>
+      <div class="subject"><span>FRENCH · </span><span style="letter-spacing:0">لغة فرنسية</span></div>
+      <div class="name-area"><div class="name-en">MOHAMED EL-BARDISI</div><div class="name-ar">محمد البرديسي</div><div class="pos-pill">#20 · ATT. MIDFIELD</div></div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">شرح سلس</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">نطق سليم</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">أسلوب راقي</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">إتقان القواعد</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">تحفيز مستمر</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">حماس معدي</div></div>
+      </div>
+      <div class="footer"><div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div><div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div><div class="footer-right">HARV FC</div></div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-bardisi','harv-panini-bardisi')">Download PNG</button>
+    <div class="caption-box" id="cap-bardisi"><button class="copy-btn" onclick="copyCaption('cap-bardisi')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 20 — صانع اللعب 🎯
+
+محمد البرديسي
+مدرس لغة فرنسية
+
+شرح سلس ونطق سليم.
+الفرنساوي معاه بيبقى chic. 🇫🇷
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #فرنسي #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 15: MOHAMED EL-QOT — Italian ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-elqot" data-subject="italian">
+      <div class="pattern-top"></div><div class="pattern-bottom"></div><div class="inner-frame"></div>
+      <div class="header"><div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div><div class="header-right"><div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div><img class="logo" src="../design-system/logo/mark.png"></div></div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/elqot.png')"><div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div></div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">91</span><span class="shield-pos">RW</span></div></div>
+      <div class="shirt-num">22</div>
+      <div class="subject"><span>ITALIAN · </span><span style="letter-spacing:0">لغة إيطالية</span></div>
+      <div class="name-area"><div class="name-en">MOHAMED EL-QOT</div><div class="name-ar">محمد القط</div><div class="pos-pill">#22 · RIGHT WING</div></div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">شرح ممتع</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">نطق أصلي</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">أسلوب تفاعلي</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">إلمام بالثقافة</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">صبر وتفاني</div></div>
+        <div class="stat"><div class="stat-val">95</div><div class="stat-bar"><div class="stat-bar-fill" style="width:95%"></div></div><div class="stat-label">طاقة إيجابية</div></div>
+      </div>
+      <div class="footer"><div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div><div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div><div class="footer-right">HARV FC</div></div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-elqot','harv-panini-elqot')">Download PNG</button>
+    <div class="caption-box" id="cap-elqot"><button class="copy-btn" onclick="copyCaption('cap-elqot')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 22 — الجناح الأيمن 🦅
+
+محمد القط
+مدرس لغة إيطالية
+
+شرح ممتع ونطق أصلي.
+الإيطالي معاه بيبقى bellissimo. 🇮🇹
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #إيطالي #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 16: TAMER EL-QADI — Physics ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-tamer" data-subject="physics">
+      <div class="pattern-top"></div><div class="pattern-bottom"></div><div class="inner-frame"></div>
+      <div class="header"><div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div><div class="header-right"><div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div><img class="logo" src="../design-system/logo/mark.png"></div></div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/tamer.png')"><div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div></div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">92</span><span class="shield-pos">CB</span></div></div>
+      <div class="shirt-num">2</div>
+      <div class="subject"><span>PHYSICS · </span><span style="letter-spacing:0">فيزياء</span></div>
+      <div class="name-area"><div class="name-en">TAMER EL-QADI</div><div class="name-ar">تامر القاضي</div><div class="pos-pill">#2 · CENTER BACK</div></div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">شرح علمي</div></div>
+        <div class="stat"><div class="stat-val">99</div><div class="stat-bar"><div class="stat-bar-fill" style="width:99%"></div></div><div class="stat-label">تبسيط القوانين</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">أسلوب تحليلي</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">إلمام شامل</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">تحفيز عالي</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">حضور قوي</div></div>
+      </div>
+      <div class="footer"><div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div><div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div><div class="footer-right">HARV FC</div></div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-tamer','harv-panini-tamer')">Download PNG</button>
+    <div class="caption-box" id="cap-tamer"><button class="copy-btn" onclick="copyCaption('cap-tamer')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 2 — قلب الدفاع 🛡️
+
+تامر القاضي
+مدرس فيزياء
+
+شرح علمي وتبسيط للقوانين.
+الفيزيا معاه مش معقدة. ⚡
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #فيزياء #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 17: AHMED SAMIR — Physics ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-samir" data-subject="physics">
+      <div class="pattern-top"></div><div class="pattern-bottom"></div><div class="inner-frame"></div>
+      <div class="header"><div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div><div class="header-right"><div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div><img class="logo" src="../design-system/logo/mark.png"></div></div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/samir.png')"><div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div></div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">91</span><span class="shield-pos">CDM</span></div></div>
+      <div class="shirt-num">13</div>
+      <div class="subject"><span>PHYSICS · </span><span style="letter-spacing:0">فيزياء</span></div>
+      <div class="name-area"><div class="name-en">AHMED SAMIR</div><div class="name-ar">أحمد سمير</div><div class="pos-pill">#13 · DEF. MIDFIELD</div></div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">شرح مبسط</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">صبر لامحدود</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">أسلوب عملي</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">دقة علمية</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">تحفيز مستمر</div></div>
+        <div class="stat"><div class="stat-val">95</div><div class="stat-bar"><div class="stat-bar-fill" style="width:95%"></div></div><div class="stat-label">طاقة إيجابية</div></div>
+      </div>
+      <div class="footer"><div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div><div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div><div class="footer-right">HARV FC</div></div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-samir','harv-panini-samir')">Download PNG</button>
+    <div class="caption-box" id="cap-samir"><button class="copy-btn" onclick="copyCaption('cap-samir')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 13 — مرتكز الوسط 🛡️⚽
+
+أحمد سمير
+مدرس فيزياء
+
+شرح مبسط ودقة علمية.
+بيوصّل القوانين بأسهل طريقة. ⚡
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #فيزياء #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 18: AHMED NAWAR — Physics ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-nawar" data-subject="physics">
+      <div class="pattern-top"></div><div class="pattern-bottom"></div><div class="inner-frame"></div>
+      <div class="header"><div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div><div class="header-right"><div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div><img class="logo" src="../design-system/logo/mark.png"></div></div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/nawar.png')"><div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div></div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">90</span><span class="shield-pos">CM</span></div></div>
+      <div class="shirt-num">15</div>
+      <div class="subject"><span>PHYSICS · </span><span style="letter-spacing:0">فيزياء</span></div>
+      <div class="name-area"><div class="name-en">AHMED NAWAR</div><div class="name-ar">أحمد نوار</div><div class="pos-pill">#15 · MIDFIELDER</div></div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">شرح تفاعلي</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">فهم عميق</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">أسلوب ذكي</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">خبرة واسعة</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">ثقة بالطلاب</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">حماس دائم</div></div>
+      </div>
+      <div class="footer"><div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div><div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div><div class="footer-right">HARV FC</div></div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-nawar','harv-panini-nawar')">Download PNG</button>
+    <div class="caption-box" id="cap-nawar"><button class="copy-btn" onclick="copyCaption('cap-nawar')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 15 — لاعب الوسط ⚽
+
+أحمد نوار
+مدرس فيزياء
+
+شرح تفاعلي وفهم عميق.
+بيخلّي الفيزيا ممتعة. ⚡
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #فيزياء #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 19: AHMED SAMIR MOGLI — Physics ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-mogli" data-subject="physics">
+      <div class="pattern-top"></div><div class="pattern-bottom"></div><div class="inner-frame"></div>
+      <div class="header"><div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div><div class="header-right"><div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div><img class="logo" src="../design-system/logo/mark.png"></div></div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/mogli.png')"><div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div></div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">92</span><span class="shield-pos">LW</span></div></div>
+      <div class="shirt-num">17</div>
+      <div class="subject"><span>PHYSICS · </span><span style="letter-spacing:0">فيزياء</span></div>
+      <div class="name-area"><div class="name-en">AHMED SAMIR MOGLI</div><div class="name-ar">أحمد سمير مجلي</div><div class="pos-pill">#17 · LEFT WING</div></div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">شرح احترافي</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">تبسيط المسائل</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">أسلوب ممتع</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">معلومة دقيقة</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">تحفيز عالي</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">حضور قوي</div></div>
+      </div>
+      <div class="footer"><div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div><div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div><div class="footer-right">HARV FC</div></div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-mogli','harv-panini-mogli')">Download PNG</button>
+    <div class="caption-box" id="cap-mogli"><button class="copy-btn" onclick="copyCaption('cap-mogli')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 17 — الجناح الأيسر 🦅
+
+أحمد سمير مجلي
+مدرس فيزياء
+
+شرح احترافي وتبسيط المسائل.
+أسلوب ممتع وتحفيز عالي. ⚡
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #فيزياء #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 20: OMAR EL-SHERBINI — Math ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-sherbini" data-subject="math">
+      <div class="pattern-top"></div><div class="pattern-bottom"></div><div class="inner-frame"></div>
+      <div class="header"><div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div><div class="header-right"><div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div><img class="logo" src="../design-system/logo/mark.png"></div></div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/sherbini.png')"><div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div></div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">93</span><span class="shield-pos">CM</span></div></div>
+      <div class="shirt-num">19</div>
+      <div class="subject"><span>MATH · </span><span style="letter-spacing:0">رياضيات</span></div>
+      <div class="name-area"><div class="name-en">OMAR EL-SHERBINI</div><div class="name-ar">عمر الشربيني</div><div class="pos-pill">#19 · MIDFIELDER</div></div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">99</div><div class="stat-bar"><div class="stat-bar-fill" style="width:99%"></div></div><div class="stat-label">شرح منطقي</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">حل المسائل</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">أسلوب تحليلي</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">صبر لامحدود</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">تبسيط المعقد</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">طاقة إيجابية</div></div>
+      </div>
+      <div class="footer"><div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div><div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div><div class="footer-right">HARV FC</div></div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-sherbini','harv-panini-sherbini')">Download PNG</button>
+    <div class="caption-box" id="cap-sherbini"><button class="copy-btn" onclick="copyCaption('cap-sherbini')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 19 — لاعب الوسط ⚽
+
+عمر الشربيني
+مدرس رياضيات
+
+شرح منطقي وحل المسائل بأبسط طريقة.
+الرياضة معاه مش مستحيلة. 📐
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #رياضيات #ثانوية_عامة</div>
+  </div>
+
+  <!-- ========== CARD 21: ALI SALAH — Philosophy ========== -->
+  <div class="card-wrap">
+    <div class="card" id="card-alisalah" data-subject="philosophy">
+      <div class="pattern-top"></div><div class="pattern-bottom"></div><div class="inner-frame"></div>
+      <div class="header"><div><div class="wc-label">FIFA WORLD CUP</div><div class="wc-year"><img src="photos/icons/wc2026.png" alt="WC">2026</div></div><div class="header-right"><div class="flag"><div class="r"></div><div class="w"></div><div class="b"></div></div><img class="logo" src="../design-system/logo/mark.png"></div></div>
+      <div class="accent-line"></div>
+      <div class="center-name"><span class="cn-en">HARVARD EDUCATIONAL CENTER · </span><span class="cn-ar">مركز هارفورد التعليمي</span></div>
+      <div class="photo-area" style="background-image:url('photos/teachers/alisalah.png')"><div class="grad-top"></div><div class="grad-bottom"></div><div class="grad-left"></div></div>
+      <div class="shield"><div class="shield-bg"><span class="shield-ovr">91</span><span class="shield-pos">AM</span></div></div>
+      <div class="shirt-num">21</div>
+      <div class="subject"><span>PHILOSOPHY · </span><span style="letter-spacing:0">فلسفة وعلم نفس</span></div>
+      <div class="name-area"><div class="name-en">ALI SALAH</div><div class="name-ar">علي صلاح</div><div class="pos-pill">#21 · ATT. MIDFIELD</div></div>
+      <div class="divider"></div>
+      <div class="stats">
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">شرح فلسفي</div></div>
+        <div class="stat"><div class="stat-val">99</div><div class="stat-bar"><div class="stat-bar-fill" style="width:99%"></div></div><div class="stat-label">تحليل عميق</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">أسلوب حواري</div></div>
+        <div class="stat"><div class="stat-val">98</div><div class="stat-bar"><div class="stat-bar-fill" style="width:98%"></div></div><div class="stat-label">فتح الأفق</div></div>
+        <div class="stat"><div class="stat-val">97</div><div class="stat-bar"><div class="stat-bar-fill" style="width:97%"></div></div><div class="stat-label">تحفيز التفكير</div></div>
+        <div class="stat"><div class="stat-val">96</div><div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div><div class="stat-label">هدوء وحكمة</div></div>
+      </div>
+      <div class="footer"><div class="footer-left"><img src="../design-system/logo/mark.png"><span>معاك للنهاية</span></div><div class="wa-pill"><span>01064949395 · 01223463448 · 02-24734371</span></div><div class="footer-right">HARV FC</div></div>
+    </div>
+    <button class="dl-btn" onclick="dl('card-alisalah','harv-panini-alisalah')">Download PNG</button>
+    <div class="caption-box" id="cap-alisalah"><button class="copy-btn" onclick="copyCaption('cap-alisalah')">Copy</button>🏆 HARV FC × كأس العالم 2026
+
+اللاعب رقم 21 — صانع اللعب 🎯
+
+علي صلاح
+مدرس فلسفة وعلم نفس
+
+تحليل عميق وأسلوب حواري.
+بيفتحلك آفاق جديدة في التفكير. 🧠
+
+📲 01064949395
+#HarvFC #كأس_العالم_2026 #هارفورد #فلسفة #ثانوية_عامة</div>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.card[data-subject]');
+      const total = cards.length;
+      cards.forEach((card, i) => {
+        const subj = card.dataset.subject;
+        card.querySelector('.pattern-top').style.backgroundImage = "url('photos/tiles/tile-" + subj + ".png')";
+        const num = document.createElement('div');
+        num.className = 'card-num';
+        num.textContent = 'HRV-' + String(i + 1).padStart(2, '0') + '/' + total;
+        card.appendChild(num);
+      });
+
+      document.getElementById('filter-bar').addEventListener('click', (e) => {
+        const btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.querySelectorAll('.card-wrap').forEach(wrap => {
+          const card = wrap.querySelector('.card[data-subject]');
+          if (!card) return;
+          if (filter === 'all' || card.dataset.subject === filter) {
+            wrap.classList.remove('hidden');
+          } else {
+            wrap.classList.add('hidden');
+          }
+        });
+        notifyHeight();
+      });
+
+      notifyHeight();
+    });
+
+      // Add view buttons before each download button
+      document.querySelectorAll('.dl-btn').forEach(btn => {
+        if (btn.previousElementSibling && btn.previousElementSibling.classList.contains('view-btn')) return;
+        const id = btn.getAttribute('onclick').match(/dl\('([^']+)'/)[1];
+        const viewBtn = document.createElement('button');
+        viewBtn.className = 'view-btn';
+        viewBtn.textContent = 'View';
+        viewBtn.onclick = () => viewCard(id);
+        btn.parentNode.insertBefore(viewBtn, btn);
+      });
+
+    function notifyHeight() {
+      requestAnimationFrame(() => {
+        const h = document.body.scrollHeight;
+        if (window.parent !== window) {
+          window.parent.postMessage({ type: 'panini-height', height: h }, '*');
+        }
+      });
+    }
+
+    async function viewCard(id) {
+      const el = document.getElementById(id);
+      const wrap = el.closest('.card-wrap');
+      const origTransform = wrap.style.transform;
+      const origMargin = wrap.style.marginBottom;
+      wrap.style.transform = 'none';
+      wrap.style.marginBottom = '0';
+      el.style.width = '1080px';
+      el.style.height = '1350px';
+      try {
+        const canvas = await html2canvas(el, {
+          width: 1080, height: 1350, scale: 1,
+          useCORS: true, allowTaint: true,
+          backgroundColor: '#1A2744', windowWidth: 1200, windowHeight: 1600
+        });
+        wrap.style.transform = origTransform;
+        wrap.style.marginBottom = origMargin;
+        const url = canvas.toDataURL('image/png');
+        const w = window.open('');
+        w.document.write('<html><head><title>HARV FC Card</title><style>body{margin:0;background:#0a0f1a;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;padding:20px;}img{max-width:100%;height:auto;}</style></head><body><img src="' + url + '"></body></html>');
+      } catch(e) {
+        wrap.style.transform = origTransform;
+        wrap.style.marginBottom = origMargin;
+        alert('Could not render. Try on a desktop browser.');
+      }
+    }
+
+    function copyCaption(id) {
+      const el = document.getElementById(id);
+      const text = el.innerText.replace('Copy', '').trim();
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = el.querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy', 2000);
+      });
+    }
+
+    async function dl(id, name) {
+      const btn = event.target;
+      btn.textContent = 'Rendering...';
+      try {
+        const el = document.getElementById(id);
+        const wrap = el.closest('.card-wrap');
+        // Remove responsive scaling temporarily
+        const origTransform = wrap.style.transform;
+        const origMargin = wrap.style.marginBottom;
+        wrap.style.transform = 'none';
+        wrap.style.marginBottom = '0';
+        // Force full size
+        el.style.width = '1080px';
+        el.style.height = '1350px';
+        const canvas = await html2canvas(el, {
+          width: 1080, height: 1350, scale: 1,
+          useCORS: true, allowTaint: true,
+          backgroundColor: '#1A2744',
+          windowWidth: 1200,
+          windowHeight: 1600
+        });
+        // Restore
+        wrap.style.transform = origTransform;
+        wrap.style.marginBottom = origMargin;
+        const link = document.createElement('a');
+        link.download = name + '.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        btn.textContent = 'Downloaded!';
+        setTimeout(() => btn.textContent = 'Download PNG', 2000);
+      } catch(e) {
+        btn.textContent = 'Download PNG';
+        alert('Download failed. Try on a desktop browser for best results.');
+      }
+    }
+  </script>
+</body>
+</html>

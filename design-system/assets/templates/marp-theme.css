@@ -1,0 +1,250 @@
+/* @theme harv */
+
+/*
+ * Harv Design System — Marp Theme
+ *
+ * Usage:
+ *   ---
+ *   marp: true
+ *   theme: harv
+ *   ---
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap');
+
+:root {
+  --harv-brand: #D42027;
+  --harv-ink: #1A2744;
+  --harv-paper: #FAFAF8;
+  --harv-surface: #FFFFFF;
+  --harv-ink-500: #6B7A8D;
+  --harv-line: #E8E7E4;
+}
+
+section {
+  font-family: 'Cairo', sans-serif;
+  font-size: 28px;
+  line-height: 1.5;
+  color: var(--harv-ink);
+  background: var(--harv-paper);
+  padding: 60px 80px;
+  direction: rtl;
+  text-align: right;
+  justify-content: flex-start;
+}
+
+/* ── Title slide ──────────────────────────────────────── */
+section.title {
+  background: var(--harv-ink);
+  color: white;
+  text-align: center;
+  justify-content: center;
+}
+
+section.title h1 {
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 16px;
+}
+
+section.title h2 {
+  font-size: 24px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ── Section divider ──────────────────────────────────── */
+section.divider {
+  background: var(--harv-ink);
+  color: white;
+  justify-content: center;
+}
+
+section.divider h1 {
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  border-top: 4px solid var(--harv-brand);
+  padding-top: 24px;
+}
+
+/* ── Dark variant ─────────────────────────────────────── */
+section.dark {
+  background: var(--harv-ink);
+  color: white;
+}
+
+section.dark h1,
+section.dark h2,
+section.dark h3 {
+  color: white;
+}
+
+section.dark a {
+  color: var(--harv-brand);
+}
+
+/* ── Headings ─────────────────────────────────────────── */
+h1 {
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--harv-ink);
+  letter-spacing: -0.015em;
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--harv-ink);
+  letter-spacing: -0.015em;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--harv-ink);
+  margin-bottom: 12px;
+}
+
+/* ── Body text ────────────────────────────────────────── */
+p {
+  font-size: 22px;
+  line-height: 1.6;
+  color: var(--harv-ink);
+  margin-bottom: 16px;
+}
+
+/* ── Lists ────────────────────────────────────────────── */
+ul, ol {
+  font-size: 22px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  padding-right: 32px;
+  padding-left: 0;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+li::marker {
+  color: var(--harv-brand);
+}
+
+/* ── Emphasis ─────────────────────────────────────────── */
+strong {
+  font-weight: 700;
+  color: var(--harv-brand);
+}
+
+em {
+  font-style: normal;
+  color: var(--harv-ink-500);
+}
+
+/* ── Code ─────────────────────────────────────────────── */
+code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  background: rgba(26, 39, 68, 0.06);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+pre code {
+  display: block;
+  padding: 24px;
+  border-radius: 10px;
+  background: var(--harv-ink);
+  color: white;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* ── Tables ───────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 20px;
+}
+
+th {
+  background: var(--harv-ink);
+  color: white;
+  padding: 12px 16px;
+  text-align: right;
+  font-weight: 600;
+}
+
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--harv-line);
+  text-align: right;
+}
+
+tr:nth-child(even) td {
+  background: rgba(26, 39, 68, 0.03);
+}
+
+/* ── Blockquote (used for callouts) ───────────────────── */
+blockquote {
+  border-right: 4px solid var(--harv-brand);
+  border-left: none;
+  padding: 16px 24px 16px 0;
+  margin: 24px 0;
+  background: rgba(212, 32, 39, 0.04);
+  border-radius: 0 10px 10px 0;
+}
+
+blockquote p {
+  margin: 0;
+  font-size: 22px;
+}
+
+/* ── Images ───────────────────────────────────────────── */
+img {
+  border-radius: 10px;
+  max-height: 400px;
+}
+
+/* ── Links ────────────────────────────────────────────── */
+a {
+  color: var(--harv-brand);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ── Footer ───────────────────────────────────────────── */
+footer {
+  font-size: 14px;
+  color: var(--harv-ink-500);
+  font-weight: 500;
+}
+
+section::after {
+  content: '';
+}
+
+/* ── Horizontal rule ──────────────────────────────────── */
+hr {
+  border: none;
+  border-top: 2px solid var(--harv-line);
+  margin: 32px 0;
+}
+
+/* ── Big number slide helper ──────────────────────────── */
+section.big-number h1 {
+  font-size: 96px;
+  color: var(--harv-brand);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+section.big-number p {
+  text-align: center;
+  font-size: 24px;
+  color: var(--harv-ink-500);
+}

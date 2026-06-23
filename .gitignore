@@ -1,0 +1,25 @@
+# Dependencies
+node_modules/
+
+# Local Netlify folder
+.netlify/
+
+# Build artifacts
+out/
+dist/
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+*.tmp
+
+# Bun
+.bun/
+
+# Large video files (track separately via Git LFS if needed)
+*.mp4

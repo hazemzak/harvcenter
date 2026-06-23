@@ -1,0 +1,7 @@
+[build]
+  publish = "deploy"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"

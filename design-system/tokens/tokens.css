@@ -1,0 +1,144 @@
+/*
+ * Harv Design System — CSS custom properties
+ *
+ * Drop this at the top of your global stylesheet. Consume via var(--harv-*).
+ * Source of truth: design-system/tokens/tokens.json
+ */
+
+:root {
+  /* ── Brand ─────────────────────────────────────────── */
+  --harv-brand-50:  #FEF2F2;
+  --harv-brand-100: #FEE2E2;
+  --harv-brand-200: #FECACA;
+  --harv-brand-300: #FCA5A5;
+  --harv-brand-400: #F87171;
+  --harv-brand-500: #EF4444;
+  --harv-brand-600: #D42027;  /* primary */
+  --harv-brand-700: #B91C1C;
+  --harv-brand-800: #991B1B;
+  --harv-brand-900: #7F1D1D;
+
+  /* ── Ink (text) ────────────────────────────────────── */
+  --harv-ink-100: #E8EBF0;
+  --harv-ink-200: #C8CED9;
+  --harv-ink-300: #A3ACBC;
+  --harv-ink-400: #7D8AA0;
+  --harv-ink-500: #5A6784;
+  --harv-ink-600: #3D4C6B;
+  --harv-ink-700: #2B3A56;
+  --harv-ink-900: #1A2744;
+
+  /* ── Surfaces ──────────────────────────────────────── */
+  --harv-paper:     #FAFAF8;
+  --harv-surface:   #FFFFFF;
+  --harv-line:      #E5E7EB;
+  --harv-line-soft: #F3F4F6;
+
+  /* ── Gold (logo accent only) ────────────────────────── */
+  --harv-gold: #C9993A;
+
+  /* ── Semantic ──────────────────────────────────────── */
+  --harv-success-100: #E2F5EC;
+  --harv-success-600: #1F9D6B;
+  --harv-warn-100:    #FBF2DC;
+  --harv-warn-600:    #C08415;
+  --harv-danger-100:  #FAE4E2;
+  --harv-danger-600:  #C8382F;
+
+  /* ── Type ──────────────────────────────────────────── */
+  --harv-font-sans:  'Cairo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --harv-font-mono:  'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --harv-weight-regular:  400;
+  --harv-weight-medium:   500;
+  --harv-weight-semibold: 600;
+  --harv-weight-bold:     700;
+
+  /* ── Spacing (4px base) ────────────────────────────── */
+  --harv-space-0:   0px;
+  --harv-space-0_5: 2px;
+  --harv-space-1:   4px;
+  --harv-space-1_5: 6px;
+  --harv-space-2:   8px;
+  --harv-space-3:   12px;
+  --harv-space-4:   16px;
+  --harv-space-5:   20px;
+  --harv-space-6:   24px;
+  --harv-space-8:   32px;
+  --harv-space-10:  40px;
+  --harv-space-12:  48px;
+  --harv-space-16:  64px;
+  --harv-space-20:  80px;
+  --harv-space-24:  96px;
+  --harv-space-32:  128px;
+  --harv-space-40:  160px;
+
+  /* ── Radius ────────────────────────────────────────── */
+  --harv-radius-none: 0px;
+  --harv-radius-xs:   4px;
+  --harv-radius-sm:   6px;
+  --harv-radius-md:   10px;
+  --harv-radius-lg:   16px;
+  --harv-radius-xl:   24px;
+  --harv-radius-full: 9999px;
+
+  /* ── Shadow ────────────────────────────────────────── */
+  --harv-shadow-none: none;
+  --harv-shadow-xs:   0 1px 2px rgba(26, 39, 68, 0.04);
+  --harv-shadow-sm:   0 1px 3px rgba(26, 39, 68, 0.06), 0 1px 2px rgba(26, 39, 68, 0.04);
+  --harv-shadow-md:   0 4px 12px rgba(26, 39, 68, 0.06), 0 2px 4px rgba(26, 39, 68, 0.04);
+  --harv-shadow-lg:   0 12px 32px rgba(26, 39, 68, 0.08), 0 4px 8px rgba(26, 39, 68, 0.04);
+  --harv-shadow-xl:   0 24px 48px rgba(26, 39, 68, 0.10), 0 8px 16px rgba(26, 39, 68, 0.06);
+
+  /* ── Motion ────────────────────────────────────────── */
+  --harv-dur-xs: 80ms;
+  --harv-dur-sm: 160ms;
+  --harv-dur-md: 240ms;
+  --harv-dur-lg: 480ms;
+  --harv-dur-xl: 720ms;
+
+  --harv-ease-out:      cubic-bezier(0.22, 1, 0.36, 1);
+  --harv-ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
+  --harv-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Container ─────────────────────────────────────── */
+  --harv-container-max:     1200px;
+  --harv-container-reading: 680px;
+  --harv-gutter-mobile:     16px;
+  --harv-gutter-desktop:    24px;
+}
+
+/* ── Base ─────────────────────────────────────────────── */
+html, body {
+  font-family: var(--harv-font-sans);
+  color: var(--harv-ink-900);
+  background: var(--harv-paper);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Type utility classes ─────────────────────────────── */
+.display-xl { font-size: 72px; line-height: 80px; font-weight: 600; letter-spacing: -0.02em; }
+.display-lg { font-size: 56px; line-height: 64px; font-weight: 600; letter-spacing: -0.02em; }
+.h1         { font-size: 40px; line-height: 48px; font-weight: 600; letter-spacing: -0.015em; }
+.h2         { font-size: 32px; line-height: 40px; font-weight: 600; letter-spacing: -0.015em; }
+.h3         { font-size: 24px; line-height: 32px; font-weight: 600; letter-spacing: -0.015em; }
+.h4         { font-size: 20px; line-height: 28px; font-weight: 600; letter-spacing: -0.015em; }
+.body-lg    { font-size: 18px; line-height: 28px; font-weight: 400; }
+.body-md    { font-size: 16px; line-height: 24px; font-weight: 400; }
+.body-sm    { font-size: 14px; line-height: 20px; font-weight: 400; }
+.caption    { font-size: 12px; line-height: 16px; font-weight: 500; }
+.overline   { font-size: 11px; line-height: 16px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.code       { font-family: var(--harv-font-mono); font-size: 14px; line-height: 20px; font-weight: 400; }
+
+/* ── Reduced motion ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

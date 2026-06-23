@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HARV FC — Panini World Cup 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0f1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 80px;
+      padding: 60px 20px;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    h1.page-title {
+      color: #fff;
+      font-size: 36px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+    h1.page-title span { color: #D42027; }
+
+    .instructions {
+      color: #7D8AA0;
+      font-size: 14px;
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      width: 1080px;
+      height: 1350px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      background: linear-gradient(170deg, #1A2744 0%, #0F1A2E 50%, #1A2744 100%);
+      box-shadow:
+        0 0 0 4px #D42027,
+        0 0 0 8px #1A2744,
+        0 0 60px rgba(212, 32, 39, 0.3),
+        0 20px 60px rgba(0,0,0,0.6);
+    }
+
+    /* Subject-themed tile pattern overlay */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: -150px;
+      background-repeat: repeat;
+      background-size: 400px 400px;
+      transform: rotate(-15deg);
+      filter: brightness(1.4);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .card[data-subject="business"]::before { background-image: url('panini-cards/photos/tiles/tile-business.png'); }
+    .card[data-subject="english"]::before { background-image: url('panini-cards/photos/tiles/tile-english.png'); }
+    .card[data-subject="history"]::before { background-image: url('panini-cards/photos/tiles/tile-history.png'); }
+
+    /* Inner card frame */
+    .card-inner {
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* ===== HEADER ===== */
+    .card-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .wc-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .wc-badge .football {
+      font-size: 28px;
+    }
+
+    .wc-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .wc-text .line1 {
+      font-size: 12px;
+      font-weight: 600;
+      color: #7D8AA0;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .wc-text .line2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 0.08em;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .egypt-flag {
+      width: 48px;
+      height: 32px;
+      border-radius: 4px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .egypt-flag div { flex: 1; }
+    .egypt-flag .ef-red { background: #CE1126; }
+    .egypt-flag .ef-white { background: #FFFFFF; }
+    .egypt-flag .ef-black { background: #000000; }
+
+    .harv-logo {
+      width: 60px;
+      height: auto;
+    }
+
+    /* Red accent line below header */
+    .header-line {
+      position: absolute;
+      top: 100px;
+      left: 40px;
+      right: 40px;
+      height: 3px;
+      background: linear-gradient(90deg, #D42027, #D42027 60%, transparent);
+      z-index: 10;
+    }
+
+    /* ===== RATING BADGE ===== */
+    .rating-badge {
+      position: absolute;
+      top: 120px;
+      left: 40px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .rating-shield {
+      width: 120px;
+      height: 140px;
+      background: linear-gradient(180deg, #D42027 0%, #a01a20 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding-bottom: 15px;
+    }
+
+    .rating-number {
+      font-size: 56px;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .rating-pos {
+      font-size: 18px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.9);
+      letter-spacing: 0.1em;
+      margin-top: -2px;
+    }
+
+    /* ===== SHIRT NUMBER (big, watermark style) ===== */
+    .shirt-number {
+      position: absolute;
+      top: 100px;
+      right: 40px;
+      font-size: 220px;
+      font-weight: 900;
+      color: rgba(212, 32, 39, 0.12);
+      z-index: 3;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    /* ===== PHOTO ===== */
+    .photo-container {
+      position: absolute;
+      top: 100px;
+      left: 0;
+      right: 0;
+      height: 780px;
+      z-index: 5;
+      overflow: hidden;
+    }
+
+    .teacher-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+    }
+
+    /* Gradient overlays on photo */
+    .photo-gradient-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(180deg, #1A2744 0%, transparent 100%);
+      z-index: 6;
+    }
+
+    .photo-gradient-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 300px;
+      background: linear-gradient(0deg, #1A2744 0%, rgba(26,39,68,0.8) 40%, transparent 100%);
+      z-index: 6;
+    }
+
+    .photo-gradient-left {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 200px;
+      background: linear-gradient(90deg, rgba(26,39,68,0.6) 0%, transparent 100%);
+      z-index: 6;
+    }
+
+    /* ===== NAME SECTION ===== */
+    .name-section {
+      position: absolute;
+      bottom: 280px;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      padding: 0 50px;
+    }
+
+    .teacher-name-en {
+      font-size: 64px;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+
+    .teacher-name-ar {
+      font-size: 36px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      direction: rtl;
+      margin-top: 4px;
+    }
+
+    .subject-tag {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 8px 24px;
+      background: #D42027;
+      border-radius: 100px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: 0.05em;
+    }
+
+    /* ===== RED DIVIDER ===== */
+    .divider {
+      position: absolute;
+      bottom: 260px;
+      left: 40px;
+      right: 40px;
+      height: 3px;
+      background: #D42027;
+      z-index: 10;
+    }
+
+    /* ===== STATS ===== */
+    .stats-section {
+      position: absolute;
+      bottom: 90px;
+      left: 40px;
+      right: 40px;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px 30px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .stat-value {
+      font-size: 42px;
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    .stat-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .stat-bar-fill {
+      height: 100%;
+      background: #D42027;
+      border-radius: 2px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: #7D8AA0;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      direction: rtl;
+    }
+
+    .stat-label-ar {
+      font-size: 16px;
+      font-weight: 600;
+      color: #5A6784;
+      direction: rtl;
+    }
+
+    /* ===== FOOTER ===== */
+    .card-footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-logo {
+      width: 36px;
+      height: auto;
+    }
+
+    .footer-tagline {
+      font-size: 16px;
+      font-weight: 600;
+      color: #5A6784;
+      direction: rtl;
+    }
+
+    .footer-right {
+      font-size: 13px;
+      font-weight: 600;
+      color: #3D4C6B;
+      letter-spacing: 0.1em;
+    }
+
+    .card-number {
+      position: absolute;
+      bottom: 90px;
+      right: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #3D4C6B;
+      z-index: 10;
+      letter-spacing: 0.1em;
+    }
+
+    /* ===== SPECIFIC PHOTO POSITIONS ===== */
+    .card[data-teacher="haitham"] .teacher-photo {
+      object-position: center 10%;
+    }
+    .card[data-teacher="milad"] .teacher-photo {
+      object-position: center 12%;
+    }
+    .card[data-teacher="salah"] .teacher-photo {
+      object-position: center 12%;
+    }
+    .card[data-teacher="atef"] .teacher-photo {
+      object-position: center 8%;
+    }
+    .card[data-teacher="tolba"] .teacher-photo {
+      object-position: center 10%;
+    }
+
+    /* Responsive scaling for preview */
+    @media (max-width: 1200px) {
+      .card {
+        transform: scale(0.5);
+        transform-origin: top center;
+        margin-bottom: -675px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="page-title">HARV FC <span>&times;</span> WORLD CUP 2026</h1>
+  <p class="instructions">
+    Right-click each card and "Save image" or screenshot at 100% zoom for Instagram-ready 1080&times;1350 output.
+  </p>
+
+  <!-- ============================================ -->
+  <!-- CARD 1: DR. HAITHAM ATIA — Business Admin    -->
+  <!-- ============================================ -->
+  <div class="card" data-teacher="haitham" data-subject="business">
+    <div class="card-inner"></div>
+
+    <!-- Header -->
+    <div class="card-header">
+      <div class="header-left">
+        <div class="wc-badge">
+          <span class="football">&#9917;</span>
+          <div class="wc-text">
+            <span class="line1">FIFA World Cup</span>
+            <span class="line2">2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="egypt-flag">
+          <div class="ef-red"></div>
+          <div class="ef-white"></div>
+          <div class="ef-black"></div>
+        </div>
+        <img src="design-system/logo/mark.png" class="harv-logo" alt="Harv">
+      </div>
+    </div>
+    <div class="header-line"></div>
+
+    <!-- Rating -->
+    <div class="rating-badge">
+      <div class="rating-shield">
+        <span class="rating-number">91</span>
+        <span class="rating-pos">CAM</span>
+      </div>
+    </div>
+
+    <!-- Shirt Number Watermark -->
+    <div class="shirt-number">10</div>
+
+    <!-- Photo -->
+    <div class="photo-container">
+      <img class="teacher-photo" src="Inspo/Approved design to be rebranded 2027/WhatsApp Image 2026-06-20 at 3.48.19 PM.jpeg" alt="Dr. Haitham Atia">
+      <div class="photo-gradient-top"></div>
+      <div class="photo-gradient-bottom"></div>
+      <div class="photo-gradient-left"></div>
+    </div>
+
+    <!-- Name -->
+    <div class="name-section">
+      <div class="teacher-name-en">Dr. Haitham<br>Atia</div>
+      <div class="teacher-name-ar">د. هيثم عطية</div>
+      <div class="subject-tag">Business Administration</div>
+    </div>
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Stats -->
+    <div class="stats-section">
+      <div class="stat-item">
+        <span class="stat-value">93</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:93%"></div></div>
+        <span class="stat-label">SHR</span>
+        <span class="stat-label-ar">شرح</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">88</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:88%"></div></div>
+        <span class="stat-label">SBR</span>
+        <span class="stat-label-ar">صبر</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">95</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:95%"></div></div>
+        <span class="stat-label">STL</span>
+        <span class="stat-label-ar">أسلوب</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">92</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:92%"></div></div>
+        <span class="stat-label">KNW</span>
+        <span class="stat-label-ar">معلومة</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">89</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:89%"></div></div>
+        <span class="stat-label">MOT</span>
+        <span class="stat-label-ar">تحفيز</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">87</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:87%"></div></div>
+        <span class="stat-label">NRG</span>
+        <span class="stat-label-ar">طاقة</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="card-footer">
+      <div class="footer-left">
+        <img src="design-system/logo/mark.png" class="footer-logo" alt="Harv">
+        <span class="footer-tagline">معاك للنهاية</span>
+      </div>
+      <span class="footer-right">HARV FC &bull; 01064949395</span>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- CARD 2: MR. MILAD MOURAD — English           -->
+  <!-- ============================================ -->
+  <div class="card" data-teacher="milad" data-subject="english">
+    <div class="card-inner"></div>
+
+    <div class="card-header">
+      <div class="header-left">
+        <div class="wc-badge">
+          <span class="football">&#9917;</span>
+          <div class="wc-text">
+            <span class="line1">FIFA World Cup</span>
+            <span class="line2">2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="egypt-flag">
+          <div class="ef-red"></div>
+          <div class="ef-white"></div>
+          <div class="ef-black"></div>
+        </div>
+        <img src="design-system/logo/mark.png" class="harv-logo" alt="Harv">
+      </div>
+    </div>
+    <div class="header-line"></div>
+
+    <div class="rating-badge">
+      <div class="rating-shield">
+        <span class="rating-number">89</span>
+        <span class="rating-pos">RW</span>
+      </div>
+    </div>
+
+    <div class="shirt-number">7</div>
+
+    <div class="photo-container">
+      <img class="teacher-photo" src="Inspo/Approved design to be rebranded 2027/WhatsApp Image 2026-06-20 at 3.48.19 PM (1).jpeg" alt="Mr. Milad Mourad">
+      <div class="photo-gradient-top"></div>
+      <div class="photo-gradient-bottom"></div>
+      <div class="photo-gradient-left"></div>
+    </div>
+
+    <div class="name-section">
+      <div class="teacher-name-en">Mr. Milad<br>Mourad</div>
+      <div class="teacher-name-ar">أ. ميلاد مراد</div>
+      <div class="subject-tag">English Teacher</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stats-section">
+      <div class="stat-item">
+        <span class="stat-value">90</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:90%"></div></div>
+        <span class="stat-label">SHR</span>
+        <span class="stat-label-ar">شرح</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">91</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:91%"></div></div>
+        <span class="stat-label">SBR</span>
+        <span class="stat-label-ar">صبر</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">88</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:88%"></div></div>
+        <span class="stat-label">STL</span>
+        <span class="stat-label-ar">أسلوب</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">89</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:89%"></div></div>
+        <span class="stat-label">KNW</span>
+        <span class="stat-label-ar">معلومة</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">92</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:92%"></div></div>
+        <span class="stat-label">MOT</span>
+        <span class="stat-label-ar">تحفيز</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">86</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:86%"></div></div>
+        <span class="stat-label">NRG</span>
+        <span class="stat-label-ar">طاقة</span>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <div class="footer-left">
+        <img src="design-system/logo/mark.png" class="footer-logo" alt="Harv">
+        <span class="footer-tagline">معاك للنهاية</span>
+      </div>
+      <span class="footer-right">HARV FC &bull; 01064949395</span>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- CARD 3: MR. MOHMED SALAH — English           -->
+  <!-- The GOAT connection!                          -->
+  <!-- ============================================ -->
+  <div class="card" data-teacher="salah" data-subject="english">
+    <div class="card-inner"></div>
+
+    <div class="card-header">
+      <div class="header-left">
+        <div class="wc-badge">
+          <span class="football">&#9917;</span>
+          <div class="wc-text">
+            <span class="line1">FIFA World Cup</span>
+            <span class="line2">2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="egypt-flag">
+          <div class="ef-red"></div>
+          <div class="ef-white"></div>
+          <div class="ef-black"></div>
+        </div>
+        <img src="design-system/logo/mark.png" class="harv-logo" alt="Harv">
+      </div>
+    </div>
+    <div class="header-line"></div>
+
+    <div class="rating-badge">
+      <div class="rating-shield">
+        <span class="rating-number">94</span>
+        <span class="rating-pos">LW</span>
+      </div>
+    </div>
+
+    <div class="shirt-number">11</div>
+
+    <div class="photo-container">
+      <img class="teacher-photo" src="Inspo/Approved design to be rebranded 2027/WhatsApp Image 2026-06-20 at 3.48.19 PM (2).jpeg" alt="Mr. Mohmed Salah">
+      <div class="photo-gradient-top"></div>
+      <div class="photo-gradient-bottom"></div>
+      <div class="photo-gradient-left"></div>
+    </div>
+
+    <div class="name-section">
+      <div class="teacher-name-en">Mr. Mohmed<br>Salah</div>
+      <div class="teacher-name-ar">أ. محمد صلاح</div>
+      <div class="subject-tag">English Teacher</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stats-section">
+      <div class="stat-item">
+        <span class="stat-value">95</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:95%;"></div></div>
+        <span class="stat-label">SHR</span>
+        <span class="stat-label-ar">شرح</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">90</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:90%;"></div></div>
+        <span class="stat-label">SBR</span>
+        <span class="stat-label-ar">صبر</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">93</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:93%;"></div></div>
+        <span class="stat-label">STL</span>
+        <span class="stat-label-ar">أسلوب</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">96</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:96%;"></div></div>
+        <span class="stat-label">KNW</span>
+        <span class="stat-label-ar">معلومة</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">94</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:94%;"></div></div>
+        <span class="stat-label">MOT</span>
+        <span class="stat-label-ar">تحفيز</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">91</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:91%;"></div></div>
+        <span class="stat-label">NRG</span>
+        <span class="stat-label-ar">طاقة</span>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <div class="footer-left">
+        <img src="design-system/logo/mark.png" class="footer-logo" alt="Harv">
+        <span class="footer-tagline">معاك للنهاية</span>
+      </div>
+      <span class="footer-right">HARV FC &bull; 01064949395</span>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- CARD 4: MR. AHMED ATEF — English              -->
+  <!-- ============================================ -->
+  <div class="card" data-teacher="atef" data-subject="english">
+    <div class="card-inner"></div>
+
+    <div class="card-header">
+      <div class="header-left">
+        <div class="wc-badge">
+          <span class="football">&#9917;</span>
+          <div class="wc-text">
+            <span class="line1">FIFA World Cup</span>
+            <span class="line2">2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="egypt-flag">
+          <div class="ef-red"></div>
+          <div class="ef-white"></div>
+          <div class="ef-black"></div>
+        </div>
+        <img src="design-system/logo/mark.png" class="harv-logo" alt="Harv">
+      </div>
+    </div>
+    <div class="header-line"></div>
+
+    <div class="rating-badge">
+      <div class="rating-shield">
+        <span class="rating-number">90</span>
+        <span class="rating-pos">ST</span>
+      </div>
+    </div>
+
+    <div class="shirt-number">9</div>
+
+    <div class="photo-container">
+      <img class="teacher-photo" src="Inspo/Approved design to be rebranded 2027/WhatsApp Image 2026-06-20 at 3.48.20 PM.jpeg" alt="Mr. Ahmed Atef">
+      <div class="photo-gradient-top"></div>
+      <div class="photo-gradient-bottom"></div>
+      <div class="photo-gradient-left"></div>
+    </div>
+
+    <div class="name-section">
+      <div class="teacher-name-en">Mr. Ahmed<br>Atef</div>
+      <div class="teacher-name-ar">أ. أحمد عاطف</div>
+      <div class="subject-tag">English Teacher</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stats-section">
+      <div class="stat-item">
+        <span class="stat-value">88</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:88%"></div></div>
+        <span class="stat-label">SHR</span>
+        <span class="stat-label-ar">شرح</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">85</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:85%"></div></div>
+        <span class="stat-label">SBR</span>
+        <span class="stat-label-ar">صبر</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">96</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:96%"></div></div>
+        <span class="stat-label">STL</span>
+        <span class="stat-label-ar">أسلوب</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">91</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:91%"></div></div>
+        <span class="stat-label">KNW</span>
+        <span class="stat-label-ar">معلومة</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">90</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:90%"></div></div>
+        <span class="stat-label">MOT</span>
+        <span class="stat-label-ar">تحفيز</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">89</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:89%"></div></div>
+        <span class="stat-label">NRG</span>
+        <span class="stat-label-ar">طاقة</span>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <div class="footer-left">
+        <img src="design-system/logo/mark.png" class="footer-logo" alt="Harv">
+        <span class="footer-tagline">معاك للنهاية</span>
+      </div>
+      <span class="footer-right">HARV FC &bull; 01064949395</span>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- CARD 5: MOHAMED TOLBA — History               -->
+  <!-- ============================================ -->
+  <div class="card" data-teacher="tolba" data-subject="history">
+    <div class="card-inner"></div>
+
+    <div class="card-header">
+      <div class="header-left">
+        <div class="wc-badge">
+          <span class="football">&#9917;</span>
+          <div class="wc-text">
+            <span class="line1">FIFA World Cup</span>
+            <span class="line2">2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="egypt-flag">
+          <div class="ef-red"></div>
+          <div class="ef-white"></div>
+          <div class="ef-black"></div>
+        </div>
+        <img src="design-system/logo/mark.png" class="harv-logo" alt="Harv">
+      </div>
+    </div>
+    <div class="header-line"></div>
+
+    <div class="rating-badge">
+      <div class="rating-shield">
+        <span class="rating-number">92</span>
+        <span class="rating-pos">CB</span>
+      </div>
+    </div>
+
+    <div class="shirt-number">4</div>
+
+    <div class="photo-container">
+      <img class="teacher-photo" src="Inspo/Approved design to be rebranded 2027/WhatsApp Image 2026-06-20 at 3.48.22 PM.jpeg" alt="Mohamed Tolba">
+      <div class="photo-gradient-top"></div>
+      <div class="photo-gradient-bottom"></div>
+      <div class="photo-gradient-left"></div>
+    </div>
+
+    <div class="name-section">
+      <div class="teacher-name-en">Mohamed<br>Tolba</div>
+      <div class="teacher-name-ar">محمد طلبة</div>
+      <div class="subject-tag">History Teacher &mdash; مدرس التاريخ</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="stats-section">
+      <div class="stat-item">
+        <span class="stat-value">94</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:94%"></div></div>
+        <span class="stat-label">SHR</span>
+        <span class="stat-label-ar">شرح</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">93</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:93%"></div></div>
+        <span class="stat-label">SBR</span>
+        <span class="stat-label-ar">صبر</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">89</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:89%"></div></div>
+        <span class="stat-label">STL</span>
+        <span class="stat-label-ar">أسلوب</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">95</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:95%"></div></div>
+        <span class="stat-label">KNW</span>
+        <span class="stat-label-ar">معلومة</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">91</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:91%"></div></div>
+        <span class="stat-label">MOT</span>
+        <span class="stat-label-ar">تحفيز</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">90</span>
+        <div class="stat-bar"><div class="stat-bar-fill" style="width:90%"></div></div>
+        <span class="stat-label">NRG</span>
+        <span class="stat-label-ar">طاقة</span>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <div class="footer-left">
+        <img src="design-system/logo/mark.png" class="footer-logo" alt="Harv">
+        <span class="footer-tagline">معاك للنهاية</span>
+      </div>
+      <span class="footer-right">HARV FC &bull; 01064949395</span>
+    </div>
+  </div>
+
+</body>
+</html>

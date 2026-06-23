@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<title>Harv — Brand Refresh 2027 | عرض النظام الجديد</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  a[href^="tel"] { color: inherit; text-decoration: none; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: #FAFAF8;
+    color: #1A2744;
+    line-height: 1.6;
+  }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #1A2744;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #D42027;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-logo img { height: 32px; width: auto; }
+  .nav-logo span { font-size: 13px; font-weight: 600; color: #A3ACBC; }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: #E8EBF0;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .nav-links a:hover { color: #D42027; }
+
+  /* ─── SCROLL PROGRESS ─── */
+  .scroll-progress {
+    position: sticky; top: 51px; z-index: 99; height: 3px;
+    background: rgba(255,255,255,0.06);
+  }
+  .scroll-progress-fill {
+    height: 100%; width: 0%; background: #D42027;
+    transition: width 0.1s linear;
+  }
+
+  /* ─── MOBILE BOTTOM BAR ─── */
+  .mobile-bar {
+    display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+    background: #1A2744; border-top: 2px solid #D42027;
+    padding: 0; font-family: 'Cairo', sans-serif; direction: rtl;
+  }
+  .mobile-bar-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px;
+  }
+  .mobile-bar-section {
+    font-size: 14px; font-weight: 700; color: #fff;
+  }
+  .mobile-bar-progress {
+    font-size: 11px; font-weight: 600; color: #7D8AA0;
+  }
+  .mobile-bar-btn {
+    background: #D42027; color: #fff; border: none; border-radius: 8px;
+    padding: 6px 16px; font-family: 'Cairo'; font-size: 12px; font-weight: 700;
+    cursor: pointer;
+  }
+  .mobile-sections {
+    display: none; flex-direction: column; gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .mobile-sections.open { display: flex; }
+  .mobile-sections a {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px; color: #A3ACBC; text-decoration: none;
+    font-size: 15px; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+  .mobile-sections a:active { background: rgba(212,32,39,0.1); }
+  .mobile-sections a.active { color: #D42027; }
+  .mobile-sections a .sec-num {
+    font-size: 11px; font-weight: 600; color: #3D4C6B;
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 1px solid #3D4C6B; display: flex; align-items: center; justify-content: center;
+  }
+  .mobile-sections a.active .sec-num {
+    border-color: #D42027; color: #D42027;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: #1A2744;
+    padding: 64px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("../design-system/logo/mark.png");
+    background-size: 140px auto;
+    background-repeat: repeat;
+    opacity: 0.02;
+    filter: brightness(10);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-overline {
+    font-size: 13px;
+    font-weight: 600;
+    color: #D42027;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-size: 36px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    font-size: 17px;
+    font-weight: 400;
+    color: #A3ACBC;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    padding: 56px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-header { margin-bottom: 32px; }
+  .section > details { width: 100%; }
+  .section > details > summary {
+    cursor: pointer; list-style: none; display: flex;
+    align-items: flex-start; justify-content: space-between; gap: 16px;
+  }
+  .section > details > summary::marker,
+  .section > details > summary::-webkit-details-marker { display: none; }
+  .section > details > summary .sec-toggle {
+    font-size: 16px; color: #C8CED9; background: #1A2744;
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 6px; transition: transform 0.3s;
+  }
+  .section > details[open] > summary .sec-toggle { transform: rotate(180deg); }
+  .section-overline {
+    font-size: 12px;
+    font-weight: 600;
+    color: #D42027;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1A2744;
+    line-height: 1.3;
+  }
+  .section-subtitle {
+    font-size: 15px;
+    font-weight: 400;
+    color: #5A6784;
+    margin-top: 6px;
+  }
+
+  /* ─── PROBLEM / SOLUTION ─── */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .problem-card, .solution-card {
+    border-radius: 14px;
+    padding: 24px;
+  }
+  .problem-card { background: #FEF2F2; border: 1px solid #FECACA; }
+  .solution-card { background: #E2F5EC; border: 1px solid #A7F3D0; }
+  .card-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-bottom: 12px;
+  }
+  .badge-old { background: #D42027; color: #FFF; }
+  .badge-new { background: #1F9D6B; color: #FFF; }
+  .card-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1A2744;
+  }
+  .card-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .card-list li {
+    font-size: 14px;
+    font-weight: 400;
+    color: #3D4C6B;
+    padding-right: 18px;
+    position: relative;
+  }
+  .card-list li::before {
+    content: '×';
+    position: absolute;
+    right: 0;
+    color: #D42027;
+    font-weight: 700;
+  }
+  .solution-card .card-list li::before {
+    content: '✓';
+    color: #1F9D6B;
+  }
+
+  /* ─── COMPARISON ─── */
+  .comparison {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1fr 40px 1fr;
+    align-items: stretch;
+  }
+
+  .compare-item {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #E5E7EB;
+    position: relative;
+    background: #0f172a;
+  }
+
+  .compare-item img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: none;
+    object-fit: cover;
+  }
+
+  /* Iframe scaling: native size + CSS transform to fit container */
+  .compare-item .iframe-wrap {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .compare-item iframe {
+    display: block;
+    border: none;
+    transform-origin: top right;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .compare-label {
+    position: absolute;
+    top: 8px;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+    z-index: 5;
+  }
+  .label-old { right: 8px; background: #D42027; color: #FFF; }
+  .label-new { right: 8px; background: #1F9D6B; color: #FFF; }
+
+  .compare-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #A3ACBC;
+  }
+  .compare-caption {
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1A2744;
+    margin-top: 10px;
+  }
+
+  .aspect-cover img { aspect-ratio: 820 / 312; object-fit: cover; }
+  .aspect-post img { aspect-ratio: 4 / 5; object-fit: cover; }
+  .aspect-square img { aspect-ratio: 1 / 1; object-fit: cover; }
+
+  /* ─── FOUNDATIONS ─── */
+  .foundations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .foundation-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .foundation-card h3 { font-size: 17px; font-weight: 700; color: #1A2744; }
+  .foundation-card p { font-size: 13px; font-weight: 400; color: #5A6784; }
+  .swatches { display: flex; gap: 8px; margin-top: 6px; }
+  .swatch { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .swatch-circle { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #E5E7EB; }
+  .swatch-label { font-size: 10px; font-weight: 500; color: #7D8AA0; }
+  .type-sample { display: flex; flex-direction: column; gap: 3px; margin-top: 6px; }
+  .type-sample .display { font-size: 24px; font-weight: 700; color: #1A2744; }
+  .type-sample .body-text { font-size: 13px; font-weight: 400; color: #5A6784; }
+
+  /* ─── RULES TABLE ─── */
+  .rules-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    font-size: 14px;
+  }
+  .rules-table th {
+    text-align: right;
+    padding: 10px 14px;
+    background: #1A2744;
+    color: #FFFFFF;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .rules-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #E5E7EB;
+    vertical-align: top;
+  }
+  .rules-table tr:nth-child(even) { background: #F3F4F6; }
+  .old-way { color: #991B1B; text-decoration: line-through; }
+  .new-way { color: #1F9D6B; font-weight: 600; }
+
+  /* ─── DESIGNS PREVIEW ─── */
+  .designs-preview {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .design-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .design-card-preview {
+    background: #0f172a;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+  }
+  .design-card-preview .iframe-wrap {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .design-card-preview iframe {
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: block;
+    transform-origin: top right;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .design-card-info {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .design-card-title { font-size: 14px; font-weight: 600; color: #1A2744; }
+  .design-card-meta { font-size: 11px; font-weight: 400; color: #7D8AA0; margin-top: 2px; }
+  .view-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: #D42027;
+    text-decoration: none;
+    padding: 6px 16px;
+    border: 1px solid #D42027;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .view-link:hover { background: #D42027; color: #FFF; }
+
+  /* ─── LOGO COMPARISON ─── */
+  .logo-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 32px;
+  }
+  .logo-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    overflow: hidden;
+    text-align: center;
+  }
+  .logo-card-preview {
+    padding: 40px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 260px;
+  }
+  .logo-card-preview.dark-bg { background: #0a0a0a; }
+  .logo-card-preview.light-bg { background: #FAFAF8; }
+  .logo-card-preview img { max-height: 180px; width: auto; }
+  .logo-card-info {
+    padding: 16px 20px;
+    border-top: 1px solid #E5E7EB;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo-card-info .logo-card-title { font-size: 15px; font-weight: 600; color: #1A2744; }
+  .logo-card-info .logo-card-sub { font-size: 12px; color: #7D8AA0; margin-top: 2px; }
+
+  .download-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1F9D6B;
+    text-decoration: none;
+    padding: 6px 16px;
+    border: 1px solid #1F9D6B;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+  .download-link:hover { background: #1F9D6B; color: #FFF; }
+  .download-link svg { width: 14px; height: 14px; fill: currentColor; }
+
+  @media (max-width: 768px) {
+    .logo-compare { grid-template-columns: 1fr; gap: 16px; }
+    .logo-card-preview { min-height: 180px; padding: 32px 24px; }
+    .logo-card-preview img { max-height: 140px; }
+  }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: #1A2744;
+    padding: 40px 24px;
+    text-align: center;
+    margin-top: 56px;
+  }
+  .footer img { height: 48px; width: auto; margin-bottom: 12px; }
+  .footer p { font-size: 13px; color: #7D8AA0; }
+  .footer .tagline { font-size: 16px; font-weight: 600; color: #D42027; margin-top: 6px; }
+
+  .divider { height: 1px; background: #E5E7EB; max-width: 1100px; margin: 0 auto; }
+
+  /* ─── MOBILE RULES TABLE CARDS ─── */
+  .rules-cards { display: none; }
+  .rule-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 12px;
+  }
+  .rule-card .rule-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #7D8AA0;
+    margin-bottom: 4px;
+  }
+
+  /* ─── PLAN TABLE ─── */
+  .plan-table { width: 100%; border-collapse: collapse; font-size: 14px; direction: rtl; }
+  .plan-table th {
+    background: #1A2744; color: #fff; padding: 14px 16px;
+    font-weight: 700; text-align: right; font-size: 13px; letter-spacing: 0.5px;
+    border-bottom: 3px solid #D42027;
+  }
+  .plan-table td {
+    padding: 14px 16px; border-bottom: 1px solid #E5E7EB;
+    vertical-align: top; color: #1A2744; line-height: 1.6;
+  }
+  .plan-table tr:hover td { background: #f8f8f6; }
+  .plan-day {
+    font-weight: 900; font-size: 15px; white-space: nowrap; color: #1A2744;
+  }
+  .plan-day small { display: block; font-weight: 600; font-size: 12px; color: #7D8AA0; }
+  .plan-type {
+    display: inline-block; padding: 2px 10px; border-radius: 100px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+  }
+  .type-video { background: #FECACA; color: #991B1B; }
+  .type-image { background: #DBEAFE; color: #1E40AF; }
+  .type-album { background: #D1FAE5; color: #065F46; }
+  .type-teaser { background: #FEF3C7; color: #92400E; }
+  .plan-content { font-weight: 600; }
+  .plan-caption {
+    font-size: 12px; color: #5A6784; white-space: pre-wrap;
+    max-height: 120px; overflow-y: auto; margin-top: 6px;
+    background: #f4f4f2; border-radius: 8px; padding: 10px 12px; line-height: 1.7;
+  }
+  .plan-caption::-webkit-scrollbar { width: 4px; }
+  .plan-caption::-webkit-scrollbar-thumb { background: #C8CED9; border-radius: 2px; }
+  .plan-why { font-size: 12px; color: #5A6784; font-style: italic; }
+  .plan-assets { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .plan-assets a {
+    font-size: 11px; font-weight: 700; color: #D42027; text-decoration: none;
+    padding: 3px 10px; border: 1px solid #D42027; border-radius: 100px;
+  }
+  .plan-assets a:hover { background: #D42027; color: #fff; }
+  .plan-note {
+    background: #FEF3C7; border: 1px solid #FCD34D; border-radius: 10px;
+    padding: 16px 20px; margin-top: 20px; direction: rtl; text-align: right;
+    font-size: 14px; color: #92400E; line-height: 1.7;
+  }
+  .plan-note strong { color: #78350F; }
+
+  /* Mobile plan cards */
+  .plan-cards { display: none; }
+  .plan-card-item {
+    background: #fff; border: 1px solid #E5E7EB; border-radius: 12px;
+    padding: 20px; margin-bottom: 12px; direction: rtl;
+  }
+  .plan-card-item .plan-day { margin-bottom: 8px; }
+  .plan-card-label { font-size: 11px; font-weight: 600; color: #7D8AA0; margin-bottom: 4px; margin-top: 10px; }
+
+  /* ─── SIDE NAV ─── */
+  .side-nav {
+    position: fixed; left: 0; top: 50%; transform: translateY(-50%);
+    z-index: 200; display: flex; flex-direction: column; gap: 4px;
+    padding: 12px 0;
+  }
+  .side-nav a {
+    display: flex; align-items: center; gap: 0;
+    text-decoration: none; padding: 6px 0 6px 12px;
+    transition: all 0.2s;
+  }
+  .side-nav a .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #3D4C6B; transition: all 0.2s; flex-shrink: 0;
+  }
+  .side-nav a .label {
+    font-size: 11px; font-weight: 600; color: #3D4C6B;
+    white-space: nowrap; overflow: hidden; max-width: 0;
+    opacity: 0; transition: all 0.25s; padding-right: 8px; direction: rtl;
+    font-family: 'Cairo', sans-serif;
+  }
+  .side-nav:hover a .label {
+    max-width: 140px; opacity: 1;
+  }
+  .side-nav a:hover .dot, .side-nav a.active .dot {
+    background: #D42027; width: 10px; height: 10px;
+  }
+  .side-nav a:hover .label { color: #D42027; }
+  .side-nav a.active .label { color: #D42027; opacity: 1; max-width: 140px; }
+
+  /* ─── WORLD CUP CARDS ─── */
+  .wc-details { max-width: 1100px; margin: 0 auto; padding: 56px 24px; }
+  .wc-toggle {
+    cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 28px; background: #1A2744; border-radius: 14px;
+    color: #fff; font-size: 22px; font-weight: 700; font-family: 'Cairo', sans-serif;
+    border: 2px solid transparent; transition: border-color 0.2s;
+  }
+  .wc-toggle:hover { border-color: #D42027; }
+  .wc-toggle::marker, .wc-toggle::-webkit-details-marker { display: none; }
+  .wc-toggle .arrow { transition: transform 0.3s; font-size: 18px; color: #D42027; }
+  details[open] .wc-toggle .arrow { transform: rotate(180deg); }
+  .wc-iframe {
+    width: 100%; border: none; border-radius: 0 0 14px 14px;
+    background: #0a0f1a; margin-top: -4px;
+  }
+  .wc-videos { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 24px; max-width: 900px; margin: 0 auto; }
+  .wc-video-card { background: #111827; border: 1px solid #1F2F50; border-radius: 14px; overflow: hidden; }
+  .wc-video-card video { width: 100%; display: block; }
+  .wc-video-info { padding: 16px; direction: rtl; text-align: right; }
+  .wc-video-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .wc-video-caption {
+    font-size: 12px; color: #C8CED9; line-height: 1.7; white-space: pre-wrap;
+    max-height: 160px; overflow-y: auto; padding: 12px; background: #0a0f1a;
+    border-radius: 8px; margin-bottom: 12px;
+  }
+  .wc-video-caption::-webkit-scrollbar { width: 4px; }
+  .wc-video-caption::-webkit-scrollbar-thumb { background: #3D4C6B; border-radius: 2px; }
+  .wc-video-actions { display: flex; gap: 8px; }
+  .wc-video-dl {
+    display: inline-block; padding: 8px 20px; background: #D42027; color: #fff;
+    border-radius: 100px; font-size: 13px; font-weight: 700; text-decoration: none;
+    font-family: 'Cairo', sans-serif; text-align: center;
+  }
+  .wc-video-dl:hover { background: #B91C1C; }
+  .wc-video-copy {
+    padding: 8px 20px; background: transparent; border: 1px solid #2A3A5C; color: #7D8AA0;
+    border-radius: 100px; font-size: 13px; font-weight: 700; cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+  }
+  .wc-video-copy:hover { border-color: #D42027; color: #fff; }
+
+  /* ═══════════════════════════════════
+     MOBILE RESPONSIVE
+     ═══════════════════════════════════ */
+  @media (max-width: 768px) {
+    body { padding-bottom: 56px; }
+    .nav { padding: 10px 16px; }
+    .nav-links { display: none; }
+    .nav-logo span { font-size: 11px; }
+    .nav-logo img { height: 28px; }
+    .mobile-bar { display: block; }
+
+    .hero { padding: 48px 20px 40px; }
+    .hero h1 { font-size: 28px; }
+    .hero p { font-size: 15px; }
+    .hero-overline { font-size: 11px; }
+
+    .section { padding: 40px 16px; }
+    .section-title { font-size: 22px; }
+    .section-subtitle { font-size: 14px; }
+
+    .problem-grid { grid-template-columns: 1fr; gap: 16px; }
+    .problem-card, .solution-card { padding: 20px; }
+    .card-title { font-size: 16px; }
+    .card-list li { font-size: 13px; }
+
+    /* Comparison: stack vertically */
+    .compare-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .compare-arrow {
+      transform: rotate(90deg);
+      font-size: 20px;
+      padding: 4px 0;
+    }
+    .compare-item img {
+      height: auto;
+      aspect-ratio: auto;
+    }
+    .compare-caption { font-size: 12px; }
+
+    .foundations-grid { grid-template-columns: 1fr; gap: 12px; }
+    .foundation-card { padding: 20px; }
+    .foundation-card h3 { font-size: 16px; }
+
+    /* Table → cards on mobile */
+    .rules-table { display: none; }
+    .rules-cards { display: block; }
+
+    .designs-preview { grid-template-columns: 1fr; }
+    .designs-preview .design-card { grid-column: span 1 !important; }
+    .design-card-preview { padding: 12px; }
+    .design-card-info { padding: 12px 16px; flex-wrap: wrap; gap: 8px; }
+    .design-card-title { font-size: 13px; }
+
+    .footer { padding: 32px 16px; margin-top: 40px; }
+    .footer img { height: 40px; }
+
+    .side-nav { display: none; }
+    .wc-videos { grid-template-columns: 1fr; }
+    .plan-table { display: none; }
+    .plan-cards { display: block; }
+    .wc-details { padding: 40px 16px; }
+    .wc-toggle { font-size: 18px; padding: 16px 20px; }
+  }
+
+  /* Tablet tweaks */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .section { padding: 56px 32px; }
+    .hero h1 { font-size: 32px; }
+    .foundations-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ SIDE NAV ═══ -->
+<nav class="side-nav" id="side-nav">
+  <a href="#problem"><span class="dot"></span><span class="label">المشكلة</span></a>
+  <a href="#logo"><span class="dot"></span><span class="label">اللوجو</span></a>
+  <a href="#comparison"><span class="dot"></span><span class="label">قبل وبعد</span></a>
+  <a href="#foundations"><span class="dot"></span><span class="label">الأسس</span></a>
+  <a href="#rules"><span class="dot"></span><span class="label">القواعد</span></a>
+  <a href="#designs"><span class="dot"></span><span class="label">التصميمات</span></a>
+  <a href="#worldcup"><span class="dot"></span><span class="label">كأس العالم</span></a>
+  <a href="#plan"><span class="dot"></span><span class="label">الخطة</span></a>
+</nav>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav">
+  <div class="nav-logo">
+    <img src="../design-system/logo/mark.png" alt="Harv">
+    <span>Brand Refresh 2027</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#problem">المشكلة</a></li>
+    <li><a href="#logo">اللوجو</a></li>
+    <li><a href="#comparison">قبل وبعد</a></li>
+    <li><a href="#foundations">الأسس</a></li>
+    <li><a href="#rules">القواعد</a></li>
+    <li><a href="#designs">التصميمات</a></li>
+    <li><a href="#worldcup">كروت كأس العالم</a></li>
+    <li><a href="#plan">الخطة</a></li>
+  </ul>
+</nav>
+<div class="scroll-progress"><div class="scroll-progress-fill" id="scroll-fill"></div></div>
+
+<!-- ═══ MOBILE BOTTOM BAR ═══ -->
+<div class="mobile-bar" id="mobile-bar">
+  <div class="mobile-bar-row">
+    <div>
+      <div class="mobile-bar-section" id="mob-section-name">المشكلة</div>
+      <div class="mobile-bar-progress" id="mob-progress">1 من 7</div>
+    </div>
+    <button class="mobile-bar-btn" id="mob-toggle">الأقسام ▲</button>
+  </div>
+  <div class="mobile-sections" id="mob-sections">
+    <a href="#problem"><span>المشكلة والحل</span><span class="sec-num">1</span></a>
+    <a href="#logo"><span>اللوجو</span><span class="sec-num">2</span></a>
+    <a href="#comparison"><span>قبل وبعد</span><span class="sec-num">3</span></a>
+    <a href="#foundations"><span>الأسس</span><span class="sec-num">4</span></a>
+    <a href="#rules"><span>القواعد</span><span class="sec-num">5</span></a>
+    <a href="#designs"><span>التصميمات</span><span class="sec-num">6</span></a>
+    <a href="#worldcup"><span>كروت كأس العالم</span><span class="sec-num">7</span></a>
+    <a href="#plan"><span>خطة النشر</span><span class="sec-num">8</span></a>
+  </div>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-overline">BRAND REFRESH 2027</div>
+    <h1>هوية هارفورد الجديدة</h1>
+    <p>نظام تصميم موحد يخلي كل بوست، كل إعلان، وكل حاجة بتطلع من السنتر — شكلها واحد ومحترف. بدل ما كل حاجة شكلها مختلف.</p>
+  </div>
+</section>
+
+<!-- ═══ PROBLEM ═══ -->
+<section class="section" id="problem">
+  <details open>
+  <summary class="section-header">
+    <div>
+      <div class="section-overline">ليه التغيير؟</div>
+      <div class="section-title">المشكلة والحل</div>
+      <div class="section-subtitle">الهوية القديمة كانت بتبان زي كل سنتر تاني في مصر. الهوية الجديدة بتفرقنا.</div>
+    </div>
+    <span class="sec-toggle">▼</span>
+  </summary>
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="card-badge badge-old">القديم</div>
+      <div class="card-title">مشاكل الهوية السابقة</div>
+      <ul class="card-list">
+        <li>لوجو 3D لامع بحدود ذهبية — زي كل سنتر تاني</li>
+        <li>خطوط مختلفة في كل بوست — مفيش consistency</li>
+        <li>صور جامعة Harvard الأمريكية — مش بتاعتنا</li>
+        <li>كلام زي "طريق التفوق والنجاح" — كلام فاضي مفيش رقم</li>
+        <li>ألوان ذهبي في كل حاجة — بتبان قديمة</li>
+        <li>كل بوست شكله مختلف عن التاني — مفيش عائلة واحدة</li>
+        <li>بنكلم أهالي مش طلاب</li>
+      </ul>
+    </div>
+    <div class="solution-card">
+      <div class="card-badge badge-new">الجديد</div>
+      <div class="card-title">النظام الجديد بيحل إيه</div>
+      <ul class="card-list">
+        <li>لوجو flat ونضيف — الـ H بتاعتنا من غير تأثيرات</li>
+        <li>خط واحد: Cairo — عربي وإنجليزي في نفس الوقت</li>
+        <li>صور حقيقية من السنتر والمدرسين بتوعنا</li>
+        <li>كل claim بيجي مع رقم: 14 مدرس، 8+ مواد، 97% نجاح</li>
+        <li>3 ألوان بس: أحمر + كحلي + أبيض دافي</li>
+        <li>كل بوست بينتمي لنفس العائلة — تعرفه من بعيد</li>
+        <li>بنكلم الطالب مباشرة — "أنت" مش "ابنك"</li>
+      </ul>
+    </div>
+  </div>
+  </details>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ LOGO ═══ -->
+<section class="section" id="logo">
+  <details open>
+  <summary class="section-header">
+    <div>
+      <div class="section-overline">اللوجو</div>
+      <div class="section-title">القديم vs الجديد</div>
+      <div class="section-subtitle">من 3D لامع ومعدني — للوجو flat ونضيف بيشتغل على أي خلفية</div>
+    </div>
+    <span class="sec-toggle">▼</span>
+  </summary>
+  <div class="logo-compare">
+    <div class="logo-card">
+      <div class="logo-card-preview dark-bg">
+        <img src="../Inspo/fb/profile picture.jpg" alt="Old logo">
+      </div>
+      <div class="logo-card-info">
+        <div>
+          <div class="logo-card-title">اللوجو القديم</div>
+          <div class="logo-card-sub">3D معدني + دائرة ذهبية + خلفية سودا</div>
+        </div>
+        <div class="card-badge badge-old" style="margin:0;">اتشال</div>
+      </div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-card-preview light-bg">
+        <img src="../design-system/logo/mark.png" alt="New logo">
+      </div>
+      <div class="logo-card-info">
+        <div>
+          <div class="logo-card-title">اللوجو الجديد</div>
+          <div class="logo-card-sub">Flat — H أحمر + كاب كحلي + 7 نجوم ذهب</div>
+        </div>
+        <a href="../design-system/logo/mark.png" download="harv-logo-2027.png" class="download-link">
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          تحميل
+        </a>
+      </div>
+    </div>
+  </div>
+  </details>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ BEFORE/AFTER ═══ -->
+<section class="section" id="comparison">
+  <details open>
+  <summary class="section-header">
+    <div>
+      <div class="section-overline">قبل وبعد</div>
+      <div class="section-title">الفرق واضح</div>
+      <div class="section-subtitle">نفس المحتوى — شكل مختلف تماماً</div>
+    </div>
+    <span class="sec-toggle">▼</span>
+  </summary>
+  </div>
+  <div class="comparison">
+
+    <!-- 1. Cover photo -->
+    <div>
+      <div class="compare-row">
+        <div class="compare-item aspect-cover">
+          <div class="compare-label label-old">قبل</div>
+          <img src="../Inspo/fb/cover photo.jpg" alt="Old cover">
+        </div>
+        <div class="compare-arrow">←</div>
+        <div class="compare-item aspect-cover">
+          <div class="compare-label label-new">بعد</div>
+          <div class="iframe-wrap">
+            <iframe src="cover-photo.html" data-native-w="1640" data-native-h="624" style="pointer-events:none;"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="compare-caption">صورة الغلاف — Facebook Cover <a href="downloads/harv-cover-2027.png" download="harv-cover-2027.png" class="download-link" style="margin-right:8px;"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>تحميل</a></div>
+    </div>
+
+    <!-- 2. Announcement post -->
+    <div>
+      <div class="compare-row">
+        <div class="compare-item aspect-post">
+          <div class="compare-label label-old">قبل</div>
+          <img src="../Inspo/fb/721780702_27759959923595901_4377290178702204477_n.jpg" alt="Old post">
+        </div>
+        <div class="compare-arrow">←</div>
+        <div class="compare-item aspect-post">
+          <div class="compare-label label-new">بعد</div>
+          <div class="iframe-wrap">
+            <iframe src="post-02-enrollment.html" data-native-w="1080" data-native-h="1350" style="pointer-events:none;"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="compare-caption">بوست الحجز والإعلان <a href="downloads/harv-enrollment-2027.png" download="harv-enrollment-2027.png" class="download-link" style="margin-right:8px;"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>تحميل</a></div>
+    </div>
+
+    <!-- 3. QR code -->
+    <div>
+      <div class="compare-row">
+        <div class="compare-item aspect-square">
+          <div class="compare-label label-old">قبل</div>
+          <img src="../Inspo/fb/qr code.jpg" alt="Old QR">
+        </div>
+        <div class="compare-arrow">←</div>
+        <div class="compare-item aspect-square">
+          <div class="compare-label label-new">بعد</div>
+          <div class="iframe-wrap">
+            <iframe src="post-03-qr-code.html" data-native-w="1080" data-native-h="1080" style="pointer-events:none;"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="compare-caption">بوست الـ QR Code — جروب الواتساب <a href="downloads/harv-qr-code.png" download="harv-qr-code.png" class="download-link" style="margin-right:8px;"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>تحميل</a></div>
+    </div>
+
+    <!-- 4. Teacher card -->
+    <div>
+      <div class="compare-row">
+        <div class="compare-item aspect-post">
+          <div class="compare-label label-old">قبل</div>
+          <img src="../Inspo/approved/milad-old.jpeg" alt="Old teacher card - Milad Mourad">
+        </div>
+        <div class="compare-arrow">←</div>
+        <div class="compare-item aspect-post">
+          <div class="compare-label label-new">بعد</div>
+          <div class="iframe-wrap">
+            <iframe src="post-01-teacher-card.html" data-native-w="1080" data-native-h="1350" style="pointer-events:none;"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="compare-caption">كارت المدرس — Teacher Announcement <a href="downloads/harv-teacher-card.png" download="harv-teacher-card.png" class="download-link" style="margin-right:8px;"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>تحميل</a></div>
+    </div>
+
+  </div>
+  </details>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ FOUNDATIONS ═══ -->
+<section class="section" id="foundations">
+  <details open>
+  <summary class="section-header">
+    <div>
+      <div class="section-overline">الأسس</div>
+      <div class="section-title">أساسيات النظام الجديد</div>
+      <div class="section-subtitle">3 عناصر ثابتة بتحكم كل حاجة بتطلع من السنتر</div>
+    </div>
+    <span class="sec-toggle">▼</span>
+  </summary>
+  </div>
+  <div class="foundations-grid">
+    <div class="foundation-card">
+      <h3>الألوان</h3>
+      <p>3 ألوان أساسية بس. الذهبي اتشال من كل حاجة ماعدا اللوجو نفسه.</p>
+      <div class="swatches">
+        <div class="swatch">
+          <div class="swatch-circle" style="background:#D42027;"></div>
+          <div class="swatch-label">أحمر</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-circle" style="background:#1A2744;"></div>
+          <div class="swatch-label">كحلي</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-circle" style="background:#FAFAF8; border-color:#d4d4d4;"></div>
+          <div class="swatch-label">أبيض دافي</div>
+        </div>
+      </div>
+    </div>
+    <div class="foundation-card">
+      <h3>الخط</h3>
+      <p>خط واحد لكل حاجة: Cairo من Google Fonts. عربي وإنجليزي. مجاني.</p>
+      <div class="type-sample">
+        <div class="display">هارفورد</div>
+        <div class="body-text">Cairo Bold — للعناوين</div>
+        <div class="body-text">Cairo Regular — للنص العادي</div>
+      </div>
+    </div>
+    <div class="foundation-card">
+      <h3>الصوت</h3>
+      <p>بنكلم الطالب مباشرة. مصري على السوشيال. فصحى في المطبوعات. جمل قصيرة. مفيش كلام فاضي.</p>
+      <div class="type-sample">
+        <div class="body-text" style="color:#1F9D6B; font-weight:600;">✓ "هنراجع مع بعض الفيزياء"</div>
+        <div class="body-text" style="color:#991B1B; text-decoration:line-through;">× "طريق التفوق والنجاح"</div>
+      </div>
+    </div>
+  </div>
+  </details>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ RULES ═══ -->
+<section class="section" id="rules">
+  <details open>
+  <summary class="section-header">
+    <div>
+      <div class="section-overline">القواعد</div>
+      <div class="section-title">إيه اللي اتغير بالظبط</div>
+    </div>
+    <span class="sec-toggle">▼</span>
+  </summary>
+
+  <!-- Desktop table -->
+  <table class="rules-table">
+    <thead>
+      <tr>
+        <th style="width:38%;">كان</th>
+        <th style="width:38%;">بقى</th>
+        <th style="width:24%;">ليه</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="old-way">لوجو 3D لامع ومعدني</td><td class="new-way">لوجو flat — H أحمر + كاب كحلي + 7 نجوم ذهب</td><td>الـ 3D بيبان رخيص وزي كل سنتر</td></tr>
+      <tr><td class="old-way">حدود وإطارات ذهبية</td><td class="new-way">لا إطارات — مساحات فاضية ونظيفة</td><td>الذهبي بيبان قديم وبيزحم التصميم</td></tr>
+      <tr><td class="old-way">صور جامعة Harvard</td><td class="new-way">صور حقيقية من السنتر والمدرسين</td><td>مش جامعتنا — بتوقع مصداقيتنا</td></tr>
+      <tr><td class="old-way">"طريق التفوق والنجاح"</td><td class="new-way">"14 مدرس · 8+ مواد · 97% نسبة نجاح"</td><td>أرقام بتبني ثقة، شعارات لأ</td></tr>
+      <tr><td class="old-way">3-4 خطوط في البوست الواحد</td><td class="new-way">Cairo بس — 4 أوزان</td><td>خط واحد = شكل موحد</td></tr>
+      <tr><td class="old-way">بنكلم الأهل: "ابنك هيتفوق"</td><td class="new-way">بنكلم الطالب: "هنراجع مع بعض"</td><td>الطالب هو اللي بيختار السنتر</td></tr>
+      <tr><td class="old-way">كل بوست شكل مختلف</td><td class="new-way">templates موحدة — كارت مدرس، إعلان، جدول</td><td>الناس تعرف البوست بتاعنا من بعيد</td></tr>
+      <tr><td class="old-way">فيديوهات AI (Higgsfield)</td><td class="new-way">صور حقيقية + تصميم نضيف</td><td>كل سنتر بينزل نفس الفيديو</td></tr>
+    </tbody>
+  </table>
+
+  <!-- Mobile cards (hidden on desktop) -->
+  <div class="rules-cards">
+    <div class="rule-card">
+      <div class="rule-label">كان</div>
+      <div class="old-way" style="margin-bottom:8px;">لوجو 3D لامع ومعدني</div>
+      <div class="rule-label">بقى</div>
+      <div class="new-way" style="margin-bottom:8px;">لوجو flat — H أحمر + كاب كحلي + 7 نجوم ذهب</div>
+      <div class="rule-label">ليه</div>
+      <div style="font-size:13px; color:#5A6784;">الـ 3D بيبان رخيص وزي كل سنتر</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-label">كان</div>
+      <div class="old-way" style="margin-bottom:8px;">حدود وإطارات ذهبية</div>
+      <div class="rule-label">بقى</div>
+      <div class="new-way" style="margin-bottom:8px;">لا إطارات — مساحات فاضية ونظيفة</div>
+      <div class="rule-label">ليه</div>
+      <div style="font-size:13px; color:#5A6784;">الذهبي بيبان قديم وبيزحم التصميم</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-label">كان</div>
+      <div class="old-way" style="margin-bottom:8px;">صور جامعة Harvard</div>
+      <div class="rule-label">بقى</div>
+      <div class="new-way" style="margin-bottom:8px;">صور حقيقية من السنتر والمدرسين</div>
+      <div class="rule-label">ليه</div>
+      <div style="font-size:13px; color:#5A6784;">مش جامعتنا — بتوقع مصداقيتنا</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-label">كان</div>
+      <div class="old-way" style="margin-bottom:8px;">"طريق التفوق والنجاح"</div>
+      <div class="rule-label">بقى</div>
+      <div class="new-way" style="margin-bottom:8px;">"14 مدرس · 8+ مواد · 97% نسبة نجاح"</div>
+      <div class="rule-label">ليه</div>
+      <div style="font-size:13px; color:#5A6784;">أرقام بتبني ثقة، شعارات لأ</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-label">كان</div>
+      <div class="old-way" style="margin-bottom:8px;">3-4 خطوط في البوست الواحد</div>
+      <div class="rule-label">بقى</div>
+      <div class="new-way" style="margin-bottom:8px;">Cairo بس — 4 أوزان</div>
+      <div class="rule-label">ليه</div>
+      <div style="font-size:13px; color:#5A6784;">خط واحد = شكل موحد</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-label">كان</div>
+      <div class="old-way" style="margin-bottom:8px;">بنكلم الأهل: "ابنك هيتفوق"</div>
+      <div class="rule-label">بقى</div>
+      <div class="new-way" style="margin-bottom:8px;">بنكلم الطالب: "هنراجع مع بعض"</div>
+      <div class="rule-label">ليه</div>
+      <div style="font-size:13px; color:#5A6784;">الطالب هو اللي بيختار السنتر</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-label">كان</div>
+      <div class="old-way" style="margin-bottom:8px;">كل بوست شكل مختلف</div>
+      <div class="rule-label">بقى</div>
+      <div class="new-way" style="margin-bottom:8px;">templates موحدة — كارت مدرس، إعلان، جدول</div>
+      <div class="rule-label">ليه</div>
+      <div style="font-size:13px; color:#5A6784;">الناس تعرف البوست بتاعنا من بعيد</div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-label">كان</div>
+      <div class="old-way" style="margin-bottom:8px;">فيديوهات AI (Higgsfield)</div>
+      <div class="rule-label">بقى</div>
+      <div class="new-way" style="margin-bottom:8px;">صور حقيقية + تصميم نضيف</div>
+      <div class="rule-label">ليه</div>
+      <div style="font-size:13px; color:#5A6784;">كل سنتر بينزل نفس الفيديو</div>
+    </div>
+  </div>
+  </details>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ DESIGNS ═══ -->
+<section class="section" id="designs">
+  <details open>
+  <summary class="section-header">
+    <div>
+      <div class="section-overline">التصميمات</div>
+      <div class="section-title">أول 4 تصميمات بالنظام الجديد</div>
+      <div class="section-subtitle">اضغط "عرض" لتشوف الحجم الكامل</div>
+    </div>
+    <span class="sec-toggle">▼</span>
+  </summary>
+  <div class="designs-preview">
+    <div class="design-card" style="grid-column: span 2;">
+      <div class="design-card-preview">
+        <div class="iframe-wrap"><iframe src="cover-photo.html" data-native-w="1640" data-native-h="624"></iframe></div>
+      </div>
+      <div class="design-card-info">
+        <div>
+          <div class="design-card-title">صورة الغلاف — Facebook Cover</div>
+          <div class="design-card-meta">1640 × 624px</div>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <a href="cover-photo.html" target="_blank" class="view-link">عرض</a>
+          <a href="downloads/harv-cover-2027.png" download="harv-cover-2027.png" class="download-link"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>تحميل</a>
+        </div>
+      </div>
+    </div>
+    <div class="design-card">
+      <div class="design-card-preview">
+        <div class="iframe-wrap"><iframe src="post-01-teacher-card.html" data-native-w="1080" data-native-h="1350"></iframe></div>
+      </div>
+      <div class="design-card-info">
+        <div>
+          <div class="design-card-title">كارت المدرس</div>
+          <div class="design-card-meta">1080 × 1350px — 4:5</div>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <a href="post-01-teacher-card.html" target="_blank" class="view-link">عرض</a>
+          <a href="downloads/harv-teacher-card.png" download="harv-teacher-card.png" class="download-link"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>تحميل</a>
+        </div>
+      </div>
+    </div>
+    <div class="design-card">
+      <div class="design-card-preview">
+        <div class="iframe-wrap"><iframe src="post-02-enrollment.html" data-native-w="1080" data-native-h="1350"></iframe></div>
+      </div>
+      <div class="design-card-info">
+        <div>
+          <div class="design-card-title">بوست الحجز 2027</div>
+          <div class="design-card-meta">1080 × 1350px — 4:5</div>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <a href="post-02-enrollment.html" target="_blank" class="view-link">عرض</a>
+          <a href="downloads/harv-enrollment-2027.png" download="harv-enrollment-2027.png" class="download-link"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>تحميل</a>
+        </div>
+      </div>
+    </div>
+    <div class="design-card" style="grid-column: span 2;">
+      <div class="design-card-preview">
+        <div class="iframe-wrap" style="max-width:480px; margin:0 auto;"><iframe src="post-03-qr-code.html" data-native-w="1080" data-native-h="1080"></iframe></div>
+      </div>
+      <div class="design-card-info">
+        <div>
+          <div class="design-card-title">بوست QR Code — جروب الواتساب</div>
+          <div class="design-card-meta">1080 × 1080px — 1:1</div>
+        </div>
+        <div style="display:flex; gap:8px;">
+          <a href="post-03-qr-code.html" target="_blank" class="view-link">عرض</a>
+          <a href="downloads/harv-qr-code.png" download="harv-qr-code.png" class="download-link"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>تحميل</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  </details>
+</section>
+
+<!-- ═══ WORLD CUP CARDS ═══ -->
+<div class="wc-details" id="worldcup">
+  <details id="wc-details">
+    <summary class="wc-toggle">
+      <span>كروت كأس العالم 2026</span>
+      <span class="arrow">▼</span>
+    </summary>
+    <div class="wc-videos">
+      <!-- English Video -->
+      <div class="wc-video-card">
+        <video src="../panini-cards/video/harv-panini-english.mp4" autoplay loop muted playsinline></video>
+        <div class="wc-video-info">
+          <div class="wc-video-title">فيديو مدرسين الإنجليزي</div>
+          <div class="wc-video-caption" id="vcap-english">🏆 HARV FC × كأس العالم 2026 ⚽
+
+فريق الإنجليزي في هارفورد 🦅
+Mr. Milad Mourad · Mr. Mohmed Salah · Mr. Ahmed Atef · Adel Nabil
+
+شرح واضح، أسلوب ممتع، وتحفيز عالي.
+الإنجليزي معانا مش صعب — ده ممتع. 💪
+
+📲 واتساب 01064949395
+📞 موبايل 01223463448
+☎️ أرضي 02-24734371
+الحجز مفتوح 2027
+#HarvFC #كأس_العالم_2026 #هارفورد #English #ثانوية_عامة</div>
+          <div class="wc-video-actions">
+            <a class="wc-video-dl" href="../panini-cards/video/harv-panini-english.mp4" download="harv-panini-english.mp4">تحميل الفيديو</a>
+            <button class="wc-video-copy" onclick="copyVCap('vcap-english',this)">نسخ الكابشن</button>
+          </div>
+        </div>
+      </div>
+      <!-- Physics Video -->
+      <div class="wc-video-card">
+        <video src="../panini-cards/video/harv-panini-physics.mp4" autoplay loop muted playsinline></video>
+        <div class="wc-video-info">
+          <div class="wc-video-title">فيديو مدرسين الفيزياء</div>
+          <div class="wc-video-caption" id="vcap-physics">🏆 HARV FC × كأس العالم 2026 ⚽
+
+فريق الفيزياء في هارفورد ⚡
+Tamer El-Qadi · Ahmed Samir · Ahmed Nawar · Ahmed Samir Mogli
+
+شرح علمي، تبسيط القوانين، وأسلوب عملي.
+الفيزيا معانا مش معقدة — ده سهلة. ⚡💪
+
+📲 واتساب 01064949395
+📞 موبايل 01223463448
+☎️ أرضي 02-24734371
+الحجز مفتوح 2027
+#HarvFC #كأس_العالم_2026 #هارفورد #فيزياء #ثانوية_عامة</div>
+          <div class="wc-video-actions">
+            <a class="wc-video-dl" href="../panini-cards/video/harv-panini-physics.mp4" download="harv-panini-physics.mp4">تحميل الفيديو</a>
+            <button class="wc-video-copy" onclick="copyVCap('vcap-physics',this)">نسخ الكابشن</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <iframe class="wc-iframe" id="wc-iframe" src="about:blank" height="800"></iframe>
+  </details>
+</div>
+
+<script>
+// Shared section data
+var sectionData = [
+  { id: 'problem', name: 'المشكلة والحل' },
+  { id: 'logo', name: 'اللوجو' },
+  { id: 'comparison', name: 'قبل وبعد' },
+  { id: 'foundations', name: 'الأسس' },
+  { id: 'rules', name: 'القواعد' },
+  { id: 'designs', name: 'التصميمات' },
+  { id: 'worldcup', name: 'كروت كأس العالم' },
+  { id: 'plan', name: 'خطة النشر' }
+];
+sectionData.forEach(function(s) { s.el = document.getElementById(s.id); });
+
+// Side nav active state
+var sideLinks = document.querySelectorAll('#side-nav a');
+
+// Mobile bar elements
+var mobName = document.getElementById('mob-section-name');
+var mobProgress = document.getElementById('mob-progress');
+var mobSectionLinks = document.querySelectorAll('#mob-sections a');
+var scrollFill = document.getElementById('scroll-fill');
+
+function updateScroll() {
+  var scrollY = window.scrollY + 200;
+  var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  var scrollPct = Math.min(100, Math.max(0, (window.scrollY / docHeight) * 100));
+
+  // Progress bar
+  scrollFill.style.width = scrollPct + '%';
+
+  // Find active section
+  var activeIdx = 0;
+  for (var i = 0; i < sectionData.length; i++) {
+    if (sectionData[i].el && sectionData[i].el.offsetTop <= scrollY) activeIdx = i;
+  }
+
+  // Side nav
+  sideLinks.forEach(function(a) { a.classList.remove('active'); });
+  if (sideLinks[activeIdx]) sideLinks[activeIdx].classList.add('active');
+
+  // Mobile bar
+  mobName.textContent = sectionData[activeIdx].name;
+  mobProgress.textContent = (activeIdx + 1) + ' من ' + sectionData.length;
+  mobSectionLinks.forEach(function(a) { a.classList.remove('active'); });
+  if (mobSectionLinks[activeIdx]) mobSectionLinks[activeIdx].classList.add('active');
+}
+
+window.addEventListener('scroll', updateScroll);
+updateScroll();
+
+// Mobile bar toggle
+var mobToggle = document.getElementById('mob-toggle');
+var mobSections = document.getElementById('mob-sections');
+mobToggle.addEventListener('click', function() {
+  var isOpen = mobSections.classList.toggle('open');
+  mobToggle.textContent = isOpen ? 'إغلاق ▼' : 'الأقسام ▲';
+});
+// Close on section click
+mobSectionLinks.forEach(function(a) {
+  a.addEventListener('click', function() {
+    mobSections.classList.remove('open');
+    mobToggle.textContent = 'الأقسام ▲';
+  });
+});
+
+// Video caption copy
+function copyVCap(id, btn) {
+  var text = document.getElementById(id).textContent.trim();
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'تم النسخ!';
+    setTimeout(function() { btn.textContent = 'نسخ الكابشن'; }, 2000);
+  });
+}
+
+document.getElementById('wc-details').addEventListener('toggle', function() {
+  var iframe = document.getElementById('wc-iframe');
+  if (this.open && iframe.src === 'about:blank') {
+    iframe.src = '../panini-cards/download.html';
+  }
+});
+
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'panini-height') {
+    var iframe = document.getElementById('wc-iframe');
+    if (iframe) iframe.style.height = e.data.height + 'px';
+  }
+});
+</script>
+
+<!-- ═══ POSTING PLAN ═══ -->
+<section class="section" id="plan">
+  <details open>
+  <summary class="section-header">
+    <div>
+      <div class="section-overline">خطة النشر</div>
+      <div class="section-title">جدول حملة كأس العالم — أسبوع واحد</div>
+      <div class="section-subtitle">من السبت 21 يونيو للجمعة 27 يونيو — كل يوم بوست أو اتنين، وفي الآخر التشكيلة الكاملة</div>
+    </div>
+    <span class="sec-toggle">▼</span>
+  </summary>
+
+  <div class="plan-note">
+    <strong>ملاحظة مهمة:</strong> كل الصور والفيديوهات جاهزة للتحميل من قسم "كروت كأس العالم" فوق. الكابشن جاهز — انسخه وانشره مع الصورة أو الفيديو. مفيش حاجة محتاج تصممها.
+  </div>
+
+  <!-- Desktop table -->
+  <table class="plan-table">
+    <thead>
+      <tr>
+        <th style="width:14%;">اليوم</th>
+        <th style="width:8%;">النوع</th>
+        <th style="width:8%;">التوقيت</th>
+        <th style="width:35%;">المحتوى والكابشن</th>
+        <th style="width:15%;">الملفات</th>
+        <th style="width:20%;">ليه في اليوم ده</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- DAY 1 -->
+      <tr>
+        <td rowspan="2"><div class="plan-day">السبت<small>21 يونيو</small></div></td>
+        <td><span class="plan-type type-teaser">تيزر</span></td>
+        <td>10 الصبح</td>
+        <td>
+          <div class="plan-content">بوست التيزر — "فريق هارفورد جاي"</div>
+          <div class="plan-caption">🏆 HARV FC × كأس العالم 2026
+
+فريق هارفورد جاي... ⚽
+21 مدرس · 12 مادة · تشكيلة كاملة
+
+استنوا الكروت 🔥
+
+📲 واتساب 01064949395
+📞 موبايل 01223463448
+☎️ أرضي 02-24734371
+#HarvFC #كأس_العالم_2026 #هارفورد</div>
+        </td>
+        <td><div class="plan-assets"><a href="../panini-cards/post-teaser.png" download>صورة التيزر</a></div></td>
+        <td><div class="plan-why">أول بوست يلفت الانتباه ويخلي الناس تستنى اللي جاي</div></td>
+      </tr>
+      <tr>
+        <td><span class="plan-type type-video">فيديو</span></td>
+        <td>6 المغرب</td>
+        <td>
+          <div class="plan-content">فيديو مدرسين الإنجليزي (4 مدرسين)</div>
+          <div class="plan-caption">🏆 HARV FC × كأس العالم 2026 ⚽
+
+فريق الإنجليزي في هارفورد 🦅
+Mr. Milad Mourad · Mr. Mohmed Salah · Mr. Ahmed Atef · Adel Nabil
+
+شرح واضح، أسلوب ممتع، وتحفيز عالي.
+الإنجليزي معانا مش صعب — ده ممتع. 💪
+
+📲 واتساب 01064949395
+📞 موبايل 01223463448
+☎️ أرضي 02-24734371
+الحجز مفتوح 2027
+#HarvFC #كأس_العالم_2026 #هارفورد #English #ثانوية_عامة</div>
+        </td>
+        <td><div class="plan-assets"><a href="../panini-cards/video/harv-panini-english.mp4" download>فيديو English</a></div></td>
+        <td><div class="plan-why">الإنجليزي أكتر مادة بيسأل عنها الطلاب — نبدأ بالأقوى</div></td>
+      </tr>
+      <!-- DAY 2 -->
+      <tr>
+        <td rowspan="2"><div class="plan-day">الأحد<small>22 يونيو</small></div></td>
+        <td><span class="plan-type type-video">فيديو</span></td>
+        <td>12 الظهر</td>
+        <td>
+          <div class="plan-content">فيديو مدرسين الفيزياء (4 مدرسين)</div>
+          <div class="plan-caption">🏆 HARV FC × كأس العالم 2026 ⚽
+
+فريق الفيزياء في هارفورد ⚡
+Tamer El-Qadi · Ahmed Samir · Ahmed Nawar · Ahmed Samir Mogli
+
+شرح علمي، تبسيط القوانين، وأسلوب عملي.
+الفيزيا معانا مش معقدة — ده سهلة. ⚡💪
+
+📲 واتساب 01064949395
+📞 موبايل 01223463448
+☎️ أرضي 02-24734371
+الحجز مفتوح 2027
+#HarvFC #كأس_العالم_2026 #هارفورد #فيزياء #ثانوية_عامة</div>
+        </td>
+        <td><div class="plan-assets"><a href="../panini-cards/video/harv-panini-physics.mp4" download>فيديو فيزياء</a></div></td>
+        <td><div class="plan-why">الفيزياء تاني أكبر قسم (4 مدرسين) — بنكمل الزخم</div></td>
+      </tr>
+      <tr>
+        <td><span class="plan-type type-album">ألبوم</span></td>
+        <td>8 بالليل</td>
+        <td>
+          <div class="plan-content">كروت الإنجليزي الأربعة — ألبوم صور</div>
+          <div class="plan-caption">🏆 HARV FC × كأس العالم 2026
+
+فريق الإنجليزي الكامل 🦅
+
+كل واحد فيهم ليه أسلوبه وقوته.
+اختار المدرس اللي يناسبك وابدأ. 💪
+
+📲 واتساب 01064949395
+📞 موبايل 01223463448
+☎️ أرضي 02-24734371
+#HarvFC #كأس_العالم_2026 #هارفورد #English #ثانوية_عامة</div>
+        </td>
+        <td><div class="plan-assets"><a href="../panini-cards/download.html" target="_blank">حمّل الكروت</a></div></td>
+        <td><div class="plan-why">الألبوم بعد الفيديو بيخلي اللي اتفرج يشوف التفاصيل</div></td>
+      </tr>
+      <!-- DAY 3 -->
+      <tr>
+        <td rowspan="2"><div class="plan-day">الاتنين<small>23 يونيو</small></div></td>
+        <td><span class="plan-type type-album">ألبوم</span></td>
+        <td>12 الظهر</td>
+        <td>
+          <div class="plan-content">كروت الفيزياء الأربعة — ألبوم صور</div>
+          <div class="plan-caption">🏆 HARV FC × كأس العالم 2026
+
+فريق الفيزياء الكامل ⚡
+
+تبسيط القوانين وشرح عملي.
+الفيزيا مش معقدة لما المدرس صح. 💪
+
+📲 واتساب 01064949395
+📞 موبايل 01223463448
+☎️ أرضي 02-24734371
+#HarvFC #كأس_العالم_2026 #هارفورد #فيزياء #ثانوية_عامة</div>
+        </td>
+        <td><div class="plan-assets"><a href="../panini-cards/download.html" target="_blank">حمّل الكروت</a></div></td>
+        <td><div class="plan-why">نفس النمط — ألبوم اليوم اللي بعد الفيديو</div></td>
+      </tr>
+      <tr>
+        <td><span class="plan-type type-album">ألبوم</span></td>
+        <td>8 بالليل</td>
+        <td>
+          <div class="plan-content">كروت الكيمياء — ناصر البطل + أشرف الشناوي</div>
+          <div class="plan-caption">🏆 HARV FC × كأس العالم 2026
+
+الكيمياء في هارفورد 🧪
+
+ناصر البطل — CDM — مرتكز الوسط
+أشرف الشناوي — GK — حارس المرمى
+
+شرح عملي وخبرة طويلة.
+مفيش معادلة بتعدّي منهم. 🔥
+
+📲 واتساب 01064949395
+📞 موبايل 01223463448
+☎️ أرضي 02-24734371
+#HarvFC #كأس_العالم_2026 #هارفورد #كيمياء #ثانوية_عامة</div>
+        </td>
+        <td><div class="plan-assets"><a href="../panini-cards/download.html" target="_blank">حمّل الكروت</a></div></td>
+        <td><div class="plan-why">الكيمياء مادة صعبة — الطلاب بيدوروا على مدرسين كويسين</div></td>
+      </tr>
+      <!-- DAY 4 -->
+      <tr>
+        <td rowspan="2"><div class="plan-day">الثلاثاء<small>24 يونيو</small></div></td>
+        <td><span class="plan-type type-album">ألبوم</span></td>
+        <td>12 الظهر</td>
+        <td>
+          <div class="plan-content">كروت العربي — رضا الفاروق + سيد عبدالعزيز</div>
+          <div class="plan-caption">🏆 HARV FC × كأس العالم 2026
+
+اللغة العربية في هارفورد ✍️
+
+رضا الفاروق — CB — قلب الدفاع
+سيد عبدالعزيز — CB — قلب الدفاع
+
+شرح بليغ وإتقان للنحو.
+العربي معاهم بيبقى ممتع. 💪
+
+📲 واتساب 01064949395
+📞 موبايل 01223463448
+☎️ أرضي 02-24734371
+#HarvFC #كأس_العالم_2026 #هارفورد #لغة_عربية #ثانوية_عامة</div>
+        </td>
+        <td><div class="plan-assets"><a href="../panini-cards/download.html" target="_blank">حمّل الكروت</a></div></td>
+        <td><div class="plan-why">العربي مادة أساسية — مهم نغطيها بدري</div></td>
+      </tr>
+      <tr>
+        <td><span class="plan-type type-image">صورة</span></td>
+        <td>8 بالليل</td>
+        <td>
+          <div class="plan-content">كارت التاريخ — محمد طلبة + كارت إدارة الأعمال — د. هيثم عطية</div>
+          <div class="plan-caption">🏆 HARV FC × كأس العالم 2026
+
+محمد طلبة — CB — قلب الدفاع 🛡️
+مدرس تاريخ — ذاكرة حديدية وأسلوب حكائي
+
+د. هيثم عطية — CAM — صانع اللعب 🎯
+مدرس إدارة أعمال — شرح مبسّط وأسلوب ممتع
+
+📲 واتساب 01064949395
+📞 موبايل 01223463448
+☎️ أرضي 02-24734371
+#HarvFC #كأس_العالم_2026 #هارفورد #ثانوية_عامة</div>
+        </td>
+        <td><div class="plan-assets"><a href="../panini-cards/download.html" target="_blank">حمّل الكروت</a></div></td>
+        <td><div class="plan-why">مواد فردية — بوست واحد لكل كارت يعرّف المدرس</div></td>
+      </tr>
+      <!-- DAY 5 -->
+      <tr>
+        <td><div class="plan-day">الأربعاء<small>25 يونيو</small></div></td>
+        <td><span class="plan-type type-album">ألبوم</span></td>
+        <td>12 الظهر</td>
+        <td>
+          <div class="plan-content">يوم اللغات — ألماني (2) + فرنسي (1) + إيطالي (1)</div>
+          <div class="plan-caption">🏆 HARV FC × كأس العالم 2026
+
+يوم اللغات في هارفورد 🌍
+
+🇩🇪 عبدالمعز إسماعيل + عصام خطاب — ألماني
+🇫🇷 محمد البرديسي — فرنسي
+🇮🇹 محمد القط — إيطالي
+
+كل لغة ليها مدرس متخصص ومتمكّن.
+
+📲 واتساب 01064949395
+📞 موبايل 01223463448
+☎️ أرضي 02-24734371
+#HarvFC #كأس_العالم_2026 #هارفورد #لغات #ثانوية_عامة</div>
+        </td>
+        <td><div class="plan-assets"><a href="../panini-cards/download.html" target="_blank">حمّل الكروت</a></div></td>
+        <td><div class="plan-why">أربع كروت لغات في ألبوم واحد — بيخلي البوست rich ومتنوع</div></td>
+      </tr>
+      <!-- DAY 6 -->
+      <tr>
+        <td rowspan="2"><div class="plan-day">الخميس<small>26 يونيو</small></div></td>
+        <td><span class="plan-type type-image">صورة</span></td>
+        <td>12 الظهر</td>
+        <td>
+          <div class="plan-content">كارت الرياضيات — عمر الشربيني + كارت الأحياء — د. ضيف + كارت الفلسفة — علي صلاح</div>
+          <div class="plan-caption">🏆 HARV FC × كأس العالم 2026
+
+📐 عمر الشربيني — رياضيات
+🧬 د. ضيف — أحياء
+🧠 علي صلاح — فلسفة وعلم نفس
+
+آخر 3 لاعيبة في التشكيلة.
+بكره... التشكيلة الكاملة 🔥
+
+📲 واتساب 01064949395
+📞 موبايل 01223463448
+☎️ أرضي 02-24734371
+#HarvFC #كأس_العالم_2026 #هارفورد #ثانوية_عامة</div>
+        </td>
+        <td><div class="plan-assets"><a href="../panini-cards/download.html" target="_blank">حمّل الكروت</a></div></td>
+        <td><div class="plan-why">نخلّص كل الكروت الفردية ونجهّز الناس للفاينال</div></td>
+      </tr>
+      <tr>
+        <td><span class="plan-type type-teaser">تيزر</span></td>
+        <td>10 بالليل</td>
+        <td>
+          <div class="plan-content">تيزر التشكيلة — "بكره التشكيلة الكاملة..."</div>
+          <div class="plan-caption">⚽ بكره الساعة 12...
+
+التشكيلة الكاملة لفريق هارفورد 2027 🏆
+
+21 مدرس · 12 مادة · تشكيلة واحدة
+
+#HarvFC #كأس_العالم_2026 #هارفورد</div>
+        </td>
+        <td></td>
+        <td><div class="plan-why">تيزر قصير يبني الترقب لبوست بكره</div></td>
+      </tr>
+      <!-- DAY 7 -->
+      <tr style="background: #FEF2F2;">
+        <td><div class="plan-day" style="color:#D42027;">الجمعة<small>27 يونيو</small></div></td>
+        <td><span class="plan-type type-image">صورة</span></td>
+        <td>12 الظهر</td>
+        <td>
+          <div class="plan-content" style="color:#D42027;">التشكيلة الكاملة — HARV FC LINEUP 2027</div>
+          <div class="plan-caption">🏆 HARV FC × كأس العالم 2026
+
+التشكيلة الكاملة لموسم 2027 ⚽🔥
+
+21 مدرس · 12 مادة · فريق واحد
+
+English · Physics · Chemistry · Biology · Arabic · German · French · Italian · Math · Philosophy · History · Business Admin
+
+الحجز مفتوح دلوقتي 📲 واتساب 01064949395
+📞 موبايل 01223463448
+☎️ أرضي 02-24734371
+
+معاك للنهاية 💪
+
+#HarvFC #كأس_العالم_2026 #هارفورد #ثانوية_عامة #الحجز_مفتوح</div>
+        </td>
+        <td><div class="plan-assets"><a href="#">تصميم التشكيلة (قريباً)</a></div></td>
+        <td><div class="plan-why">البوست الأكبر — كل حاجة في صورة واحدة. يتعمله Pin على الجروب</div></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Mobile cards (hidden on desktop) -->
+  <div class="plan-cards">
+    <div class="plan-card-item" style="border-right: 4px solid #FCD34D;">
+      <div class="plan-day">السبت 21 يونيو <small>10 الصبح</small></div>
+      <div class="plan-card-label">النوع</div><span class="plan-type type-teaser">تيزر</span>
+      <div class="plan-card-label">المحتوى</div><div class="plan-content">بوست التيزر — "فريق هارفورد جاي"</div>
+      <div class="plan-assets" style="margin-top:8px;"><a href="../panini-cards/post-teaser.png" download>صورة التيزر</a></div>
+    </div>
+    <div class="plan-card-item" style="border-right: 4px solid #991B1B;">
+      <div class="plan-day">السبت 21 يونيو <small>6 المغرب</small></div>
+      <div class="plan-card-label">النوع</div><span class="plan-type type-video">فيديو</span>
+      <div class="plan-card-label">المحتوى</div><div class="plan-content">فيديو مدرسين الإنجليزي (4 مدرسين)</div>
+      <div class="plan-assets" style="margin-top:8px;"><a href="../panini-cards/video/harv-panini-english.mp4" download>فيديو English</a></div>
+    </div>
+    <div class="plan-card-item" style="border-right: 4px solid #991B1B;">
+      <div class="plan-day">الأحد 22 يونيو <small>12 الظهر</small></div>
+      <div class="plan-card-label">النوع</div><span class="plan-type type-video">فيديو</span>
+      <div class="plan-card-label">المحتوى</div><div class="plan-content">فيديو مدرسين الفيزياء (4 مدرسين)</div>
+      <div class="plan-assets" style="margin-top:8px;"><a href="../panini-cards/video/harv-panini-physics.mp4" download>فيديو فيزياء</a></div>
+    </div>
+    <div class="plan-card-item" style="border-right: 4px solid #065F46;">
+      <div class="plan-day">الأحد 22 يونيو <small>8 بالليل</small></div>
+      <div class="plan-card-label">النوع</div><span class="plan-type type-album">ألبوم</span>
+      <div class="plan-card-label">المحتوى</div><div class="plan-content">كروت الإنجليزي الأربعة — ألبوم صور</div>
+    </div>
+    <div class="plan-card-item" style="border-right: 4px solid #065F46;">
+      <div class="plan-day">الاتنين 23 يونيو <small>12 الظهر</small></div>
+      <div class="plan-card-label">النوع</div><span class="plan-type type-album">ألبوم</span>
+      <div class="plan-card-label">المحتوى</div><div class="plan-content">كروت الفيزياء الأربعة — ألبوم صور</div>
+    </div>
+    <div class="plan-card-item" style="border-right: 4px solid #065F46;">
+      <div class="plan-day">الاتنين 23 يونيو <small>8 بالليل</small></div>
+      <div class="plan-card-label">النوع</div><span class="plan-type type-album">ألبوم</span>
+      <div class="plan-card-label">المحتوى</div><div class="plan-content">كروت الكيمياء — ناصر البطل + أشرف الشناوي</div>
+    </div>
+    <div class="plan-card-item" style="border-right: 4px solid #065F46;">
+      <div class="plan-day">الثلاثاء 24 يونيو <small>12 الظهر</small></div>
+      <div class="plan-card-label">النوع</div><span class="plan-type type-album">ألبوم</span>
+      <div class="plan-card-label">المحتوى</div><div class="plan-content">كروت العربي — رضا الفاروق + سيد عبدالعزيز</div>
+    </div>
+    <div class="plan-card-item" style="border-right: 4px solid #1E40AF;">
+      <div class="plan-day">الثلاثاء 24 يونيو <small>8 بالليل</small></div>
+      <div class="plan-card-label">النوع</div><span class="plan-type type-image">صورة</span>
+      <div class="plan-card-label">المحتوى</div><div class="plan-content">كارت التاريخ + كارت إدارة الأعمال</div>
+    </div>
+    <div class="plan-card-item" style="border-right: 4px solid #065F46;">
+      <div class="plan-day">الأربعاء 25 يونيو <small>12 الظهر</small></div>
+      <div class="plan-card-label">النوع</div><span class="plan-type type-album">ألبوم</span>
+      <div class="plan-card-label">المحتوى</div><div class="plan-content">يوم اللغات — ألماني + فرنسي + إيطالي</div>
+    </div>
+    <div class="plan-card-item" style="border-right: 4px solid #1E40AF;">
+      <div class="plan-day">الخميس 26 يونيو <small>12 الظهر</small></div>
+      <div class="plan-card-label">النوع</div><span class="plan-type type-image">صورة</span>
+      <div class="plan-card-label">المحتوى</div><div class="plan-content">رياضيات + أحياء + فلسفة</div>
+    </div>
+    <div class="plan-card-item" style="border-right: 4px solid #FCD34D;">
+      <div class="plan-day">الخميس 26 يونيو <small>10 بالليل</small></div>
+      <div class="plan-card-label">النوع</div><span class="plan-type type-teaser">تيزر</span>
+      <div class="plan-card-label">المحتوى</div><div class="plan-content">"بكره التشكيلة الكاملة..."</div>
+    </div>
+    <div class="plan-card-item" style="border-right: 4px solid #D42027; background:#FEF2F2;">
+      <div class="plan-day" style="color:#D42027;">الجمعة 27 يونيو <small>12 الظهر</small></div>
+      <div class="plan-card-label">النوع</div><span class="plan-type type-image">صورة</span>
+      <div class="plan-card-label">المحتوى</div><div class="plan-content" style="color:#D42027;">التشكيلة الكاملة — HARV FC LINEUP 2027 🔥</div>
+    </div>
+  </div>
+
+  <div class="plan-note" style="margin-top:24px;">
+    <strong>بعد الأسبوع ده:</strong> نرجع للهوية الرسمية — بوست الحجز، بوست الـ QR Code، كارت المدرس الرسمي. الناس عرفتنا بالكروت، دلوقتي نكلمهم بجد.
+  </div>
+  </details>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <img src="../design-system/logo/mark.png" alt="Harv">
+  <p>مركز هارفورد التعليمي — مدينة نصر — بجوار بنزينة كار جاس — أمام عقارات السوسري أ</p>
+  <div class="tagline">معاك للنهاية</div>
+</footer>
+
+<script>
+function scaleIframes() {
+  document.querySelectorAll('.iframe-wrap').forEach(function(wrap) {
+    var iframe = wrap.querySelector('iframe');
+    if (!iframe) return;
+    var nw = parseInt(iframe.dataset.nativeW) || 1080;
+    var nh = parseInt(iframe.dataset.nativeH) || 1350;
+    var containerW = wrap.offsetWidth;
+    var scale = containerW / nw;
+    iframe.style.width = nw + 'px';
+    iframe.style.height = nh + 'px';
+    iframe.style.transform = 'scale(' + scale + ')';
+    wrap.style.height = (nh * scale) + 'px';
+  });
+}
+window.addEventListener('load', scaleIframes);
+window.addEventListener('resize', scaleIframes);
+</script>
+</body>
+</html>

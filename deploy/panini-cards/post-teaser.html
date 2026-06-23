@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>HARV FC — Teaser Post</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0f1a; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 20px; }
+
+  .post {
+    width: 1080px; height: 1350px; position: relative; overflow: hidden;
+    background: #1A2744; font-family: 'Cairo', sans-serif;
+  }
+
+  .post .pattern {
+    position: absolute; inset: -300px; pointer-events: none; z-index: 0;
+    background-image: url('photos/tiles/tile-logo.png');
+    background-size: 500px 500px; background-repeat: repeat;
+    transform: rotate(-15deg); filter: brightness(1.15);
+  }
+
+  .post .border-outer {
+    position: absolute; inset: 16px; border-radius: 20px;
+    border: 3px solid #D42027; z-index: 2; pointer-events: none;
+  }
+
+  .post .border-inner {
+    position: absolute; inset: 28px; border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.08); z-index: 2; pointer-events: none;
+  }
+
+  .corner { position: absolute; width: 60px; height: 60px; z-index: 3; }
+  .corner-tl { top: 40px; left: 40px; border-top: 3px solid rgba(212,32,39,0.4); border-left: 3px solid rgba(212,32,39,0.4); }
+  .corner-tr { top: 40px; right: 40px; border-top: 3px solid rgba(212,32,39,0.4); border-right: 3px solid rgba(212,32,39,0.4); }
+  .corner-bl { bottom: 40px; left: 40px; border-bottom: 3px solid rgba(212,32,39,0.4); border-left: 3px solid rgba(212,32,39,0.4); }
+  .corner-br { bottom: 40px; right: 40px; border-bottom: 3px solid rgba(212,32,39,0.4); border-right: 3px solid rgba(212,32,39,0.4); }
+
+  .post .center {
+    position: absolute; inset: 0; z-index: 5;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 20px;
+  }
+
+  .wc-logo { width: 120px; height: auto; filter: drop-shadow(0 2px 20px rgba(255,255,255,0.15)); }
+
+  .wc-text { font-size: 16px; font-weight: 700; color: #D42027; letter-spacing: 5px; }
+
+  .divider { width: 120px; height: 3px; background: #D42027; border-radius: 2px; }
+
+  .logo-mark { width: 180px; height: auto; filter: drop-shadow(0 4px 30px rgba(212,32,39,0.3)); }
+
+  .fc-title { font-size: 36px; font-weight: 900; color: #fff; letter-spacing: 8px; }
+
+  .divider-wide { width: 200px; height: 2px; background: rgba(255,255,255,0.08); border-radius: 2px; }
+
+  .teaser-text {
+    font-size: 72px; font-weight: 900; color: #fff; direction: rtl;
+    text-align: center; line-height: 1.3;
+    text-shadow: 0 4px 40px rgba(212,32,39,0.3);
+  }
+
+  .teaser-sub {
+    font-size: 28px; font-weight: 700; color: rgba(255,255,255,0.4);
+    direction: rtl; text-align: center;
+  }
+
+  .coming-pill {
+    display: inline-block; padding: 12px 48px; border-radius: 100px;
+    background: #D42027; font-size: 24px; font-weight: 900; color: #fff;
+    letter-spacing: 3px; margin-top: 8px;
+    box-shadow: 0 4px 30px rgba(212,32,39,0.4);
+  }
+
+  .footer {
+    position: absolute; bottom: 50px; left: 0; right: 0; z-index: 5;
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+  }
+
+  .footer-name {
+    font-size: 14px; font-weight: 600; color: #3D4C6B; letter-spacing: 2px;
+  }
+
+  .footer-phones {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    padding: 10px 28px; border-radius: 20px;
+    background: rgba(212,32,39,0.12); border: 1px solid rgba(212,32,39,0.3);
+    font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.6); letter-spacing: 1px;
+    direction: ltr;
+  }
+
+  @media (max-width: 1200px) {
+    .post { transform: scale(0.45); transform-origin: top center; }
+  }
+</style>
+</head>
+<body>
+  <div class="post">
+    <div class="pattern"></div>
+    <div class="border-outer"></div>
+    <div class="border-inner"></div>
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+    <div class="center">
+      <img class="wc-logo" src="photos/icons/wc2026.png" alt="WC 2026">
+      <div class="wc-text">FIFA WORLD CUP 2026</div>
+      <div class="divider"></div>
+      <img class="logo-mark" src="../design-system/logo/mark.png" alt="Harv">
+      <div class="fc-title">HARV FC</div>
+      <div class="divider-wide"></div>
+      <div class="teaser-text">فريق هارفورد<br>جاي... ⚽</div>
+      <div class="teaser-sub">21 مدرس · 12 مادة · تشكيلة كاملة</div>
+      <div class="coming-pill">الحجز مفتوح 2027</div>
+    </div>
+    <div class="footer">
+      <div class="footer-name">HARVARD EDUCATIONAL CENTER · مركز هارفورد التعليمي</div>
+      <div class="footer-phones">
+      <span>واتساب 01064949395</span>
+      <span>·</span>
+      <span>موبايل 01223463448</span>
+      <span>·</span>
+      <span>أرضي 02-24734371</span>
+    </div>
+    </div>
+  </div>
+</body>
+</html>

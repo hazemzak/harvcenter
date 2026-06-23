@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1080 1350" font-family="Cairo, sans-serif">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&amp;display=swap');
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="1350" fill="#1A2744"/>
+
+  <!-- ===== TOP BAR (RTL — logo + name on right) ===== -->
+  <image href="../../../logo/mark.png" x="960" y="16" width="65" height="75"/>
+  <text x="948" y="62" font-size="30" font-weight="700" fill="#FFFFFF" direction="rtl" text-anchor="end">هارفورد</text>
+  <!-- Formation label (left side) -->
+  <text x="40" y="62" font-size="26" font-weight="600" fill="#D42027" text-anchor="start">٣-٣-٣</text>
+
+  <!-- Red accent line -->
+  <line x1="30" y1="95" x2="1050" y2="95" stroke="#D42027" stroke-width="3"/>
+
+  <!-- Title with inline logo -->
+  <image href="../../../logo/mark.png" x="495" y="118" width="40" height="46"/>
+  <text x="488" y="155" font-size="44" font-weight="700" fill="#FFFFFF" text-anchor="end" direction="rtl">تشكيلة</text>
+  <text x="542" y="155" font-size="44" font-weight="700" fill="#FFFFFF" text-anchor="start">هارفورد ٢٠٢٧</text>
+
+  <!-- Logo watermark on pitch — branded background -->
+  <image href="../../../logo/mark.png" x="320" y="400" width="440" height="510" opacity="0.05"/>
+
+  <!-- ===== PITCH LINES (subtle) ===== -->
+  <rect x="90" y="195" width="900" height="860" fill="none" stroke="#2B3A56" stroke-width="1.5"/>
+  <line x1="90" y1="625" x2="990" y2="625" stroke="#2B3A56" stroke-width="1.5"/>
+  <circle cx="540" cy="625" r="80" fill="none" stroke="#2B3A56" stroke-width="1.5"/>
+  <circle cx="540" cy="625" r="4" fill="#2B3A56"/>
+  <rect x="310" y="195" width="460" height="140" fill="none" stroke="#2B3A56" stroke-width="1"/>
+  <rect x="310" y="915" width="460" height="140" fill="none" stroke="#2B3A56" stroke-width="1"/>
+
+  <!-- ===== FORWARDS (3) ===== -->
+  <!-- #9 LW — محمد صلاح -->
+  <g transform="translate(220, 290)">
+    <circle cx="0" cy="0" r="48" fill="#3D4C6B" stroke="#FFFFFF" stroke-width="2.5"/>
+    <text x="0" y="66" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle" direction="rtl">محمد صلاح</text>
+    <text x="0" y="90" font-size="16" font-weight="400" fill="#D42027" text-anchor="middle" direction="rtl">انجليزي</text>
+    <text x="0" y="-58" font-size="18" font-weight="700" fill="#D42027" text-anchor="middle">9</text>
+  </g>
+
+  <!-- #10 ST — محمد الجيوشي -->
+  <g transform="translate(540, 260)">
+    <circle cx="0" cy="0" r="48" fill="#3D4C6B" stroke="#FFFFFF" stroke-width="2.5"/>
+    <text x="0" y="66" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle" direction="rtl">محمد الجيوشي</text>
+    <text x="0" y="90" font-size="16" font-weight="400" fill="#D42027" text-anchor="middle" direction="rtl">فيزياء</text>
+    <text x="0" y="-58" font-size="18" font-weight="700" fill="#D42027" text-anchor="middle">10</text>
+  </g>
+
+  <!-- #11 RW — ميلاد مراد -->
+  <g transform="translate(860, 290)">
+    <circle cx="0" cy="0" r="48" fill="#3D4C6B" stroke="#FFFFFF" stroke-width="2.5"/>
+    <text x="0" y="66" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle" direction="rtl">ميلاد مراد</text>
+    <text x="0" y="90" font-size="16" font-weight="400" fill="#D42027" text-anchor="middle" direction="rtl">انجليزي</text>
+    <text x="0" y="-58" font-size="18" font-weight="700" fill="#D42027" text-anchor="middle">11</text>
+  </g>
+
+  <!-- ===== MIDFIELD (3) ===== -->
+  <!-- #6 LM — مازن الحيوان -->
+  <g transform="translate(220, 530)">
+    <circle cx="0" cy="0" r="48" fill="#3D4C6B" stroke="#FFFFFF" stroke-width="2.5"/>
+    <text x="0" y="66" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle" direction="rtl">مازن الحيوان</text>
+    <text x="0" y="90" font-size="16" font-weight="400" fill="#D42027" text-anchor="middle" direction="rtl">رياضيات وإحصاء</text>
+    <text x="0" y="-58" font-size="18" font-weight="700" fill="#D42027" text-anchor="middle">6</text>
+  </g>
+
+  <!-- #7 CM — محمد صبري -->
+  <g transform="translate(540, 560)">
+    <circle cx="0" cy="0" r="48" fill="#3D4C6B" stroke="#FFFFFF" stroke-width="2.5"/>
+    <text x="0" y="66" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle" direction="rtl">محمد صبري</text>
+    <text x="0" y="90" font-size="16" font-weight="400" fill="#D42027" text-anchor="middle" direction="rtl">رياضيات</text>
+    <text x="0" y="-58" font-size="18" font-weight="700" fill="#D42027" text-anchor="middle">7</text>
+  </g>
+
+  <!-- #8 RM — علي صلاح -->
+  <g transform="translate(860, 530)">
+    <circle cx="0" cy="0" r="48" fill="#3D4C6B" stroke="#FFFFFF" stroke-width="2.5"/>
+    <text x="0" y="66" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle" direction="rtl">علي صلاح</text>
+    <text x="0" y="90" font-size="16" font-weight="400" fill="#D42027" text-anchor="middle" direction="rtl">فلسفة</text>
+    <text x="0" y="-58" font-size="18" font-weight="700" fill="#D42027" text-anchor="middle">8</text>
+  </g>
+
+  <!-- ===== DEFENSE (3) ===== -->
+  <!-- #3 LB — ناصر البطل -->
+  <g transform="translate(220, 780)">
+    <circle cx="0" cy="0" r="48" fill="#3D4C6B" stroke="#FFFFFF" stroke-width="2.5"/>
+    <text x="0" y="66" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle" direction="rtl">ناصر البطل</text>
+    <text x="0" y="90" font-size="16" font-weight="400" fill="#D42027" text-anchor="middle" direction="rtl">كيمياء</text>
+    <text x="0" y="-58" font-size="18" font-weight="700" fill="#D42027" text-anchor="middle">3</text>
+  </g>
+
+  <!-- #4 CB — محمد طلبة -->
+  <g transform="translate(540, 790)">
+    <circle cx="0" cy="0" r="48" fill="#3D4C6B" stroke="#FFFFFF" stroke-width="2.5"/>
+    <text x="0" y="66" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle" direction="rtl">محمد طلبة</text>
+    <text x="0" y="90" font-size="16" font-weight="400" fill="#D42027" text-anchor="middle" direction="rtl">تاريخ</text>
+    <text x="0" y="-58" font-size="18" font-weight="700" fill="#D42027" text-anchor="middle">4</text>
+  </g>
+
+  <!-- #5 RB — طارق عصام -->
+  <g transform="translate(860, 780)">
+    <circle cx="0" cy="0" r="48" fill="#3D4C6B" stroke="#FFFFFF" stroke-width="2.5"/>
+    <text x="0" y="66" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle" direction="rtl">طارق عصام</text>
+    <text x="0" y="90" font-size="16" font-weight="400" fill="#D42027" text-anchor="middle" direction="rtl">كيمياء</text>
+    <text x="0" y="-58" font-size="18" font-weight="700" fill="#D42027" text-anchor="middle">5</text>
+  </g>
+
+  <!-- ===== GOALKEEPER ===== -->
+  <!-- #1 GK — الشناوي -->
+  <g transform="translate(540, 980)">
+    <circle cx="0" cy="0" r="54" fill="#3D4C6B" stroke="#D42027" stroke-width="3"/>
+    <text x="0" y="72" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle" direction="rtl">الشناوي</text>
+    <text x="0" y="96" font-size="16" font-weight="400" fill="#D42027" text-anchor="middle" direction="rtl">كيمياء</text>
+    <text x="0" y="-64" font-size="20" font-weight="700" fill="#D42027" text-anchor="middle">1</text>
+  </g>
+
+  <!-- ===== COACHING STAFF ===== -->
+  <line x1="30" y1="1110" x2="1050" y2="1110" stroke="#2B3A56" stroke-width="1.5"/>
+
+  <!-- Manager -->
+  <g transform="translate(200, 1200)">
+    <circle cx="0" cy="0" r="30" fill="#3D4C6B" stroke="#D42027" stroke-width="2"/>
+    <text x="42" y="-8" font-size="14" font-weight="400" fill="#7D8AA0">MANAGER</text>
+    <text x="42" y="16" font-size="20" font-weight="700" fill="#FFFFFF" direction="rtl" text-anchor="start">أحمد زكريا الحكيم</text>
+  </g>
+
+  <!-- Assistant Manager -->
+  <g transform="translate(700, 1200)">
+    <circle cx="0" cy="0" r="30" fill="#3D4C6B" stroke="#C9993A" stroke-width="2"/>
+    <text x="42" y="-8" font-size="14" font-weight="400" fill="#7D8AA0">ASST. MANAGER</text>
+    <text x="42" y="16" font-size="20" font-weight="700" fill="#FFFFFF" direction="rtl" text-anchor="start">محمود عبدالمعطي</text>
+  </g>
+
+  <!-- Bottom: logo + tagline (like liked photo) -->
+  <image href="../../../logo/mark.png" x="508" y="1265" width="50" height="58"/>
+  <text x="540" y="1340" font-size="18" font-weight="400" fill="#7D8AA0" text-anchor="middle" direction="rtl">معاك للنهاية</text>
+</svg>

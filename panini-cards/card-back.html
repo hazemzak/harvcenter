@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>HARV FC — Card Back</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0f1a; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+  .card-back {
+    width: 1080px; height: 1350px; position: relative; overflow: hidden;
+    background: #1A2744; font-family: 'Cairo', sans-serif;
+  }
+
+  /* Pattern background — logo tile */
+  .card-back .pattern {
+    position: absolute; inset: -300px; pointer-events: none; z-index: 0;
+    background-image: url('photos/tiles/tile-logo.png');
+    background-size: 500px 500px; background-repeat: repeat;
+    transform: rotate(-15deg); filter: brightness(1.15);
+  }
+
+  /* Outer border */
+  .card-back .border-outer {
+    position: absolute; inset: 16px; border-radius: 20px;
+    border: 3px solid #D42027; z-index: 2; pointer-events: none;
+  }
+
+  /* Inner border */
+  .card-back .border-inner {
+    position: absolute; inset: 28px; border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.08); z-index: 2; pointer-events: none;
+  }
+
+  /* Center content */
+  .card-back .center {
+    position: absolute; inset: 0; z-index: 5;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 24px;
+  }
+
+  .card-back .wc-logo {
+    width: 100px; height: auto;
+    filter: drop-shadow(0 2px 20px rgba(255,255,255,0.15));
+  }
+
+  .card-back .logo-mark {
+    width: 200px; height: auto;
+    filter: drop-shadow(0 4px 30px rgba(212,32,39,0.3));
+  }
+
+  .card-back .title {
+    font-size: 32px; font-weight: 900; color: #fff;
+    letter-spacing: 6px; text-align: center;
+  }
+
+  .card-back .subtitle {
+    font-size: 20px; font-weight: 700; color: #D42027;
+    letter-spacing: 4px;
+  }
+
+  .card-back .divider {
+    width: 120px; height: 3px; background: #D42027; border-radius: 2px;
+  }
+
+  .card-back .tagline {
+    font-size: 22px; font-weight: 600; color: rgba(255,255,255,0.4);
+    direction: rtl;
+  }
+
+  /* Corner accents */
+  .corner { position: absolute; width: 60px; height: 60px; z-index: 3; }
+  .corner-tl { top: 40px; left: 40px; border-top: 3px solid rgba(212,32,39,0.4); border-left: 3px solid rgba(212,32,39,0.4); }
+  .corner-tr { top: 40px; right: 40px; border-top: 3px solid rgba(212,32,39,0.4); border-right: 3px solid rgba(212,32,39,0.4); }
+  .corner-bl { bottom: 40px; left: 40px; border-bottom: 3px solid rgba(212,32,39,0.4); border-left: 3px solid rgba(212,32,39,0.4); }
+  .corner-br { bottom: 40px; right: 40px; border-bottom: 3px solid rgba(212,32,39,0.4); border-right: 3px solid rgba(212,32,39,0.4); }
+
+  /* Footer */
+  .card-back .footer {
+    position: absolute; bottom: 60px; left: 0; right: 0; z-index: 5;
+    text-align: center; font-size: 14px; font-weight: 600;
+    color: #3D4C6B; letter-spacing: 2px;
+  }
+
+  @media (max-width: 1200px) {
+    .card-back { transform: scale(0.45); transform-origin: top center; }
+  }
+</style>
+</head>
+<body>
+  <div class="card-back">
+    <div class="pattern"></div>
+    <div class="border-outer"></div>
+    <div class="border-inner"></div>
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+    <div class="center">
+      <img class="wc-logo" src="photos/icons/wc2026.png" alt="World Cup 2026">
+      <div class="subtitle">FIFA WORLD CUP 2026</div>
+      <div class="divider"></div>
+      <img class="logo-mark" src="../design-system/logo/mark.png" alt="Harv">
+      <div class="title">HARV FC</div>
+      <div class="divider"></div>
+      <div class="tagline">معاك للنهاية</div>
+    </div>
+    <div class="footer">HARVARD EDUCATIONAL CENTER · مركز هارفورد التعليمي</div>
+  </div>
+</body>
+</html>

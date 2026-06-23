@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Harv — Rebranded Designs</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 40px;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .subtitle {
+    font-size: 16px;
+    color: #94a3b8;
+    margin-bottom: 40px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .card {
+    background: #1e293b;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #334155;
+  }
+  .card-header {
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #334155;
+  }
+  .card-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .card-meta {
+    font-size: 13px;
+    color: #64748b;
+  }
+  .card-link {
+    color: #D42027;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 8px 20px;
+    border: 1px solid #D42027;
+    border-radius: 100px;
+    transition: all 0.2s;
+  }
+  .card-link:hover {
+    background: #D42027;
+    color: #fff;
+  }
+  .card-preview {
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    background: #0f172a;
+  }
+  .card-preview iframe {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
+</style>
+</head>
+<body>
+  <h1>Harv — Rebranded 2027 Designs</h1>
+  <p class="subtitle">4 designs following the new brand system. Open each to view full-size.</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Facebook Cover Photo</div>
+          <div class="card-meta">1640 x 624px — Navy background</div>
+        </div>
+        <a href="cover-photo.html" target="_blank" class="card-link">Open full size</a>
+      </div>
+      <div class="card-preview">
+        <iframe src="cover-photo.html" width="820" height="312" style="transform: scale(1); transform-origin: center;"></iframe>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Post 1 — Teacher Announcement Card</div>
+          <div class="card-meta">1080 x 1350px (4:5) — English teacher template</div>
+        </div>
+        <a href="post-01-teacher-card.html" target="_blank" class="card-link">Open full size</a>
+      </div>
+      <div class="card-preview">
+        <iframe src="post-01-teacher-card.html" width="432" height="540" style="transform: scale(1); transform-origin: center;"></iframe>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Post 2 — Enrollment 2027</div>
+          <div class="card-meta">1080 x 1350px (4:5) — Registration open announcement</div>
+        </div>
+        <a href="post-02-enrollment.html" target="_blank" class="card-link">Open full size</a>
+      </div>
+      <div class="card-preview">
+        <iframe src="post-02-enrollment.html" width="432" height="540" style="transform: scale(1); transform-origin: center;"></iframe>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title">Post 3 — QR Code / WhatsApp Group</div>
+          <div class="card-meta">1080 x 1080px (1:1) — Group join invitation</div>
+        </div>
+        <a href="post-03-qr-code.html" target="_blank" class="card-link">Open full size</a>
+      </div>
+      <div class="card-preview">
+        <iframe src="post-03-qr-code.html" width="432" height="432" style="transform: scale(1); transform-origin: center;"></iframe>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
