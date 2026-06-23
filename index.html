@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<title>هارفورد — معاك للنهاية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  a[href^="tel"] { color: inherit; text-decoration: none; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: #FAFAF8;
+    color: #1A2744;
+    line-height: 1.6;
+  }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #1A2744;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #D42027;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-logo img { height: 32px; width: auto; }
+  .nav-logo span { font-size: 13px; font-weight: 600; color: #A3ACBC; }
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: #E8EBF0;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .nav-links a:hover { color: #D42027; }
+
+  /* ─── SCROLL PROGRESS ─── */
+  .scroll-progress {
+    position: sticky; top: 51px; z-index: 99; height: 3px;
+    background: rgba(255,255,255,0.06);
+  }
+  .scroll-progress-fill {
+    height: 100%; width: 0%; background: #D42027;
+    transition: width 0.1s linear;
+  }
+
+  /* ─── MOBILE BOTTOM BAR ─── */
+  .mobile-bar {
+    display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+    background: #1A2744; border-top: 2px solid #D42027;
+    padding: 0; font-family: 'Cairo', sans-serif; direction: rtl;
+  }
+  .mobile-bar-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px;
+  }
+  .mobile-bar-section {
+    font-size: 14px; font-weight: 700; color: #fff;
+  }
+  .mobile-bar-progress {
+    font-size: 11px; font-weight: 600; color: #7D8AA0;
+  }
+  .mobile-bar-btn {
+    background: #D42027; color: #fff; border: none; border-radius: 8px;
+    padding: 6px 16px; font-family: 'Cairo'; font-size: 12px; font-weight: 700;
+    cursor: pointer;
+  }
+  .mobile-sections {
+    display: none; flex-direction: column; gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .mobile-sections.open { display: flex; }
+  .mobile-sections a {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px; color: #A3ACBC; text-decoration: none;
+    font-size: 15px; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+  .mobile-sections a:active { background: rgba(212,32,39,0.1); }
+  .mobile-sections a.active { color: #D42027; }
+  .mobile-sections a .sec-num {
+    font-size: 11px; font-weight: 600; color: #3D4C6B;
+    width: 24px; height: 24px; border-radius: 50%;
+    border: 1px solid #3D4C6B; display: flex; align-items: center; justify-content: center;
+  }
+  .mobile-sections a.active .sec-num {
+    border-color: #D42027; color: #D42027;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: #1A2744;
+    padding: 72px 24px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("design-system/logo/mark.png");
+    background-size: 140px auto;
+    background-repeat: repeat;
+    opacity: 0.02;
+    filter: brightness(10);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; }
+  .hero-overline {
+    font-size: 13px;
+    font-weight: 600;
+    color: #D42027;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-size: 42px;
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    font-size: 17px;
+    font-weight: 400;
+    color: #A3ACBC;
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 32px;
+  }
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-stat .num {
+    font-size: 36px;
+    font-weight: 900;
+    color: #D42027;
+    line-height: 1.1;
+  }
+  .hero-stat .lbl {
+    font-size: 13px;
+    font-weight: 600;
+    color: #A3ACBC;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: #D42027;
+    color: #fff;
+    padding: 14px 40px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 700;
+    transition: background 0.2s;
+  }
+  .hero-cta:hover { background: #B91C1C; }
+
+  /* ─── SECTIONS ─── */
+  .section {
+    padding: 56px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-header { margin-bottom: 32px; }
+  .section-overline {
+    font-size: 12px;
+    font-weight: 600;
+    color: #D42027;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1A2744;
+    line-height: 1.3;
+  }
+  .section-subtitle {
+    font-size: 15px;
+    font-weight: 400;
+    color: #5A6784;
+    margin-top: 6px;
+  }
+  .divider { height: 1px; background: #E5E7EB; max-width: 1100px; margin: 0 auto; }
+
+  /* ─── TEACHERS ─── */
+  .filter-bar {
+    display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    max-width: 1100px; margin-bottom: 24px;
+  }
+  .filter-btn {
+    padding: 8px 18px; border-radius: 100px; border: 1px solid #2A3A5C;
+    background: transparent; color: #5A6784; font-family: 'Cairo'; font-size: 13px;
+    font-weight: 700; cursor: pointer; transition: all 0.15s; letter-spacing: 0.5px;
+  }
+  .filter-btn:hover { border-color: #D42027; color: #D42027; }
+  .filter-btn.active { background: #D42027; border-color: #D42027; color: #fff; }
+
+  .track-toggle {
+    display: flex; justify-content: center; gap: 8px; margin-bottom: 24px;
+  }
+  .track-toggle.hidden { display: none; }
+  .track-btn {
+    padding: 6px 16px; border-radius: 100px; border: 1px solid #E5E7EB;
+    background: transparent; color: #5A6784; font-family: 'Cairo'; font-size: 12px;
+    font-weight: 700; cursor: pointer; transition: all 0.15s;
+  }
+  .track-btn:hover { border-color: #1A2744; color: #1A2744; }
+  .track-btn.active { background: #1A2744; border-color: #1A2744; color: #fff; }
+
+  .teachers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .teacher-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .teacher-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26,39,68,0.08);
+  }
+  .teacher-card-photo {
+    width: 100%; height: 280px;
+    object-fit: cover; object-position: center 20%;
+    display: block; background: #1A2744;
+  }
+  .teacher-card-placeholder {
+    width: 100%; height: 280px;
+    background: #1A2744;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .teacher-card-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("design-system/logo/mark.png");
+    background-size: 60px auto;
+    background-repeat: repeat;
+    opacity: 0.04;
+    filter: brightness(10);
+  }
+  .teacher-card-placeholder img {
+    width: 60px; height: auto; opacity: 0.15; position: relative; z-index: 1;
+  }
+  .teacher-card-info {
+    padding: 16px;
+  }
+  .teacher-card-name {
+    font-size: 16px; font-weight: 700; color: #1A2744; margin-bottom: 4px;
+  }
+  .teacher-card-subject {
+    font-size: 13px; font-weight: 500; color: #5A6784; margin-bottom: 8px;
+  }
+  .teacher-card-badges {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .badge {
+    display: inline-block; padding: 2px 10px; border-radius: 100px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.3px;
+  }
+  .badge-center { background: #D1FAE5; color: #065F46; }
+  .badge-online { background: #DBEAFE; color: #1E40AF; }
+  .badge-lang { background: #FEF3C7; color: #92400E; }
+  .badge-arabi { background: #E5E7EB; color: #374151; }
+  .teacher-card.hidden { display: none; }
+  .no-results {
+    grid-column: 1 / -1; text-align: center; padding: 40px;
+    color: #7D8AA0; font-size: 16px; font-weight: 600;
+  }
+
+  /* ─── PANINI CARD GIFs ─── */
+  .flip-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .flip-wrap {
+    cursor: pointer;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 1080 / 1350;
+    background: #1A2744;
+  }
+  .flip-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+    border-radius: 12px;
+  }
+  .flip-wrap .gif-layer {
+    position: absolute; inset: 0;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .flip-wrap:hover .gif-layer,
+  .flip-wrap.touched .gif-layer {
+    opacity: 1;
+  }
+  .flip-wrap:hover .static-layer,
+  .flip-wrap.touched .static-layer {
+    opacity: 0;
+  }
+
+  /* Expanded experience (details/summary for full panini page) */
+  .experience-expand { width: 100%; margin-top: 24px; }
+  .experience-expand summary {
+    cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 24px; background: #1A2744; border-radius: 14px;
+    color: #fff; font-size: 18px; font-weight: 700; font-family: 'Cairo', sans-serif;
+    border: 2px solid transparent; transition: border-color 0.2s;
+  }
+  .experience-expand summary:hover { border-color: #D42027; }
+  .experience-expand summary::marker,
+  .experience-expand summary::-webkit-details-marker { display: none; }
+  .experience-expand summary .arrow { transition: transform 0.3s; font-size: 18px; color: #D42027; }
+  .experience-expand[open] summary .arrow { transform: rotate(180deg); }
+  .experience-expand iframe {
+    width: 100%; border: none; border-radius: 0 0 14px 14px;
+    background: #0a0f1a; margin-top: -4px;
+  }
+
+  /* ─── ANNOUNCEMENTS ─── */
+  .announcements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  .announcement-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .announcement-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26,39,68,0.08);
+  }
+  .announcement-img {
+    width: 100%; aspect-ratio: 4/5;
+    overflow: hidden; background: #E5E7EB;
+  }
+  .announcement-img img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .announcement-body {
+    padding: 20px;
+  }
+  .announcement-badge {
+    display: inline-block; padding: 3px 12px; border-radius: 100px;
+    font-size: 11px; font-weight: 700; margin-bottom: 10px;
+  }
+  .badge-free { background: #D1FAE5; color: #065F46; }
+  .badge-event { background: #DBEAFE; color: #1E40AF; }
+  .badge-news { background: #FEF3C7; color: #92400E; }
+  .announcement-body h3 {
+    font-size: 17px; font-weight: 700; color: #1A2744; margin-bottom: 6px; line-height: 1.4;
+  }
+  .announcement-body p {
+    font-size: 13px; font-weight: 400; color: #5A6784; line-height: 1.6;
+    margin-bottom: 14px;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .announcement-cta {
+    font-size: 13px; font-weight: 700; color: #D42027; text-decoration: none;
+  }
+  .announcement-cta:hover { text-decoration: underline; }
+  .announcements-empty {
+    text-align: center; padding: 40px; color: #7D8AA0; font-size: 15px;
+  }
+
+  /* ─── CONTACT ─── */
+  .contact-section {
+    background: #1A2744;
+    padding: 56px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url("design-system/logo/mark.png");
+    background-size: 120px auto;
+    background-repeat: repeat;
+    opacity: 0.02;
+    filter: brightness(10);
+    pointer-events: none;
+  }
+  .contact-content { position: relative; z-index: 2; max-width: 600px; margin: 0 auto; }
+  .contact-content h2 {
+    font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 8px;
+  }
+  .contact-content .location {
+    font-size: 16px; font-weight: 500; color: #A3ACBC; margin-bottom: 28px;
+  }
+  .contact-phones {
+    display: flex; justify-content: center; gap: 20px; margin-bottom: 28px; flex-wrap: wrap;
+  }
+  .contact-phone {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 24px; border-radius: 12px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08);
+    color: #fff; text-decoration: none; font-size: 18px; font-weight: 700;
+    letter-spacing: 1px; direction: ltr; transition: background 0.2s;
+  }
+  .contact-phone:hover { background: rgba(255,255,255,0.1); }
+  .contact-phone .icon { font-size: 20px; }
+  .contact-wa {
+    display: inline-block;
+    background: #D42027; color: #fff;
+    padding: 16px 48px; border-radius: 100px;
+    text-decoration: none; font-size: 18px; font-weight: 700;
+    transition: background 0.2s;
+  }
+  .contact-wa:hover { background: #B91C1C; }
+  .contact-schedule-note {
+    margin-top: 32px; padding: 20px 28px;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px; color: #A3ACBC; font-size: 14px; line-height: 1.7;
+  }
+  .contact-schedule-note strong { color: #D42027; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: #0F1A2E;
+    padding: 32px 24px;
+    text-align: center;
+  }
+  .footer img { height: 40px; width: auto; margin-bottom: 10px; }
+  .footer p { font-size: 12px; color: #5A6784; }
+  .footer .tagline { font-size: 15px; font-weight: 600; color: #D42027; margin-top: 6px; }
+
+  /* ─── SIDE NAV ─── */
+  .side-nav {
+    position: fixed; left: 0; top: 50%; transform: translateY(-50%);
+    z-index: 200; display: flex; flex-direction: column; gap: 4px;
+    padding: 12px 0;
+  }
+  .side-nav a {
+    display: flex; align-items: center; gap: 0;
+    text-decoration: none; padding: 6px 0 6px 12px;
+    transition: all 0.2s;
+  }
+  .side-nav a .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #3D4C6B; transition: all 0.2s; flex-shrink: 0;
+  }
+  .side-nav a .label {
+    font-size: 11px; font-weight: 600; color: #3D4C6B;
+    white-space: nowrap; overflow: hidden; max-width: 0;
+    opacity: 0; transition: all 0.25s; padding-right: 8px; direction: rtl;
+    font-family: 'Cairo', sans-serif;
+  }
+  .side-nav:hover a .label { max-width: 140px; opacity: 1; }
+  .side-nav a:hover .dot, .side-nav a.active .dot {
+    background: #D42027; width: 10px; height: 10px;
+  }
+  .side-nav a:hover .label { color: #D42027; }
+  .side-nav a.active .label { color: #D42027; opacity: 1; max-width: 140px; }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (max-width: 768px) {
+    body { padding-bottom: 56px; }
+    .nav { padding: 10px 16px; }
+    .nav-links { display: none; }
+    .nav-logo span { font-size: 11px; }
+    .nav-logo img { height: 28px; }
+    .mobile-bar { display: block; }
+
+    .hero { padding: 48px 20px 40px; }
+    .hero h1 { font-size: 30px; }
+    .hero p { font-size: 15px; }
+    .hero-stats { gap: 24px; }
+    .hero-stat .num { font-size: 28px; }
+
+    .section { padding: 40px 16px; }
+    .section-title { font-size: 22px; }
+
+    .filter-bar { gap: 6px; justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; padding-bottom: 8px; }
+    .filter-btn { white-space: nowrap; flex-shrink: 0; font-size: 12px; padding: 6px 14px; }
+
+    .teachers-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+    .teacher-card-photo, .teacher-card-placeholder { height: 200px; }
+    .teacher-card-info { padding: 12px; }
+    .teacher-card-name { font-size: 14px; }
+    .teacher-card-subject { font-size: 11px; }
+
+    .flip-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+    .announcements-grid { grid-template-columns: 1fr; }
+
+    .contact-phones { flex-direction: column; align-items: center; }
+    .contact-phone { width: 100%; justify-content: center; }
+
+    .side-nav { display: none; }
+
+    .footer { padding: 24px 16px; }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .section { padding: 56px 32px; }
+    .hero h1 { font-size: 36px; }
+    .teachers-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ SIDE NAV ═══ -->
+<nav class="side-nav" id="side-nav">
+  <a href="#teachers"><span class="dot"></span><span class="label">المدرسين</span></a>
+  <a href="#experiences"><span class="dot"></span><span class="label">تجارب تفاعلية</span></a>
+  <a href="#announcements"><span class="dot"></span><span class="label">إعلانات</span></a>
+  <a href="#contact"><span class="dot"></span><span class="label">تواصل معانا</span></a>
+</nav>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav">
+  <div class="nav-logo">
+    <img src="design-system/logo/mark.png" alt="Harv">
+    <span>سنتر هارفورد التعليمي</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#teachers">المدرسين</a></li>
+    <li><a href="#experiences">تجارب تفاعلية</a></li>
+    <li><a href="#announcements">إعلانات</a></li>
+    <li><a href="#contact">تواصل معانا</a></li>
+  </ul>
+</nav>
+<div class="scroll-progress"><div class="scroll-progress-fill" id="scroll-fill"></div></div>
+
+<!-- ═══ MOBILE BOTTOM BAR ═══ -->
+<div class="mobile-bar" id="mobile-bar">
+  <div class="mobile-bar-row">
+    <div>
+      <div class="mobile-bar-section" id="mob-section-name">المدرسين</div>
+      <div class="mobile-bar-progress" id="mob-progress">1 من 4</div>
+    </div>
+    <button class="mobile-bar-btn" id="mob-toggle">الأقسام ▲</button>
+  </div>
+  <div class="mobile-sections" id="mob-sections">
+    <a href="#teachers"><span>المدرسين</span><span class="sec-num">1</span></a>
+    <a href="#experiences"><span>تجارب تفاعلية</span><span class="sec-num">2</span></a>
+    <a href="#announcements"><span>إعلانات</span><span class="sec-num">3</span></a>
+    <a href="#contact"><span>تواصل معانا</span><span class="sec-num">4</span></a>
+  </div>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-overline">HARVARD EDUCATIONAL CENTER</div>
+    <h1>معاك للنهاية</h1>
+    <p>سنتر تعليمي في مدينة نصر — ثانوية عامة وبكالوريا. مدرسين متخصصين، سنتر واونلاين.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="num">42+</span>
+        <span class="lbl">مدرس</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">15+</span>
+        <span class="lbl">مادة</span>
+      </div>
+      <div class="hero-stat">
+        <span class="num">2</span>
+        <span class="lbl">مسار: سنتر واونلاين</span>
+      </div>
+    </div>
+    <a href="https://wa.me/201064949395" class="hero-cta" target="_blank" rel="noopener">ابعتلنا واتساب</a>
+  </div>
+</section>
+
+<!-- ═══ TEACHERS ═══ -->
+<section class="section" id="teachers">
+  <div class="section-header">
+    <div class="section-overline">فريق التدريس</div>
+    <div class="section-title">المدرسين</div>
+    <div class="section-subtitle">42 مدرس متخصص في 15 مادة — ثانوية عامة وبكالوريا</div>
+  </div>
+
+  <div class="filter-bar" id="filter-bar"></div>
+  <div class="track-toggle hidden" id="track-toggle"></div>
+  <div class="teachers-grid" id="teachers-grid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ GAMIFIED EXPERIENCES ═══ -->
+<section class="section" id="experiences">
+  <div class="section-header">
+    <div class="section-overline">حاجات تانية</div>
+    <div class="section-title">تجارب تفاعلية</div>
+    <div class="section-subtitle">كروت، فيديوهات، وحاجات ممتعة — استكشف بنفسك</div>
+  </div>
+
+  <div class="flip-grid" id="flip-grid"></div>
+
+  <!-- Full panini page expandable -->
+  <details class="experience-expand" id="panini-expand">
+    <summary>
+      <span>افتح كل الكروت بالحجم الكامل + التحميل ⚽</span>
+      <span class="arrow">▼</span>
+    </summary>
+    <iframe id="panini-iframe" data-src="panini-cards/download.html" height="800" loading="lazy"></iframe>
+  </details>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ ANNOUNCEMENTS ═══ -->
+<section class="section" id="announcements">
+  <div class="section-header">
+    <div class="section-overline">جديد</div>
+    <div class="section-title">إعلانات</div>
+    <div class="section-subtitle">كورسات مجانية، أحداث، وأخبار — كل اللي يهمك</div>
+  </div>
+
+  <div class="announcements-grid">
+    <!-- Free German Course -->
+    <div class="announcement-card">
+      <div class="announcement-img">
+        <img src="social-posts/free-german-course.png" alt="كورس ألماني مجاني" loading="lazy">
+      </div>
+      <div class="announcement-body">
+        <span class="announcement-badge badge-free">كورس مجاني</span>
+        <h3>كورس ألماني مجاني — هير عبدالمعز</h3>
+        <p>كورس مجاني في اللغة الألمانية لطلاب البكالوريا. يوم الأربعاء ٥/٨ الساعة ٤ عصراً. سجّل اسمك في الفورم وروح استلم كارت الحجز والملزمة من السنتر.</p>
+        <a href="https://forms.gle/7hCuZjYhUsk6oD6GA" class="announcement-cta" target="_blank" rel="noopener">سجّل دلوقتي ←</a>
+      </div>
+    </div>
+
+    <!-- ADD NEW ANNOUNCEMENT HERE -->
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="contact-section" id="contact">
+  <div class="contact-content">
+    <h2>تواصل معانا</h2>
+    <div class="location">مدينة نصر — بجوار بنزينة كار جاس — أمام عقارات السوسري أ</div>
+
+    <div class="contact-phones">
+      <a href="tel:+201064949395" class="contact-phone">
+        <span class="icon">📲</span>
+        <span>01064949395</span>
+      </a>
+      <a href="tel:+201223463448" class="contact-phone">
+        <span class="icon">📞</span>
+        <span>01223463448</span>
+      </a>
+    </div>
+
+    <a href="https://wa.me/201064949395" class="contact-wa" target="_blank" rel="noopener">ابعتلنا واتساب</a>
+
+    <div class="contact-schedule-note">
+      <strong>الجدول قريباً</strong> — لو عايز تعرف مواعيد الحصص ابعتلنا واتساب وهنرد عليك.
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<div class="footer">
+  <img src="design-system/logo/mark.png" alt="Harv">
+  <p>سنتر هارفورد التعليمي — مدينة نصر</p>
+  <div class="tagline">معاك للنهاية</div>
+</div>
+
+<script>
+// ═══════════════════════════════════
+// TEACHER DATA
+// ═══════════════════════════════════
+var SUBJECTS = [
+  { id: 'all', label: 'الكل' },
+  { id: 'english', label: 'إنجليزي' },
+  { id: 'arabic', label: 'عربي (لغة)' },
+  { id: 'french', label: 'فرنسي' },
+  { id: 'german', label: 'ألماني' },
+  { id: 'italian', label: 'إيطالي' },
+  { id: 'physics', label: 'فيزياء', hasTracks: true },
+  { id: 'chemistry', label: 'كيمياء', hasTracks: true },
+  { id: 'math', label: 'رياضيات', hasTracks: true },
+  { id: 'history', label: 'تاريخ' },
+  { id: 'psychology', label: 'علم نفس' },
+  { id: 'business', label: 'إدارة أعمال' },
+  { id: 'accounting', label: 'محاسبة' },
+  { id: 'programming', label: 'برمجة' }
+];
+
+var teachers = [
+  // Arabic Language
+  { name: 'أ/ رضا الفاروق', subject: 'arabic', subjectLabel: 'اللغة العربية', mode: null, track: null, photo: 'teachers/reda-elfaRouk.jpg' },
+  { name: 'أ/ السيد عبدالعزيز', subject: 'arabic', subjectLabel: 'اللغة العربية', mode: null, track: null, photo: 'teachers/elsayed-abdelaziz.jpg' },
+
+  // English Language
+  { name: 'أ/ محمد صلاح', subject: 'english', subjectLabel: 'اللغة الإنجليزية', mode: null, track: null, photo: 'teachers/mohamed-salah-english.jpg' },
+  { name: 'أ/ احمد عاطف', subject: 'english', subjectLabel: 'اللغة الإنجليزية', mode: null, track: null, photo: 'teachers/ahmed-atef.jpg' },
+  { name: 'أ/ ميلاد مراد', subject: 'english', subjectLabel: 'اللغة الإنجليزية', mode: null, track: null, photo: 'teachers/milad-mourad.png' },
+  { name: 'أ/ عادل نبيل', subject: 'english', subjectLabel: 'اللغة الإنجليزية', mode: null, track: null, photo: 'teachers/adel-nabil.jpg' },
+
+  // French Language
+  { name: 'مسيو/ مروان العناني', subject: 'french', subjectLabel: 'اللغة الفرنسية', mode: null, track: null, photo: 'teachers/marwan-elanany.jpg' },
+  { name: 'مسيو/ محمد البرديسي', subject: 'french', subjectLabel: 'اللغة الفرنسية', mode: null, track: null, photo: 'teachers/mohamed-elbardissi.jpg' },
+  { name: 'مسيو/ حسين أبو العينين', subject: 'french', subjectLabel: 'اللغة الفرنسية', mode: null, track: null, photo: 'teachers/hussein-aboleinen.jpg' },
+
+  // German Language
+  { name: 'هير/ عبدالمعز اسماعيل', subject: 'german', subjectLabel: 'اللغة الألمانية', mode: null, track: null, photo: 'teachers/abdelmoeez-ismail.jpg' },
+  { name: 'هير/ عصام خطاب', subject: 'german', subjectLabel: 'اللغة الألمانية', mode: null, track: null, photo: 'teachers/essam-khattab.jpg' },
+
+  // Italian Language
+  { name: 'سنيور/ محمد القط', subject: 'italian', subjectLabel: 'اللغة الإيطالية', mode: null, track: null, photo: 'teachers/mohamed-elott.jpeg' },
+
+  // History
+  { name: 'محمد طلبه', subject: 'history', subjectLabel: 'التاريخ', mode: 'سنتر واونلاين', track: null, photo: 'teachers/mohamed-tolba.jpg' },
+  { name: 'عبدالله اسماعيل', subject: 'history', subjectLabel: 'التاريخ', mode: 'سنتر', track: null, photo: 'teachers/abdullah-ismail.jpg' },
+
+  // Physics — Languages track
+  { name: 'تامر القاضي', subject: 'physics', subjectLabel: 'Physics', mode: 'اونلاين', track: 'لغات', photo: 'teachers/tamer-elqadi.jpeg' },
+  { name: 'احمد سمير', subject: 'physics', subjectLabel: 'Physics', mode: 'اونلاين', track: 'لغات', photo: 'teachers/ahmed-samir-physics.jpg' },
+  { name: 'احمد نوار', subject: 'physics', subjectLabel: 'Physics', mode: 'اونلاين', track: 'لغات', photo: 'teachers/ahmed-nawwar.png' },
+  { name: 'عمر رعيه', subject: 'physics', subjectLabel: 'Physics', mode: 'اونلاين', track: 'لغات', photo: null },
+  { name: 'محمد الجيوشي', subject: 'physics', subjectLabel: 'Physics', mode: 'سنتر', track: 'لغات', photo: 'teachers/mohamed-elgioushy.jpeg' },
+
+  // Physics — Arabic track
+  { name: 'محمد عبدالمعبود', subject: 'physics', subjectLabel: 'الفيزياء', mode: 'اونلاين', track: 'عربي', photo: 'teachers/mohamed-abdelmaboud.jpg' },
+  { name: 'احمد عبدالمنعم', subject: 'physics', subjectLabel: 'الفيزياء', mode: 'سنتر', track: 'عربي', photo: 'teachers/ahmed-abdelmonem.jpg' },
+
+  // Chemistry — Languages track
+  { name: 'اشرف الشناوي', subject: 'chemistry', subjectLabel: 'Chemistry', mode: 'اونلاين', track: 'لغات', photo: 'teachers/ashraf-elshenawy.jpg' },
+  { name: 'ناصر البطل', subject: 'chemistry', subjectLabel: 'Chemistry', mode: 'اونلاين', track: 'لغات', photo: 'teachers/nasser-elbatal.jpg' },
+  { name: 'طارق عصام', subject: 'chemistry', subjectLabel: 'Chemistry', mode: 'سنتر', track: 'لغات', photo: null },
+
+  // Chemistry — Arabic track
+  { name: 'محمد عبدالجواد', subject: 'chemistry', subjectLabel: 'الكيمياء', mode: 'اونلاين', track: 'عربي', photo: 'teachers/mohamed-abdelgawad.jpg' },
+  { name: 'خالد صبري', subject: 'chemistry', subjectLabel: 'الكيمياء', mode: 'سنتر', track: 'عربي', photo: null },
+  { name: 'خالد صقر', subject: 'chemistry', subjectLabel: 'الكيمياء', mode: 'اونلاين', track: 'عربي', photo: null },
+
+  // Math — Languages track
+  { name: 'محمد مجد', subject: 'math', subjectLabel: 'Math', mode: 'سنتر', track: 'لغات', photo: null },
+  { name: 'محمد صبري', subject: 'math', subjectLabel: 'Math', mode: 'سنتر', track: 'لغات', photo: 'teachers/mohamed-sabry.jpeg' },
+  { name: 'مازن الحيوان', subject: 'math', subjectLabel: 'Math', mode: 'سنتر', track: 'لغات', photo: null },
+  { name: 'محمد عزت', subject: 'math', subjectLabel: 'Math', mode: 'سنتر', track: 'لغات', photo: null },
+  { name: 'عمر الشربيني', subject: 'math', subjectLabel: 'Math', mode: 'اونلاين', track: 'لغات', photo: 'teachers/omar-elsherbiny.jpg' },
+
+  // Math — Arabic track
+  { name: 'ماجد حسن', subject: 'math', subjectLabel: 'الرياضيات', mode: 'سنتر', track: 'عربي', photo: 'teachers/maged-hassan.jpg' },
+  { name: 'محمد نجيب', subject: 'math', subjectLabel: 'الرياضيات', mode: 'سنتر', track: 'عربي', photo: 'teachers/mohamed-naguib.jpg' },
+
+  // Programming
+  { name: 'محمود يونس', subject: 'programming', subjectLabel: 'البرمجة', mode: 'لغات', track: null, photo: null },
+  { name: 'كمال المراكبي', subject: 'programming', subjectLabel: 'البرمجة', mode: 'لغات وعربي', track: null, photo: null },
+
+  // Business Admin
+  { name: 'د/ هيثم عطيه', subject: 'business', subjectLabel: 'إدارة أعمال', mode: 'عربي ولغات', track: null, photo: 'teachers/haitham-atia.jpg' },
+
+  // Accounting
+  { name: 'د/ احمد طلبه', subject: 'accounting', subjectLabel: 'المحاسبة', mode: 'عربي ولغات', track: null, photo: null },
+
+  // Psychology
+  { name: 'علي صلاح', subject: 'psychology', subjectLabel: 'علم النفس', mode: null, track: null, photo: 'teachers/ali-salah.jpg' },
+  { name: 'صابر درويش', subject: 'psychology', subjectLabel: 'علم النفس', mode: null, track: null, photo: 'teachers/saber-darwish.jpg' }
+];
+
+// ═══════════════════════════════════
+// FILTER + RENDER TEACHERS
+// ═══════════════════════════════════
+var activeSubject = 'all';
+var activeTrack = 'all';
+
+function buildFilters() {
+  var bar = document.getElementById('filter-bar');
+  SUBJECTS.forEach(function(s) {
+    var btn = document.createElement('button');
+    btn.className = 'filter-btn' + (s.id === 'all' ? ' active' : '');
+    btn.textContent = s.label;
+    btn.setAttribute('data-subject', s.id);
+    btn.onclick = function() {
+      activeSubject = s.id;
+      activeTrack = 'all';
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      updateTrackToggle();
+      renderTeachers();
+    };
+    bar.appendChild(btn);
+  });
+}
+
+function updateTrackToggle() {
+  var toggle = document.getElementById('track-toggle');
+  var sub = SUBJECTS.find(function(s) { return s.id === activeSubject; });
+  if (sub && sub.hasTracks) {
+    toggle.className = 'track-toggle';
+    toggle.innerHTML = '';
+    ['all', 'لغات', 'عربي'].forEach(function(t) {
+      var btn = document.createElement('button');
+      btn.className = 'track-btn' + (activeTrack === t ? ' active' : '');
+      btn.textContent = t === 'all' ? 'الكل' : t;
+      btn.onclick = function() {
+        activeTrack = t;
+        document.querySelectorAll('.track-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        renderTeachers();
+      };
+      toggle.appendChild(btn);
+    });
+  } else {
+    toggle.className = 'track-toggle hidden';
+  }
+}
+
+function renderTeachers() {
+  var grid = document.getElementById('teachers-grid');
+  var filtered = teachers.filter(function(t) {
+    if (activeSubject !== 'all' && t.subject !== activeSubject) return false;
+    if (activeTrack !== 'all' && t.track && t.track !== activeTrack) return false;
+    return true;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="no-results">مفيش نتائج</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map(function(t) {
+    var photoHTML = t.photo
+      ? '<img class="teacher-card-photo" src="' + t.photo + '" alt="' + t.name + '" loading="lazy">'
+      : '<div class="teacher-card-placeholder"><img src="design-system/logo/mark.png" alt=""></div>';
+
+    var badges = '';
+    if (t.mode) {
+      if (t.mode.indexOf('سنتر') !== -1) badges += '<span class="badge badge-center">سنتر</span>';
+      if (t.mode.indexOf('اونلاين') !== -1) badges += '<span class="badge badge-online">اونلاين</span>';
+      if (t.mode.indexOf('لغات') !== -1 && !t.track) badges += '<span class="badge badge-lang">لغات</span>';
+      if (t.mode.indexOf('عربي') !== -1 && !t.track) badges += '<span class="badge badge-arabi">عربي</span>';
+    }
+    if (t.track === 'لغات') badges += '<span class="badge badge-lang">لغات</span>';
+    if (t.track === 'عربي') badges += '<span class="badge badge-arabi">عربي</span>';
+
+    return '<div class="teacher-card">'
+      + photoHTML
+      + '<div class="teacher-card-info">'
+      + '<div class="teacher-card-name">' + t.name + '</div>'
+      + '<div class="teacher-card-subject">' + t.subjectLabel + '</div>'
+      + '<div class="teacher-card-badges">' + badges + '</div>'
+      + '</div></div>';
+  }).join('');
+}
+
+// ═══════════════════════════════════
+// PANINI FLIP CARDS (image-based)
+// ═══════════════════════════════════
+var paniniCards = [
+  'haitham','milad','salah','atef','tolba','nasser','shenawy','deif',
+  'reda','sayed','adel','abdelmoeez','essam','bardisi','elqot',
+  'tamer','samir','nawar','mogli','sherbini','alisalah'
+];
+
+function renderFlipCards() {
+  var grid = document.getElementById('flip-grid');
+  grid.innerHTML = paniniCards.map(function(id) {
+    var pngSrc = 'panini-cards/rendered/' + id + '.png';
+    var gifSrc = 'panini-cards/gifs/' + id + '.gif';
+    return '<div class="flip-wrap">'
+      + '<img class="static-layer" src="' + pngSrc + '" alt="' + id + '" loading="lazy">'
+      + '<img class="gif-layer" data-src="' + gifSrc + '" alt="' + id + ' animation">'
+      + '</div>';
+  }).join('');
+
+  // Lazy-load GIFs on first hover/touch
+  document.querySelectorAll('.flip-wrap').forEach(function(wrap) {
+    var gifLoaded = false;
+    function loadGif() {
+      if (gifLoaded) return;
+      var gif = wrap.querySelector('.gif-layer');
+      if (gif && gif.dataset.src) {
+        gif.src = gif.dataset.src;
+        gifLoaded = true;
+      }
+    }
+    wrap.addEventListener('mouseenter', loadGif);
+    wrap.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      loadGif();
+      this.classList.toggle('touched');
+    });
+  });
+}
+
+// ═══════════════════════════════════
+// PANINI IFRAME LAZY LOAD
+// ═══════════════════════════════════
+var paniniLoaded = false;
+document.getElementById('panini-expand').addEventListener('toggle', function() {
+  if (this.open && !paniniLoaded) {
+    var iframe = document.getElementById('panini-iframe');
+    iframe.src = iframe.getAttribute('data-src');
+    paniniLoaded = true;
+  }
+});
+
+// ═══════════════════════════════════
+// SCROLL TRACKING + NAV
+// ═══════════════════════════════════
+var sectionData = [
+  { id: 'teachers', name: 'المدرسين' },
+  { id: 'experiences', name: 'تجارب تفاعلية' },
+  { id: 'announcements', name: 'إعلانات' },
+  { id: 'contact', name: 'تواصل معانا' }
+];
+
+function updateScroll() {
+  var scrollTop = window.scrollY;
+  var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('scroll-fill').style.width = pct + '%';
+
+  var current = 0;
+  sectionData.forEach(function(s, i) {
+    var el = document.getElementById(s.id);
+    if (el && el.getBoundingClientRect().top <= 120) current = i;
+  });
+
+  document.getElementById('mob-section-name').textContent = sectionData[current].name;
+  document.getElementById('mob-progress').textContent = (current + 1) + ' من ' + sectionData.length;
+
+  document.querySelectorAll('#mob-sections a').forEach(function(a, i) {
+    a.classList.toggle('active', i === current);
+  });
+  document.querySelectorAll('#side-nav a').forEach(function(a, i) {
+    a.classList.toggle('active', i === current);
+  });
+}
+
+// Mobile bar toggle
+document.getElementById('mob-toggle').addEventListener('click', function() {
+  var sections = document.getElementById('mob-sections');
+  sections.classList.toggle('open');
+  this.textContent = sections.classList.contains('open') ? 'الأقسام ▼' : 'الأقسام ▲';
+});
+
+// Close mobile sections on link click
+document.querySelectorAll('#mob-sections a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    document.getElementById('mob-sections').classList.remove('open');
+    document.getElementById('mob-toggle').textContent = 'الأقسام ▲';
+  });
+});
+
+// ═══════════════════════════════════
+// INIT
+// ═══════════════════════════════════
+buildFilters();
+renderTeachers();
+renderFlipCards();
+window.addEventListener('scroll', updateScroll);
+updateScroll();
+</script>
+</body>
+</html>
