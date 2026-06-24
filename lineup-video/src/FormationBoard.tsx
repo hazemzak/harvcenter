@@ -1,4 +1,4 @@
-import { PLAYERS } from "./data";
+import { STARTERS as PLAYERS } from "./data";
 import { loadFont } from "@remotion/google-fonts/Cairo";
 
 const { fontFamily } = loadFont("normal", {
@@ -193,15 +193,15 @@ export const FormationBoard: React.FC<{
             {/* Name label */}
             <span
               style={{
-                fontSize: 9,
-                fontWeight: isActive ? 700 : 400,
-                color: isActive ? "#fff" : "rgba(255,255,255,0.5)",
+                fontSize: 12,
+                fontWeight: isActive ? 700 : 500,
+                color: isActive ? "#fff" : "rgba(255,255,255,0.6)",
                 whiteSpace: "nowrap",
-                letterSpacing: 0.5,
-                textShadow: "0 1px 3px rgba(0,0,0,0.6)",
+                direction: "rtl",
+                textShadow: "0 1px 4px rgba(0,0,0,0.7)",
               }}
             >
-              {player.nameEn}
+              {player.nameAr}
             </span>
           </div>
         );
