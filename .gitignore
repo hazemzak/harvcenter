@@ -23,3 +23,6 @@ Thumbs.db
 
 # Large video files (track separately via Git LFS if needed)
 *.mp4
+# Squad reel exports — needed for Instagram public URL hosting
+!panini-cards/video/out/
+!panini-cards/video/out/harv-panini-*.mp4
