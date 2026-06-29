@@ -474,7 +474,7 @@ Mohamed Tolba
   // ═══════════════════════════════════════════
   {
     id: "physics-reel-v2",
-    date: "2026-06-29", time: "10:00",
+    date: "2026-06-29", time: "13:00",
     type: "video",
     file: "video/out/harv-panini-physics.mp4",
     caption: `🏆 HARV FC × كأس العالم 2026
@@ -499,7 +499,7 @@ Omar Raeia · El-Gioshy · Abdelmaaboud
   },
   {
     id: "math-reel",
-    date: "2026-06-29", time: "12:00",
+    date: "2026-06-29", time: "14:30",
     type: "video",
     file: "video/out/harv-panini-math.mp4",
     caption: `🏆 HARV FC × كأس العالم 2026
@@ -524,7 +524,7 @@ Mohamed Magd · Mohamed Ezzat
   },
   {
     id: "sciences-reel-v2",
-    date: "2026-06-29", time: "14:00",
+    date: "2026-06-29", time: "16:00",
     type: "video",
     file: "video/out/harv-panini-sciences.mp4",
     caption: `🏆 HARV FC × كأس العالم 2026
@@ -550,7 +550,7 @@ Mohamed Magd · Mohamed Ezzat
   },
   {
     id: "english-reel",
-    date: "2026-06-29", time: "16:00",
+    date: "2026-06-29", time: "17:30",
     type: "video",
     file: "video/out/harv-panini-english.mp4",
     caption: `🏆 HARV FC × كأس العالم 2026
@@ -574,7 +574,7 @@ Milad Mourad · Mohamed Salah · Ahmed Atef · Adel Nabil
   },
   {
     id: "arabic-reel-v2",
-    date: "2026-06-29", time: "17:30",
+    date: "2026-06-29", time: "19:00",
     type: "video",
     file: "video/out/harv-panini-arabic.mp4",
     caption: `🏆 HARV FC × كأس العالم 2026
@@ -598,7 +598,7 @@ Milad Mourad · Mohamed Salah · Ahmed Atef · Adel Nabil
   },
   {
     id: "languages-reel-v2",
-    date: "2026-06-29", time: "19:00",
+    date: "2026-06-29", time: "20:30",
     type: "video",
     file: "video/out/harv-panini-languages.mp4",
     caption: `🏆 HARV FC × كأس العالم 2026
@@ -624,7 +624,7 @@ Milad Mourad · Mohamed Salah · Ahmed Atef · Adel Nabil
   },
   {
     id: "humanities-reel-v2",
-    date: "2026-06-29", time: "21:00",
+    date: "2026-06-29", time: "22:00",
     type: "video",
     file: "video/out/harv-panini-humanities.mp4",
     caption: `🏆 HARV FC × كأس العالم 2026
